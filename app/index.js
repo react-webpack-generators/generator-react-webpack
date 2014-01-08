@@ -59,6 +59,7 @@ ReactWebpackGenerator.prototype.createIndexHtml = function createIndexHtml() {
 ReactWebpackGenerator.prototype.packageFiles = function () {
   this.template('../../templates/common/_package.json', 'package.json');
   this.copy('../../templates/common/Gruntfile.js', 'Gruntfile.js');
+  this.copy('../../templates/common/gitignore', '.gitignore');
 };
 
 ReactWebpackGenerator.prototype.styleFiles = function styleFiles() {
