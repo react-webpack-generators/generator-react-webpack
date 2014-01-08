@@ -13,7 +13,7 @@ var Generator = module.exports = function Generator() {
 	this.appname = path.basename(process.cwd());
 
 	this.appname = this._.slugify(this._.humanize(this.appname));
-	this.scriptAppName = this._.capitalize(this.appname) + generalUtils.appName(this);
+	this.scriptAppName = this._.camelize(this._.capitalize(this.appname)) + generalUtils.appName(this);
 	this.classedName = this._.capitalize(this.name);
 
 	if (typeof this.env.options.appPath === 'undefined') {

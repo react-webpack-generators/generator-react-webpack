@@ -15,7 +15,7 @@ describe('react-webpack generator', function () {
             '../../component',
             '../../main'
         ];
-        helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
+        helpers.testDirectory(path.join(__dirname, 'temp-test'), function (err) {
             if (err) {
                 return done(err);
             }
@@ -42,7 +42,7 @@ describe('react-webpack generator', function () {
             'karma.conf.js',
             'package.json',
             'package.json',
-            'src/scripts/components/TempApp.js',
+            'src/scripts/components/TempTestApp.js',
             'test/helpers/phantomjs-shims.js',
             'test/helpers/react/addons.js'
         ];
