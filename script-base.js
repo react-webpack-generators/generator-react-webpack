@@ -14,6 +14,7 @@ var Generator = module.exports = function Generator() {
 
 	this.appname = this._.slugify(this._.humanize(this.appname));
 	this.scriptAppName = this._.capitalize(this.appname) + generalUtils.appName(this);
+	this.classedName = this._.capitalize(this.name);
 
 	if (typeof this.env.options.appPath === 'undefined') {
 		this.env.options.appPath = this.env.options.appPath || 'src';
@@ -52,10 +53,7 @@ Generator.prototype.htmlTemplate = function (src, dest) {
 	]);
 };
 
-Generator.prototype.generateSourceAndTest = function (appTemplate, testTemplate, targetDirectory, skipAdd) {
-	this.appTemplate(appTemplate, path.join('scripts', targetDirectory, this.name));
-	this.testTemplate(testTemplate, path.join(targetDirectory, this.name));
-	if (!skipAdd) {
-		this.addScriptToIndex(path.join(targetDirectory, this.name));
-	}
+Generator.prototype.generateSourceAndTest = function (appTemplate, testTemplate, targetDirectory) {
+	this.appTemplate(appTemplate, path.join('scripts', targetDirectory, this._.capitalize(this.name)));
+	this.testTemplate(testTemplate, path.join(targetDirectory, this._.capitalize(this.name)));
 };

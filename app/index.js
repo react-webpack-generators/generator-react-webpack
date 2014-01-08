@@ -72,3 +72,7 @@ ReactWebpackGenerator.prototype.imageFiles = function () {
   this.sourceRoot(path.join(__dirname, 'templates'));
   this.directory('images', 'src/images', true);
 };
+
+ReactWebpackGenerator.prototype.karmaFiles = function () {
+  this.copy('../../templates/common/karma.conf.js', 'karma.conf.js');
+};
