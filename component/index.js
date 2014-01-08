@@ -10,8 +10,8 @@ util.inherits(ComponentGenerator, ScriptBase);
 
 ComponentGenerator.prototype.createComponentFile = function createComponentFile() {
   this.generateSourceAndTest(
-    'component',
-    'spec/component',
+    'Component',
+    'spec/Component',
     'components'
   );
 };
