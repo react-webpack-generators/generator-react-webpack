@@ -39,6 +39,7 @@ describe('react-webpack generator', function () {
             'src/styles/main.css',
             'src/index.html',
             'Gruntfile.js',
+            'webpack.config.js',
             'karma.conf.js',
             'package.json',
             'package.json',

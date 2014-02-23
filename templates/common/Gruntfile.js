@@ -7,92 +7,45 @@ var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
 };
 
+var webpackConfig = require('./webpack.config.js');
+
 module.exports = function (grunt) {
   // Let *load-grunt-tasks* require everything
   require('load-grunt-tasks')(grunt);
+
   // Read configuration from package.json
   var pkgConfig = grunt.file.readJSON('package.json');
-  var jshintConfig = grunt.file.readJSON('.jshintrc');
-
-  var loaders = [{
-    test: /\.css$/,
-    loader: 'style!css'
-  }, {
-    test: /\.gif/,
-    loader: 'url-loader?limit=10000&minetype=image/gif'
-  }, {
-    test: /\.jpg/,
-    loader: 'url-loader?limit=10000&minetype=image/jpg'
-  }, {
-    test: /\.png/,
-    loader: 'url-loader?limit=10000&minetype=image/png'
-  }, {
-    test: /\.js$/,
-    loader: 'jsx-loader'
-  }];
-
+  
   grunt.initConfig({
     pkg: pkgConfig,
+
     webpack: {
+      options: webpackConfig,
+
       development: {
-        entry: './<%= pkg.src %>/scripts/components/<%= pkg.mainInput %>.js',
-        output: {
-          path: '.tmp/scripts/',
-          filename: '<%= pkg.mainOutput %>.js'
-        },
-        debug: true,
-        cache: true,
+        entry: './src/scripts/components/<%= pkg.mainInput %>',
         devtool: 'source-map',
-        stats: {
-          colors: true,
-          reasons: true
-        },
-        jshint: grunt.util._.merge(jshintConfig, {
-          emitErrors: false,
-          failOnHint: false
-        }),
-        module: {
-          preLoaders: [{
-            test: '\\.js$',
-            exclude: 'node_modules',
-            loader: 'jshint'
-          }],
-          loaders: loaders
+        plugins: [],
+
+        output: {
+          publicPath: '.tmp/',
+          path: '.tmp/scripts/'
         }
       },
+
       dist: {
-        entry: './<%= pkg.src %>/scripts/components/<%= pkg.mainInput %>.js',
-        output: {
-          path: '.tmp/scripts/',
-          filename: '<%= pkg.mainOutput %>.dev.js'
-        },
-        debug: false,
-        cache: true,
-        stats: {
-          colors: true,
-          reasons: true
-        },
-        jshint: grunt.util._.merge(jshintConfig, {
-          emitErrors: false,
-          failOnHint: false
-        }),
-        module: {
-          preLoaders: [{
-            test: '\\.js$',
-            exclude: 'node_modules',
-            loader: 'jshint'
-          }],
-          loaders: loaders
-        }
+        entry: './src/scripts/components/<%= pkg.mainInput %>'
       }
     },
+
     watch: {
       webpack: {
         files: ['<%= pkg.src %>/scripts/{,*/}*.js',
           '<%= pkg.src %>/styles/{,*/}*.css'
         ],
-        tasks: ['test','webpack:development']
+        tasks: ['test', 'webpack:development']
       },
+
       livereload: {
         options: {
           livereload: LIVERELOAD_PORT
@@ -103,20 +56,27 @@ module.exports = function (grunt) {
         ]
       }
     },
+
     connect: {
       options: {
         port: 8000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost'
+        hostname: 'localhost',
+        base: [
+          '.tmp',
+          '<%= pkg.src %>'
+        ]
       },
+
       livereload: {
         options: {
           base: [
             '.tmp',
-            pkgConfig.src
+            '<%= pkg.src %>'
           ]
         }
       },
+      
       dist: {
         options: {
           middleware: function (connect) {
@@ -127,11 +87,13 @@ module.exports = function (grunt) {
         }
       }
     },
+
     open: {
       server: {
         url: 'http://localhost:<%= connect.options.port %>'
       }
     },
+
     karma: {
       unit: {
         configFile: 'karma.conf.js'
@@ -159,14 +121,6 @@ module.exports = function (grunt) {
       }
     },
 
-    uglify: {
-      dist: {
-        files: {
-          '<%= pkg.dist %>/scripts/<%= pkg.mainOutput %>.js': ['.tmp/scripts/<%= pkg.mainOutput %>.dev.js']
-        }
-      }
-    },
-
     clean: {
       dist: {
         files: [{
@@ -178,7 +132,7 @@ module.exports = function (grunt) {
         }]
       },
       server: '.tmp'
-    },
+    }
   });
 
   grunt.registerTask('serve', function (target) {
@@ -187,6 +141,7 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
+      'clean',
       'connect:livereload',
       'webpack:development',
       'open',
@@ -196,7 +151,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', ['karma']);
 
-  grunt.registerTask('build', ['clean', 'test', 'copy', 'webpack:dist', 'uglify', 'clean:server']);
+  grunt.registerTask('build', ['clean', 'test', 'copy', 'webpack:dist', 'clean:server']);
 
   grunt.registerTask('default', []);
 };
