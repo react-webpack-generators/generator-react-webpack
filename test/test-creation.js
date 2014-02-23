@@ -45,7 +45,8 @@ describe('react-webpack generator', function () {
             'package.json',
             'src/scripts/components/TempTestApp.js',
             'test/helpers/phantomjs-shims.js',
-            'test/helpers/react/addons.js'
+            'test/helpers/react/addons.js',
+            'test/spec/components/TempTestApp.js',
         ];
 
         react.run({}, function () {
