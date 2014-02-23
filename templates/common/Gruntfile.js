@@ -37,10 +37,36 @@ module.exports = function (grunt) {
       development: {
         entry: './<%= pkg.src %>/scripts/components/<%= pkg.mainInput %>.js',
         output: {
-          path: '<%= pkg.src %>/scripts/',
+          path: '.tmp/scripts/',
           filename: '<%= pkg.mainOutput %>.js'
         },
         debug: true,
+        cache: true,
+        devtool: 'source-map',
+        stats: {
+          colors: true,
+          reasons: true
+        },
+        jshint: grunt.util._.merge(jshintConfig, {
+          emitErrors: false,
+          failOnHint: false
+        }),
+        module: {
+          preLoaders: [{
+            test: '\\.js$',
+            exclude: 'node_modules',
+            loader: 'jshint'
+          }],
+          loaders: loaders
+        }
+      },
+      dist: {
+        entry: './<%= pkg.src %>/scripts/components/<%= pkg.mainInput %>.js',
+        output: {
+          path: '.tmp/scripts/',
+          filename: '<%= pkg.mainOutput %>.dev.js'
+        },
+        debug: false,
         cache: true,
         stats: {
           colors: true,
@@ -63,10 +89,9 @@ module.exports = function (grunt) {
     watch: {
       webpack: {
         files: ['<%= pkg.src %>/scripts/{,*/}*.js',
-          '<%= pkg.src %>/styles/{,*/}*.css',
-          '!<%= pkg.src %>/scripts/<%= pkg.mainOutput %>.js'
+          '<%= pkg.src %>/styles/{,*/}*.css'
         ],
-        tasks: ['webpack:development']
+        tasks: ['test','webpack:development']
       },
       livereload: {
         options: {
@@ -74,7 +99,7 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= pkg.src %>/{,*/}*.html',
-          '<%= pkg.src %>/scripts/<%= pkg.mainOutput %>.js'
+          '<%= pkg.src %>/.tmp/scripts/<%= pkg.mainOutput %>.js'
         ]
       }
     },
@@ -86,12 +111,10 @@ module.exports = function (grunt) {
       },
       livereload: {
         options: {
-          middleware: function (connect) {
-            return [
-              lrSnippet,
-              mountFolder(connect, pkgConfig.src)
-            ];
-          }
+          base: [
+            '.tmp',
+            pkgConfig.src
+          ]
         }
       },
       dist: {
@@ -113,7 +136,49 @@ module.exports = function (grunt) {
       unit: {
         configFile: 'karma.conf.js'
       }
-    }
+    },
+
+    copy: {
+      dist: {
+        files: [
+          // includes files within path
+          {
+            flatten: true,
+            expand: true,
+            src: ['<%= pkg.src %>/*'],
+            dest: '<%= pkg.dist %>/',
+            filter: 'isFile'
+          },
+          {
+            flatten: true,
+            expand: true,
+            src: ['<%= pkg.src %>/images/'],
+            dest: '<%= pkg.dist %>/'
+          },
+        ]
+      }
+    },
+
+    uglify: {
+      dist: {
+        files: {
+          '<%= pkg.dist %>/scripts/<%= pkg.mainOutput %>.js': ['.tmp/scripts/<%= pkg.mainOutput %>.dev.js']
+        }
+      }
+    },
+
+    clean: {
+      dist: {
+        files: [{
+          dot: true,
+          src: [
+            '.tmp',
+            '<%= pkg.dist %>'
+          ]
+        }]
+      },
+      server: '.tmp'
+    },
   });
 
   grunt.registerTask('serve', function (target) {
@@ -131,7 +196,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', ['karma']);
 
-  grunt.registerTask('build', []);
+  grunt.registerTask('build', ['clean', 'test', 'copy', 'webpack:dist', 'uglify', 'clean:server']);
 
   grunt.registerTask('default', []);
 };
