@@ -1,14 +1,18 @@
 'use strict';
 
 describe('<%= classedName %>', function () {
-  var <%= classedName %>, component;
+  var <%= scriptAppName %>, component;
 
   beforeEach(function () {
-    <%= classedName %> = require('../../../src/scripts/components/<%= classedName %>');
-    component = <%= classedName %>();
+    var container = document.createElement('div');
+    container.id = 'content';
+    document.body.appendChild(container);
+
+    <%= scriptAppName %> = require('../../../src/scripts/components/<%= scriptAppName %>');
+    component = <%= scriptAppName %>();
   });
 
-  it('should create a new instance of <%= classedName %>', function () {
+  it('should create a new instance of <%= scriptAppName %>', function () {
     expect(component).toBeDefined();
   });
 });
