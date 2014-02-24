@@ -5,6 +5,7 @@
 'use strict';
 
 var React = require('react/addons');
+require('../../styles/<%= classedName %>.css');
 
 var <%= classedName %> = React.createClass({
   /*jshint ignore:start */

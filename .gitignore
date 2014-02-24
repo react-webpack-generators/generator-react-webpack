@@ -28,4 +28,4 @@ $RECYCLE.BIN/
 # App specific
 
 node_modules/
-/test/temp/
+/test/temp-test/
