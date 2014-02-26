@@ -15,7 +15,7 @@ var loaders = [{
     test: /\.png/,
     loader: 'url-loader?limit=10000&minetype=image/png'
   }, {
-    test: /\.js$/,
+    test: /\.jsx$/,
     loader: 'jsx-loader'
   }];
 
@@ -38,9 +38,5 @@ module.exports = {
       loader: 'jshint'
     }],
     loaders: loaders
-  },
-  plugins: [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin()
-  ]
+  }
 };

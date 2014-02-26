@@ -8,7 +8,7 @@ describe('<%= classedName %>', function () {
     container.id = 'content';
     document.body.appendChild(container);
 
-    <%= scriptAppName %> = require('../../../src/scripts/components/<%= scriptAppName %>');
+    <%= scriptAppName %> = require('../../../src/scripts/components/<%= scriptAppName %>.jsx');
     component = <%= scriptAppName %>();
   });
 

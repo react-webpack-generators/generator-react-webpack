@@ -23,7 +23,7 @@ module.exports = function (grunt) {
       options: webpackConfig,
 
       development: {
-        entry: './src/scripts/components/<%= pkg.mainInput %>',
+        entry: './src/scripts/components/<%= pkg.mainInput %>.jsx',
         devtool: 'source-map',
         plugins: [],
 
@@ -34,7 +34,7 @@ module.exports = function (grunt) {
       },
 
       dist: {
-        entry: './src/scripts/components/<%= pkg.mainInput %>'
+        entry: './src/scripts/components/<%= pkg.mainInput %>.jsx'
       }
     },
 

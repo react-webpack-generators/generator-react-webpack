@@ -31,6 +31,7 @@ var Generator = module.exports = function Generator() {
 
 	var sourceRoot = '/templates/';
 	this.scriptSuffix = '.js';
+	this.reactSuffix = '.jsx';
 
 	var stylesRoot = '/templates/styles';
 	this.stylesSuffix = '.css';
@@ -42,8 +43,8 @@ util.inherits(Generator, yeoman.generators.NamedBase);
 
 Generator.prototype.appTemplate = function (src, dest) {
 	yeoman.generators.Base.prototype.template.apply(this, [
-		path.join('javascript', src + this.scriptSuffix),
-		path.join(this.env.options.appPath, dest) + this.scriptSuffix
+		path.join('javascript', src + this.reactSuffix),
+		path.join(this.env.options.appPath, dest) + this.reactSuffix
 	]);
 };
 

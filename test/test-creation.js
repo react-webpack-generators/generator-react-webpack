@@ -43,7 +43,7 @@ describe('react-webpack generator', function () {
             'karma.conf.js',
             'package.json',
             'package.json',
-            'src/scripts/components/TempTestApp.js',
+            'src/scripts/components/TempTestApp.jsx',
             'test/helpers/phantomjs-shims.js',
             'test/helpers/react/addons.js',
             'test/spec/components/TempTestApp.js',
@@ -86,7 +86,7 @@ describe('react-webpack generator', function () {
             //var Foo = React.createClass({
             reactGenerator.run([], function () {
                 helpers.assertFiles([
-                    [path.join('src/scripts', targetDirectory, name + '.js'), new RegExp('var ' + scriptNameFn(name) + suffix, 'g')],
+                    [path.join('src/scripts', targetDirectory, name + '.jsx'), new RegExp('var ' + scriptNameFn(name) + suffix, 'g')],
                     [path.join('test/spec', targetDirectory, name + '.js'), new RegExp('describe\\(\'' + specNameFn(name) + suffix + '\'', 'g')]
                 ]);
                 done();
