@@ -7,19 +7,17 @@
   "mainInput": "<%= scriptAppName %>",
   "mainOutput": "main",
   "dependencies": {
-    "react": "~0.9.0"
+    "react": "~0.10.0"
   },
   "devDependencies": {
-    "grunt": "~0.4.2",
-    "load-grunt-tasks": "~0.2.1",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-contrib-connect": "~0.6.0",
-    "connect-livereload": "~0.3.1",
-    "webpack": "~1.0.0-beta4",
+    "grunt": "~0.4.4",
+    "load-grunt-tasks": "~0.4.0",
+    "grunt-contrib-connect": "~0.7.1",
+    "webpack": "~1.1.0",
     "jsx-loader": "petehunt/jsx-loader",
     "grunt-webpack": "~1.0.0",
-    "style-loader": "~0.6.0",
-    "url-loader": "~0.5.2",
+    "style-loader": "~0.6.3",
+    "url-loader": "~0.5.4",
     "css-loader": "~0.6.6",
     "karma-script-launcher": "~0.1.0",
     "karma-chrome-launcher": "~0.1.2",
@@ -29,8 +27,8 @@
     "karma": "~0.10.9",
     "grunt-karma": "~0.6.2",
     "karma-webpack-plugin": "~1.0.0",
-    "webpack-dev-server": "~1.0.2",
-    "grunt-open": "~0.2.2",
+    "webpack-dev-server": "~1.2.4",
+    "grunt-open": "~0.2.3",
     "jshint-loader": "~0.6.0",
     "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-clean": "~0.5.0"

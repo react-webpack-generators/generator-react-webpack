@@ -1,13 +1,11 @@
 'use strict';
-var LIVERELOAD_PORT = 35729;
-var lrSnippet = require('connect-livereload')({
-  port: LIVERELOAD_PORT
-});
+
 var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
 };
 
-var webpackConfig = require('./webpack.config.js');
+var webpackDistConfig = require('./webpack.dist.config.js'),
+    webpackDevConfig = require('./webpack.config.js');
 
 module.exports = function (grunt) {
   // Let *load-grunt-tasks* require everything
@@ -20,65 +18,39 @@ module.exports = function (grunt) {
     pkg: pkgConfig,
 
     webpack: {
-      options: webpackConfig,
-
-      development: {
-        entry: './src/scripts/components/<%= pkg.mainInput %>.jsx',
-        devtool: 'source-map',
-        plugins: [],
-
-        output: {
-          publicPath: '.tmp/',
-          path: '.tmp/scripts/'
-        }
-      },
+      options: webpackDistConfig,
 
       dist: {
-        entry: './src/scripts/components/<%= pkg.mainInput %>.jsx'
+        cache: false
       }
     },
 
-    watch: {
-      webpack: {
-        files: ['<%= pkg.src %>/scripts/{,*/}*.js',
-          '<%= pkg.src %>/styles/{,*/}*.css'
-        ],
-        tasks: ['test', 'webpack:development']
+    'webpack-dev-server': {
+      options: {
+        port: 8000,
+        webpack: webpackDevConfig,
+        publicPath: '/scripts/',
+        contentBase: './<%= pkg.src %>/',
+        cache: true
       },
+      
+      start: {
+        keepAlive: true,
 
-      livereload: {
-        options: {
-          livereload: LIVERELOAD_PORT
-        },
-        files: [
-          '<%= pkg.src %>/{,*/}*.html',
-          '<%= pkg.src %>/.tmp/scripts/<%= pkg.mainOutput %>.js'
-        ]
+        webpack: {
+          debug: true,
+        }
       }
     },
 
     connect: {
       options: {
-        port: 8000,
-        // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
-        base: [
-          '.tmp',
-          '<%= pkg.src %>'
-        ]
+        port: 8000
       },
 
-      livereload: {
-        options: {
-          base: [
-            '.tmp',
-            '<%= pkg.src %>'
-          ]
-        }
-      },
-      
       dist: {
         options: {
+          keepalive: true,
           middleware: function (connect) {
             return [
               mountFolder(connect, pkgConfig.dist)
@@ -89,8 +61,14 @@ module.exports = function (grunt) {
     },
 
     open: {
-      server: {
-        url: 'http://localhost:<%= connect.options.port %>'
+      options: {
+        delay: 500
+      },
+      dev: {
+        path: 'http://localhost:<%= connect.options.port %>/webpack-dev-server/'
+      },
+      dist: {
+        path: 'http://localhost:<%= connect.options.port %>/'
       }
     },
 
@@ -114,8 +92,8 @@ module.exports = function (grunt) {
           {
             flatten: true,
             expand: true,
-            src: ['<%= pkg.src %>/images/'],
-            dest: '<%= pkg.dist %>/'
+            src: ['<%= pkg.src %>/images/*'],
+            dest: '<%= pkg.dist %>/images/'
           },
         ]
       }
@@ -126,32 +104,27 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '.tmp',
             '<%= pkg.dist %>'
           ]
         }]
-      },
-      server: '.tmp'
+      }
     }
   });
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
+      return grunt.task.run(['build', 'open:dist', 'connect:dist']);
     }
 
     grunt.task.run([
-      'clean',
-      'connect:livereload',
-      'webpack:development',
-      'open',
-      'watch'
+      'open:dev',
+      'webpack-dev-server'
     ]);
   });
 
   grunt.registerTask('test', ['karma']);
 
-  grunt.registerTask('build', ['clean', 'test', 'copy', 'webpack:dist', 'clean:server']);
+  grunt.registerTask('build', ['clean', 'copy', 'webpack']);
 
   grunt.registerTask('default', []);
 };
