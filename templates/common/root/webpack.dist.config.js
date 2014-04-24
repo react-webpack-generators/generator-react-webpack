@@ -6,9 +6,6 @@
 
 'use strict';
 
-/**
- * Configures the distribution webpack build
- */
 var webpack = require('webpack');
 
 module.exports = {

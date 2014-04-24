@@ -31,15 +31,10 @@ module.exports = function (grunt) {
         webpack: webpackDevConfig,
         publicPath: '/scripts/',
         contentBase: './<%= pkg.src %>/',
-        cache: true
       },
       
       start: {
         keepAlive: true,
-
-        webpack: {
-          debug: true,
-        }
       }
     },
 

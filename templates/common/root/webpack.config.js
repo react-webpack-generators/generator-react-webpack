@@ -9,8 +9,6 @@
 
 module.exports = {
   output: {
-    publicPatch: '.tmp/',
-    path: '.tmp/scripts/',
     filename: 'main.js'
   },
 
