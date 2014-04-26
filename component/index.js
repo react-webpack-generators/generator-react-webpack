@@ -12,6 +12,7 @@ ComponentGenerator.prototype.createComponentFile = function createComponentFile(
   this.generateSourceAndTest(
     'Component',
     'spec/Component',
+    'styles/Component',
     'components'
   );
 };
