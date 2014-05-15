@@ -65,7 +65,6 @@ Produces `src/scripts/components/Foo.jsx` (*javascript - JSX*):
 var React = require('react/addons');
 
 var Foo = React.createClass({
-  /*jshint ignore:start */
   render: function () {
     return (
         <div>
@@ -73,7 +72,6 @@ var Foo = React.createClass({
         </div>
       )
   }
-  /*jshint ignore:end */
 });
 
 module.exports = Foo;
@@ -163,6 +161,10 @@ Out the box the [Gruntfile](http://gruntjs.com/api/grunt.file) is configured wit
 ### CSS
 
 Included in the project is [Eric Meyer's reset.css](http://meyerweb.com/eric/tools/css/reset/) script. There is also a `src/styles/main.css` script that's required by the core `src/scripts/components/App.js` component using Webpack.
+
+### JSHint
+
+Please use [JSXHint](https://github.com/STRML/JSXHint) for linting JSX and the corresponding Sublime package if using SLT3 [SublimeLinter-jsxhint](https://github.com/SublimeLinter/SublimeLinter-jsxhint). Note this is a global npm install and JSX files will need to be associated with the JSX file type withing SLT3.
 
 ## Props
 

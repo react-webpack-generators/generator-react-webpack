@@ -14,7 +14,6 @@ require('../../styles/main.css');
 var imageURL = '../../images/yeoman.png';
 
 var <%= scriptAppName %> = React.createClass({
-  /*jshint ignore:start */
   render: function() {
     return (
       <div className='main'>
@@ -24,7 +23,6 @@ var <%= scriptAppName %> = React.createClass({
       </div>
     );
   }
-  /*jshint ignore:end */
 });
 
 React.renderComponent(<<%= scriptAppName %> />, document.getElementById('content')); // jshint ignore:line
