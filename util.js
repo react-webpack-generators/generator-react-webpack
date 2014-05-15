@@ -7,7 +7,9 @@ module.exports = {
   rewrite: rewrite,
   rewriteFile: rewriteFile,
   appName: appName,
-  capitalize: capitalize
+  capitalize: capitalize,
+  capitalizeClass: capitalizeClass,
+  capitalizeFile: capitalizeFile
 };
 
 function rewriteFile (args) {
@@ -60,8 +62,21 @@ function rewrite (args) {
   return lines.join('\n');
 }
 
-function capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+function capitalize(str) {
+  str = String(str);
+  return str[0].toUpperCase() + str.substr(1, str.length);
+}
+
+function capitalizeClass(string) {
+  var words =  string.split('/');
+  words.push(capitalize(words.pop()));
+  return words.pop();
+}
+
+function capitalizeFile(string) {
+  var words =  string.split('/');
+  words.push(capitalize(words.pop()));
+  return words.join('/');
 }
 
 function appName(self) {
