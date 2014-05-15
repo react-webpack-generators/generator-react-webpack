@@ -1,4 +1,4 @@
-# generator-react-webpack [![Build Status](https://secure.travis-ci.org/newtriks/generator-react-webpack.png?branch=master)](https://travis-ci.org/newtriks/generator-react-webpack)  [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+# generator-react-webpack [![Build Status](https://secure.travis-ci.org/eddhannay/generator-react-webpack.png?branch=master)](https://travis-ci.org/eddhannay/generator-react-webpack)  [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 > Yeoman generator for [ReactJS](http://facebook.github.io/react/) - lets you quickly set up a project including karma test runner and [Webpack](http://webpack.github.io/) module system.
 
@@ -54,7 +54,7 @@ Example:
 yo react-webpack:component foo
 ```
 
-Produces `src/scripts/components/Foo.js` (*javascript - JSX*):
+Produces `src/scripts/components/Foo.jsx` (*javascript - JSX*):
 ```
 /**
  * @jsx React.DOM
@@ -96,6 +96,14 @@ describe('Foo', function () {
     expect(component).toBeDefined();
   });
 });
+```
+
+And `src/styles/Foo.css`:
+```
+
+.Foo{
+  border: 1px dashed #f00;
+}
 ```
 
 ## Testing
@@ -148,7 +156,7 @@ Each component is a module and can be required using the [Webpack](http://webpac
 Out the box the [Gruntfile](http://gruntjs.com/api/grunt.file) is configured with the following:
 
 1. **webpack**: uses the [grunt-webpack](https://github.com/webpack/grunt-webpack) plugin to load all required modules and output to a single JS file `src/scripts/main.js`. This is included in the `src/index.html` file by default and will reload in the browser as and when it is recompiled. 
-2. **watch**: uses the [grunt-watch](https://github.com/gruntjs/grunt-contrib-watch) plugin and watches for file changes. Livereload support is included by default and thus on file change the *webpack* task is run and the browser will auto update.
+2. **webpack-dev-server**: uses the [webpack-dev-server](https://github.com/webpack/webpack-dev-server) to watch for file changes and also serve the webpack app in development.
 3. **connect**: uses the [grunt-connect](https://github.com/gruntjs/grunt-contrib-connect) plugin to start a webserver at [localhost](http://localhost:8000).
 4. **karma**: uses the [grunt-karma](https://github.com/karma-runner/grunt-karma) plugin to load the Karma configuration file `karma.conf.js` located in the project root. This will run all tests using [PhantomJS](http://phantomjs.org/) by default but supports many other browsers. 
 
@@ -167,7 +175,3 @@ Contributions are welcomed. When submitting a bugfix, write a test that exposes 
 ## License
 
 [BSD license](http://opensource.org/licenses/bsd-license.php)
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/newtriks/generator-react-webpack/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-

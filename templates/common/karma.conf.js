@@ -27,7 +27,7 @@ module.exports = function (config) {
           test: /\.png/,
           loader: 'url-loader?limit=10000&minetype=image/png'
         }, {
-          test: /\.js$/,
+          test: /\.jsx$/,
           loader: 'jsx-loader'
         }]
       }
