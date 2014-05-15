@@ -1,4 +1,4 @@
-# generator-react-webpack [![Build Status](https://secure.travis-ci.org/eddhannay/generator-react-webpack.png?branch=master)](https://travis-ci.org/eddhannay/generator-react-webpack)  [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+# generator-react-webpack [![Build Status](https://secure.travis-ci.org/newtriks/generator-react-webpack.png?branch=master)](https://travis-ci.org/newtriks/generator-react-webpack)  [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 > Yeoman generator for [ReactJS](http://facebook.github.io/react/) - lets you quickly set up a project including karma test runner and [Webpack](http://webpack.github.io/) module system.
 
@@ -169,6 +169,8 @@ Please use [JSXHint](https://github.com/STRML/JSXHint) for linting JSX and the c
 ## Props
 
 Thanks to all who contributed to [generator-angular](https://github.com/yeoman/generator-angular) as the majority of code here has been shamelessy sourced from that repos.
+
+Thanks to [Edd Hannay](https://github.com/eddhannay) for his Webpack optimisations, my local merge and testing meant his additions lost his signature (my fault sorry) so big thanks Edd.
 
 ## Contribute
 
