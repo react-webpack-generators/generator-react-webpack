@@ -179,3 +179,5 @@ Contributions are welcomed. When submitting a bugfix, write a test that exposes 
 ## License
 
 [BSD license](http://opensource.org/licenses/bsd-license.php)
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/newtriks/generator-react-webpack/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
