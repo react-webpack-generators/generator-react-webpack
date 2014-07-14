@@ -14,11 +14,11 @@ var ReactWebpackGenerator = module.exports = function ReactWebpackGenerator(args
 
   args = ['main'];
 
-  if (typeof this.env.options.appPath === 'undefined') {
-    this.env.options.appPath = this.env.options.appPath || 'src';
+  if (typeof this.options.appPath === 'undefined') {
+    this.options.appPath = this.options.appPath || 'src';
   }
 
-  this.appPath = this.env.options.appPath;
+  this.appPath = this.options.appPath;
 
   this.hookFor('react-webpack:common', {
     args: args
