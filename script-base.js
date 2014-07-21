@@ -20,23 +20,22 @@ var Generator = module.exports = function Generator() {
 	this.classedFileName = this._.capitalizeFile(this.name);
     this.classedName = this._.capitalizeClass(this.name);
 
-	if (typeof this.env.options.appPath === 'undefined') {
-		this.env.options.appPath = this.env.options.appPath || 'src';
+	if (typeof this.options.appPath === 'undefined') {
+		this.options.appPath = this.options.appPath || 'src/scripts';
 	}
 
-	if (typeof this.env.options.testPath === 'undefined') {
-		this.env.options.testPath = this.env.options.testPath || 'test/spec';
+	if (typeof this.options.testPath === 'undefined') {
+		this.options.testPath = this.options.testPath || 'test/spec';
 	}
 
-	if (typeof this.env.options.stylesPath === 'undefined') {
-		this.env.options.stylesPath = this.env.options.stylesPath || 'src/styles';
+	if (typeof this.options.stylesPath === 'undefined') {
+		this.options.stylesPath = this.options.stylesPath || 'src/styles';
 	}
 
 	var sourceRoot = '/templates/';
 	this.scriptSuffix = '.js';
 	this.reactSuffix = '.jsx';
 
-	var stylesRoot = '/templates/styles';
 	this.stylesSuffix = '.css';
 
 	this.sourceRoot(path.join(__dirname, sourceRoot));
@@ -47,14 +46,14 @@ util.inherits(Generator, yeoman.generators.NamedBase);
 Generator.prototype.appTemplate = function (src, dest) {
 	yeoman.generators.Base.prototype.template.apply(this, [
 		path.join('javascript', src + this.reactSuffix),
-		path.join(this.env.options.appPath, dest) + this.reactSuffix
+		path.join(this.options.appPath, dest) + this.reactSuffix
 	]);
 };
 
 Generator.prototype.testTemplate = function (src, dest) {
 	yeoman.generators.Base.prototype.template.apply(this, [
 		src + this.scriptSuffix,
-		path.join(this.env.options.testPath, dest) + this.scriptSuffix
+		path.join(this.options.testPath, dest) + this.scriptSuffix
 	]);
 };
 
@@ -62,19 +61,19 @@ Generator.prototype.stylesTemplate = function (src, dest) {
 	console.log(src);
 	yeoman.generators.Base.prototype.template.apply(this, [
 		src + this.stylesSuffix,
-		path.join(this.env.options.stylesPath, dest) + this.stylesSuffix
+		path.join(this.options.stylesPath, dest) + this.stylesSuffix
 	]);
 };
 
 Generator.prototype.htmlTemplate = function (src, dest) {
 	yeoman.generators.Base.prototype.template.apply(this, [
 		src,
-		path.join(this.env.options.appPath, dest.toLowerCase())
+		path.join(this.options.appPath, dest.toLowerCase())
 	]);
 };
 
 Generator.prototype.generateSourceAndTest = function (appTemplate, testTemplate, stylesTemplate, targetDirectory) {
-	this.appTemplate(appTemplate, path.join('scripts', targetDirectory, this._.capitalizeFile(this.name)));
+	this.appTemplate(appTemplate, path.join(targetDirectory, this._.capitalizeFile(this.name)));
 	this.testTemplate(testTemplate, path.join(targetDirectory, this._.capitalizeFile(this.name)));
 	this.stylesTemplate(stylesTemplate, path.join(this._.capitalizeFile(this.name)));
 };

@@ -10,6 +10,6 @@ var MainGenerator = module.exports = function MainGenerator(args, options, confi
 util.inherits(MainGenerator, ScriptBase);
 
 MainGenerator.prototype.createAppFile = function createAppFile() {
-  this.appTemplate('App', 'scripts/components/' + this.scriptAppName);
+  this.appTemplate('App', 'components/' + this.scriptAppName);
   this.testTemplate('spec/App', 'components/' + this.scriptAppName);
 };
