@@ -22,6 +22,10 @@ module.exports = {
     reasons: true
   },
 
+  resolve: {
+    extensions: ['','.js','.jsx']
+  },
+
   module: {
     preLoaders: [{
       test: '\\.js$',
