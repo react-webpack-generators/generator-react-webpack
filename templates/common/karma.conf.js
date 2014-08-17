@@ -19,13 +19,13 @@ module.exports = function (config) {
           loader: 'style!css'
         }, {
           test: /\.gif/,
-          loader: 'url-loader?limit=10000&minetype=image/gif'
+          loader: 'url-loader?limit=10000&mimetype=image/gif'
         }, {
           test: /\.jpg/,
-          loader: 'url-loader?limit=10000&minetype=image/jpg'
+          loader: 'url-loader?limit=10000&mimetype=image/jpg'
         }, {
           test: /\.png/,
-          loader: 'url-loader?limit=10000&minetype=image/png'
+          loader: 'url-loader?limit=10000&mimetype=image/png'
         }, {
           test: /\.jsx$/,
           loader: 'jsx-loader'
