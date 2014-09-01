@@ -31,6 +31,10 @@ module.exports = {
     new webpack.optimize.AggressiveMergingPlugin()
   ],
 
+  resolve: {
+    extensions: ['','.js','.jsx']
+  },
+
   module: {
     preLoaders: [{
       test: '\\.js$',
