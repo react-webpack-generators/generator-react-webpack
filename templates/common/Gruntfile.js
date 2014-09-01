@@ -13,7 +13,7 @@ module.exports = function (grunt) {
 
   // Read configuration from package.json
   var pkgConfig = grunt.file.readJSON('package.json');
-  
+
   grunt.initConfig({
     pkg: pkgConfig,
 
@@ -29,10 +29,10 @@ module.exports = function (grunt) {
       options: {
         port: 8000,
         webpack: webpackDevConfig,
-        publicPath: '/scripts/',
+        publicPath: '/assets/',
         contentBase: './<%= pkg.src %>/',
       },
-      
+
       start: {
         keepAlive: true,
       }
