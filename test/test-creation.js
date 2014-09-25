@@ -35,7 +35,7 @@ describe('react-webpack generator', function () {
 
     it('creates expected files', function (done) {
         var expected = ['src/favicon.ico',
-            'src/styles/reset.css',
+            'src/styles/normalize.css',
             'src/styles/main.css',
             'src/index.html',
             'Gruntfile.js',

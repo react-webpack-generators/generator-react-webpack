@@ -11,7 +11,7 @@ var ReactTransitionGroup = React.addons.TransitionGroup;
 (window !== window.top ? window.top : window).React = React;
 
 // CSS
-require('../../styles/reset.css');
+require('../../styles/normalize.css');
 require('../../styles/main.css');
 
 var imageURL = require('../../images/yeoman.png');

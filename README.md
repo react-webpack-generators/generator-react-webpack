@@ -124,7 +124,7 @@ project
       main.js
     - styles
       main.css
-      reset.css
+      normalize.css
     index.html
   - test
     - spec
@@ -160,7 +160,7 @@ Out the box the [Gruntfile](http://gruntjs.com/api/grunt.file) is configured wit
 
 ### CSS
 
-Included in the project is [Eric Meyer's reset.css](http://meyerweb.com/eric/tools/css/reset/) script. There is also a `src/styles/main.css` script that's required by the core `src/scripts/components/App.js` component using Webpack.
+Included in the project is the [normalize.css](http://necolas.github.io/normalize.css/) script. There is also a `src/styles/main.css` script that's required by the core `src/scripts/components/App.js` component using Webpack.
 
 ### JSHint
 
