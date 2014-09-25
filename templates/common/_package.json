@@ -10,7 +10,7 @@
   "mainInput": "<%= scriptAppName %>",
   "mainOutput": "main",
   "dependencies": {
-    "react": "~0.11.1"
+    "react": "~0.11.2"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
