@@ -1,6 +1,6 @@
 {
   "name": "generator-react-webpack",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Yeoman generator for ReactJS and Webpack",
   "keywords": [
     "yeoman-generator",
@@ -28,14 +28,14 @@
     "test": "mocha"
   },
   "dependencies": {
-    "yeoman-generator": "~0.14.0"
+    "yeoman-generator": "^0.17.6"
   },
   "devDependencies": {
-    "mocha": "~1.14.0",
-    "underscore.string": "~2.3.1"
+    "mocha": "^1.21.4",
+    "underscore.string": "^2.3.3"
   },
   "peerDependencies": {
-    "yo": ">=1.0.0"
+    "yo": ">=1.2.0"
   },
   "engines": {
     "node": ">=0.10.0"
