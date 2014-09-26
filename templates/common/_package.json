@@ -7,7 +7,7 @@
   "src": "src",
   "test": "test",
   "dist": "dist",
-  "mainInput": "<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %> <% } %>",
+  "mainInput": "<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>",
   "mainOutput": "main",
   "dependencies": {<% if (reactRouter) { %>
     "react-router": "^0.7.0",<% } %>
