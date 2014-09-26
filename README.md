@@ -104,6 +104,13 @@ And `src/styles/Foo.css`:
 }
 ```
 
+## Options
+Options are available as additional installs to the initial application generation phase.
+
+### [ReactRouter](https://github.com/rackt/react-router)
+
+A complete routing library for React.
+
 ## Testing
 
 Running `grunt test` will run the unit tests with karma. Tests are written using [Jasmine](http://pivotal.github.io/jasmine/) by default.

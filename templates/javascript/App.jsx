@@ -27,7 +27,7 @@ var <%= scriptAppName %> = React.createClass({
     );
   }
 });
-
-React.renderComponent(<<%= scriptAppName %> />, document.getElementById('content')); // jshint ignore:line
-
+<% if (!reactRouter) {
+%>React.renderComponent(<<%= scriptAppName %> />, document.getElementById('content')); // jshint ignore:line
+<% } %>
 module.exports = <%= scriptAppName %>;

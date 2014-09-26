@@ -8,6 +8,7 @@
 'use strict';
 
 module.exports = {
+
   output: {
     filename: 'main.js',
     publicPath: '/assets/'
@@ -24,7 +25,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['','.js','.jsx']
+    extensions: ['', '.js', '.jsx']
   },
 
   module: {
@@ -35,20 +36,15 @@ module.exports = {
     }],
 
     loaders: [{
-      test: /\.css$/,
-      loader: 'style!css'
-    }, {
-      test: /\.gif/,
-      loader: 'url-loader?limit=10000&mimetype=image/gif'
-    }, {
-      test: /\.jpg/,
-      loader: 'url-loader?limit=10000&mimetype=image/jpg'
-    }, {
-      test: /\.png/,
-      loader: 'url-loader?limit=10000&mimetype=image/png'
-    }, {
       test: /\.jsx$/,
-      loader: 'jsx-loader'
+      loader: 'jsx-loader?harmony'
+    }, {
+      test: /\.css$/,
+      loader: 'style-loader!css-loader'
+    }, {
+      test: /\.(png|jpg)$/,
+      loader: 'url-loader?limit=8192'
     }]
   }
+
 };

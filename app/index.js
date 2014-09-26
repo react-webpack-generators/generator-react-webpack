@@ -20,11 +20,11 @@ var ReactWebpackGenerator = module.exports = function ReactWebpackGenerator(args
 
   this.appPath = this.options.appPath;
 
-  this.hookFor('react-webpack:common', {
+  this.composeWith('react-webpack:common', {
     args: args
   });
 
-  this.hookFor('react-webpack:main', {
+  this.composeWith('react-webpack:main', {
     args: args
   });
 
@@ -47,6 +47,19 @@ ReactWebpackGenerator.prototype.welcome = function welcome() {
   }
 };
 
+ReactWebpackGenerator.prototype.askForReactRouter = function () {
+  var done = this.async();
+  this.prompt({
+    type    : 'confirm',
+    name    : 'reactRouter',
+    message : 'Would you like to include react-router?',
+    default : true
+  }, function (props) {
+    this.env.options.reactRouter = props.reactRouter;
+    done();
+  }.bind(this));
+};
+
 ReactWebpackGenerator.prototype.readIndex = function readIndex() {
   this.indexFile = this.engine(this.read('../../templates/common/index.html'), this);
 };
@@ -57,6 +70,7 @@ ReactWebpackGenerator.prototype.createIndexHtml = function createIndexHtml() {
 };
 
 ReactWebpackGenerator.prototype.packageFiles = function () {
+  this.reactRouter = this.env.options.reactRouter;
   this.template('../../templates/common/_package.json', 'package.json');
   this.copy('../../templates/common/Gruntfile.js', 'Gruntfile.js');
   this.copy('../../templates/common/gitignore', '.gitignore');
