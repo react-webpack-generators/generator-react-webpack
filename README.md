@@ -109,7 +109,7 @@ Options are available as additional installs to the initial application generati
 
 ### [ReactRouter](https://github.com/rackt/react-router)
 
-A complete routing library for React.
+A complete routing library for React. This option only adds the basic hooks to get started with [react router](https://github.com/rackt/react-router).
 
 ## Testing
 
