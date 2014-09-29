@@ -19,7 +19,7 @@ module.exports = {
   debug: true,
   devtool: false,
   entry: [
-      'webpack/hot/dev-server',
+      'webpack/hot/only-dev-server',
       './src/scripts/components/<%= pkg.mainInput %>.jsx'
   ],
 
@@ -52,7 +52,8 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
   ]
 
 };

@@ -101,7 +101,8 @@ describe('react-webpack generator', function() {
             ['Gruntfile.js', /hot:\s*true/],
             ['webpack.config.js', /react-hot/],
             ['webpack.config.js', /webpack\.HotModuleReplacementPlugin/],
-            ['webpack.config.js', /webpack\/hot\/dev-server/]
+            ['webpack.config.js', /webpack\.NoErrorsPlugin/],
+            ['webpack.config.js', /webpack\/hot\/only-dev-server/]
         ]);
         done();
       });
