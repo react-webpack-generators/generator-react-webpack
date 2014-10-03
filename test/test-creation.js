@@ -3,6 +3,7 @@
 
 var path = require('path');
 var helpers = require('yeoman-generator').test;
+var assert = require('yeoman-generator').assert;
 var _ = require('underscore.string');
 
 describe('react-webpack generator', function() {
@@ -90,6 +91,20 @@ describe('react-webpack generator', function() {
           ]));
           done();
         });
+      });
+    });
+
+    it('should use HMR webpack API inside of configs', function (done) {
+      react.run({}, function() {
+        assert.fileContent([
+            ['package.json', /react-hot-loader/],
+            ['Gruntfile.js', /hot:\s*true/],
+            ['webpack.config.js', /react-hot/],
+            ['webpack.config.js', /webpack\.HotModuleReplacementPlugin/],
+            ['webpack.config.js', /webpack\.NoErrorsPlugin/],
+            ['webpack.config.js', /webpack\/hot\/only-dev-server/]
+        ]);
+        done();
       });
     });
 

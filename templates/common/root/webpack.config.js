@@ -6,6 +6,7 @@
  */
 
 'use strict';
+var webpack = require('webpack');
 
 module.exports = {
 
@@ -17,7 +18,10 @@ module.exports = {
   cache: true,
   debug: true,
   devtool: false,
-  entry: './src/scripts/components/<%= pkg.mainInput %>.jsx',
+  entry: [
+      'webpack/hot/only-dev-server',
+      './src/scripts/components/<%= pkg.mainInput %>.jsx'
+  ],
 
   stats: {
     colors: true,
@@ -37,7 +41,7 @@ module.exports = {
 
     loaders: [{
       test: /\.jsx$/,
-      loader: 'jsx-loader?harmony'
+      loader: 'react-hot!jsx-loader?harmony'
     }, {
       test: /\.css$/,
       loader: 'style-loader!css-loader'
@@ -45,6 +49,11 @@ module.exports = {
       test: /\.(png|jpg)$/,
       loader: 'url-loader?limit=8192'
     }]
-  }
+  },
+
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ]
 
 };

@@ -35,6 +35,7 @@
     "grunt-open": "~0.2.3",
     "jshint-loader": "~0.8.0",
     "grunt-contrib-copy": "~0.5.0",
-    "grunt-contrib-clean": "~0.6.0"
+    "grunt-contrib-clean": "~0.6.0",
+    "react-hot-loader": "^0.4.5"
   }
 }
