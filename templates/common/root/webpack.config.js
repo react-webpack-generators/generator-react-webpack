@@ -21,7 +21,7 @@ module.exports = {
   entry: [
     '!bootstrap-webpack!./bootstrap.config.js',
     'font-awesome-webpack!./font-awesome.config.js',
-    './src/scripts/components/main.jsx',
+    './src/scripts/components/<%= pkg.mainInput %>.jsx',
     'webpack/hot/only-dev-server'
   ],
 
