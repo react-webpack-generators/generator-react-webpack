@@ -15,8 +15,13 @@ describe('react-webpack generator', function() {
     'src/index.html',
     'Gruntfile.js',
     'webpack.config.js',
+    'webpack.config.js',
     'karma.conf.js',
-    'package.json'
+    'package.json',
+    'bootstrap.config.js',
+    'bootstrap.config.less',
+    'font-awesome.config.js',
+    'font-awesome.config.less'
   ];
   var mockPrompts = {};
   var genOptions = {
