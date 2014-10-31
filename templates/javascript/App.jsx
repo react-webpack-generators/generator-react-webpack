@@ -5,6 +5,7 @@
 'use strict';
 
 var React = require('react/addons');
+var Button = require('react-bootstrap').Button;
 var ReactTransitionGroup = React.addons.TransitionGroup;
 
 // Export React so the devtools can find it
@@ -23,6 +24,7 @@ var <%= scriptAppName %> = React.createClass({
         <ReactTransitionGroup transitionName="fade">
           <img src={imageURL} />
         </ReactTransitionGroup>
+        <Button bsStyle="primary">Like it ?</Button>
       </div>
     );
   }
