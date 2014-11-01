@@ -18,7 +18,9 @@ var Generator = module.exports = function Generator() {
 	this.appname = this._.slugify(this._.humanize(this.appname));
 	this.scriptAppName = this._.camelize(this._.capitalize(this.appname)) + generalUtils.appName(this);
 	this.classedFileName = this._.capitalizeFile(this.name);
-    this.classedName = this._.capitalizeClass(this.name);
+  this.classedName = this._.capitalizeClass(this.name);
+  this.bootstrap = this.options.bootstrap;
+  this.fontawesome = this.options.fontawesome;
 
 	if (typeof this.options.appPath === 'undefined') {
 		this.options.appPath = this.options.appPath || 'src/scripts';

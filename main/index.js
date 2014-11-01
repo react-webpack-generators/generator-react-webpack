@@ -11,6 +11,8 @@ util.inherits(MainGenerator, ScriptBase);
 
 MainGenerator.prototype.createAppFile = function createAppFile() {
   this.reactRouter = this.env.options.reactRouter;
+  this.bootstrap = this.env.options.bootstrap;
+  this.fontawesome = this.env.options.fontawesome;
   this.appTemplate('App', 'components/' + this.scriptAppName);
   this.testTemplate('spec/App', 'components/' + this.scriptAppName);
 };

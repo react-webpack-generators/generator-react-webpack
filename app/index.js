@@ -60,6 +60,62 @@ ReactWebpackGenerator.prototype.askForReactRouter = function () {
   }.bind(this));
 };
 
+
+ReactWebpackGenerator.prototype.askForBootstrap = function askForBootstrap() {
+  var done = this.async();
+
+  this.prompt({
+    type: 'confirm',
+    name: 'bootstrap',
+    message: 'Would you like to include Bootstrap?',
+    default: true
+  }, function (props) {
+    this.env.options.bootstrap = props.bootstrap;
+
+    done();
+  }.bind(this));
+};
+
+ReactWebpackGenerator.prototype.askForFontAwesome = function () {
+  var done = this.async();
+  this.prompt({
+    type    : 'confirm',
+    name    : 'fontawesome',
+    message : 'Would you like to include font-awesome?',
+    default : true
+  }, function (props) {
+    this.env.options.fontawesome = props.fontawesome;
+    done();
+  }.bind(this));
+};
+
+ReactWebpackGenerator.prototype.askForCSSFlavour = function askForCSSFlavour() {
+  var done = this.async();
+
+  this.prompt({
+    type: 'list',
+    name: 'cssFlavour',
+    message: 'Which type of css would you like to use?',
+    default: 0,
+    choices: [{
+      name: 'SASS',
+      value: 'sass'
+    },{
+      name: 'LESS',
+      value: 'less'
+    }]
+  }, function (props) {
+    console.log(props);
+    if (props.cssFlavour == 'sass') {
+      this.env.options.sass = true;
+    } else {
+      this.env.options.less = true;
+    }
+
+    done();
+  }.bind(this));
+};
+
 ReactWebpackGenerator.prototype.readIndex = function readIndex() {
   this.indexFile = this.engine(this.read('../../templates/common/index.html'), this);
 };
@@ -69,8 +125,34 @@ ReactWebpackGenerator.prototype.createIndexHtml = function createIndexHtml() {
   this.write(path.join(this.appPath, 'index.html'), this.indexFile);
 };
 
+ReactWebpackGenerator.prototype.bootstrapConfig = function bootstrapConfig() {
+  this.bootstrap = this.env.options.bootstrap;
+  this.less = this.env.options.less;
+  if (this.bootstrap) {
+    var configFile = 'bootstrap.config.js';
+    var configStyle = 'bootstrap.config.' + (this.less ? 'less' : 'scss');
+    this.copy('../../templates/config/' + configFile, configFile);
+    this.copy('../../templates/config/' + configStyle, configStyle);
+  }
+};
+
+ReactWebpackGenerator.prototype.fontawesome = function fontawesome() {
+  this.fontawesome = this.env.options.fontawesome;
+  this.less = this.env.options.less;
+  if (this.env.options.fontawesome) {
+    var configFile = 'font-awesome.config.js';
+    var configStyle = 'font-awesome.config.' + (this.less ? 'less' : 'scss');
+    this.copy('../../templates/config/' + configFile, configFile);
+    this.copy('../../templates/config/' + configStyle, configStyle);
+  }
+};
+
 ReactWebpackGenerator.prototype.packageFiles = function () {
   this.reactRouter = this.env.options.reactRouter;
+  this.less = this.env.options.less;
+  this.sass = this.env.options.sass;
+  this.bootstrap = this.env.options.bootstrap;
+  this.fontawesome = this.env.options.fontawesome;
   this.template('../../templates/common/_package.json', 'package.json');
   this.copy('../../templates/common/Gruntfile.js', 'Gruntfile.js');
   this.copy('../../templates/common/gitignore', '.gitignore');
