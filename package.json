@@ -1,7 +1,7 @@
 {
   "name": "generator-react-webpack",
-  "version": "1.0.0",
-  "description": "Yeoman generator for ReactJS and Webpack",
+  "version": "1.0.1",
+  "description": "Yeoman generator for ReactJS and Webpack, LESS, Bootstrap and Font Awesome",
   "keywords": [
     "yeoman-generator",
     "reactjs",
@@ -10,7 +10,9 @@
     "framework",
     "component",
     "front-end",
-    "app"
+    "app",
+    "bootstrap",
+    "font-awesome"
   ],
   "homepage": "https://github.com/newtriks/generator-react-webpack",
   "bugs": "https://github.com/newtriks/generator-react-webpack/issues",

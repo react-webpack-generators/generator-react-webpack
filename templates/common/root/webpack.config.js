@@ -19,8 +19,10 @@ module.exports = {
   debug: true,
   devtool: false,
   entry: [
-      'webpack/hot/only-dev-server',
-      './src/scripts/components/<%= pkg.mainInput %>.jsx'
+    '!bootstrap-webpack!./bootstrap.config.js',
+    'font-awesome-webpack!./font-awesome.config.js',
+    './src/scripts/components/<%= pkg.mainInput %>.jsx',
+    'webpack/hot/only-dev-server'
   ],
 
   stats: {
@@ -39,16 +41,40 @@ module.exports = {
       loader: 'jshint'
     }],
 
-    loaders: [{
-      test: /\.jsx$/,
-      loader: 'react-hot!jsx-loader?harmony'
-    }, {
-      test: /\.css$/,
-      loader: 'style-loader!css-loader'
-    }, {
-      test: /\.(png|jpg)$/,
-      loader: 'url-loader?limit=8192'
-    }]
+    loaders: [
+      {
+        test: /\.jsx$/,
+        loader: 'react-hot!jsx-loader?harmony'
+      },
+      {
+        test: /\.css/,
+        loader: "style-loader!css-loader"
+      },
+      {
+        test: /\.less$/,
+        loader: "style-loader!css-loader!less-loader"
+      },
+      {
+        test: /\.gif/,
+        loader: "url-loader?limit=10000&minetype=image/gif"
+      },
+      {
+        test: /\.jpg/,
+        loader: "url-loader?limit=10000&minetype=image/jpg"
+      },
+      {
+        test: /\.png/,
+        loader: "url-loader?limit=10000&minetype=image/png"
+      },
+      {
+        test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url-loader?limit=10000&minetype=application/font-woff"
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "file-loader"
+      }
+    ]
   },
 
   plugins: [
