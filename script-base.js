@@ -38,6 +38,18 @@ var Generator = module.exports = function Generator() {
 
 	this.stylesSuffix = '.css';
 
+    switch(this.config.get('styles-language')) {
+        case 'sass':
+            this.stylesSuffix = '.sass';
+            break;
+        case 'less':
+            this.stylesSuffix = '.less';
+            break;
+        case 'stylus':
+            this.stylesSuffix = '.styl';
+            break;
+    }
+
 	this.sourceRoot(path.join(__dirname, sourceRoot));
 };
 
