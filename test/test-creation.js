@@ -111,6 +111,46 @@ describe('react-webpack generator', function() {
 
   });
 
+  describe('Generator', function () {
+
+    it('should contain info about used style lang', function (done) {
+      react.run({}, function() {
+        assert.ok(react.config.get('styles-language'));
+        done();
+      });
+    });
+
+    it('by default should use css style lang', function (done) {
+      react.run({}, function() {
+        assert.equal(react.config.get('styles-language'), 'css');
+        done();
+      });
+    });
+
+    var assertStyle = function (lang, done) {
+      helpers.mockPrompt(react, {
+        stylesLanguage: lang
+      });
+      react.run({}, function() {
+        assert.equal(react.config.get('styles-language'), lang);
+        done();
+      });
+    };
+
+    it('should use sass style lang', function (done) {
+      assertStyle('sass', done);
+    });
+
+    it('should use less style lang', function (done) {
+      assertStyle('less', done);
+    });
+
+    it('should use stylus style lang', function (done) {
+      assertStyle('stylus', done);
+    });
+
+  });
+
   describe('Subgenerators', function() {
     var generatorTest = function(generatorType, specType, targetDirectory, scriptNameFn, specNameFn, suffix, done) {
 

@@ -63,6 +63,25 @@ ReactWebpackGenerator.prototype.askForReactRouter = function () {
   }.bind(this));
 };
 
+ReactWebpackGenerator.prototype.askForStylesLanguage = function () {
+  var done = this.async();
+  this.prompt({
+    type    : 'list',
+    name    : 'stylesLanguage',
+    message : 'Which styles language you want to use?',
+    choices: [
+        {name: 'CSS', value: 'css'},
+        {name: 'SASS', value: 'sass'},
+        {name: 'LESS', value: 'less'},
+        {name: 'Stylus', value: 'stylus'}
+    ],
+    default : 'css'
+  }, function (props) {
+    this.config.set('styles-language', props.stylesLanguage);
+    done();
+  }.bind(this));
+};
+
 ReactWebpackGenerator.prototype.readIndex = function readIndex() {
   this.indexFile = this.engine(this.read('../../templates/common/index.html'), this);
 };
