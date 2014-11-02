@@ -35,7 +35,10 @@
     "grunt-open": "~0.2.3",
     "jshint-loader": "~0.8.0",
     "grunt-contrib-copy": "~0.5.0",
-    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-clean": "~0.6.0",<% if (stylesLanguage === 'sass') { %>
+    "sass-loader": "^0.2.0",<% } %><% if (stylesLanguage === 'less') { %>
+    "less-loader": "^0.7.7",<% } %><% if (stylesLanguage === 'stylus') { %>
+    "stylus-loader": "^0.4.0",<% } %>
     "react-hot-loader": "^0.4.5"
   }
 }

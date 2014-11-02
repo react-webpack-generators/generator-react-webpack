@@ -41,7 +41,16 @@ module.exports = {
     loaders: [{
       test: /\.jsx$/,
       loader: 'react-hot!jsx-loader?harmony'
-    }, {
+    },<% if (stylesLanguage === 'sass') { %> {
+      test: /\.sass/,
+      loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+    },<% } %><% if (stylesLanguage === 'less') { %> {
+      test: /\.less/,
+      loader: 'style-loader!css-loader!less-loader'
+    },<% } %><% if (stylesLanguage === 'stylus') { %> {
+      test: /\.styl/,
+      loader: 'style-loader!css-loader!stylus-loader'
+    },<% } %> {
       test: /\.css$/,
       loader: 'style-loader!css-loader'
     }, {

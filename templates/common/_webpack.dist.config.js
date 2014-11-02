@@ -49,7 +49,16 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: 'style-loader!css-loader'
-    }, {
+    },<% if (stylesLanguage === 'sass') { %> {
+      test: /\.sass/,
+      loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+    },<% } %><% if (stylesLanguage === 'less') { %> {
+      test: /\.less/,
+      loader: 'style-loader!css-loader!less-loader'
+    },<% } %><% if (stylesLanguage === 'stylus') { %> {
+      test: /\.styl/,
+      loader: 'style-loader!stylus-loader!less-loader'
+    },<% } %> {
       test: /\.(png|jpg)$/,
       loader: 'url-loader?limit=8192'
     }]
