@@ -38,7 +38,6 @@ module.exports = {
       exclude: 'node_modules',
       loader: 'jshint'
     }],
-
     loaders: [{
       test: /\.jsx$/,
       loader: 'react-hot!jsx-loader?harmony'
