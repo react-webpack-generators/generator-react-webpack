@@ -77,6 +77,7 @@ ReactWebpackGenerator.prototype.askForStylesLanguage = function () {
     ],
     default : 'css'
   }, function (props) {
+    this.env.options.stylesLanguage = props.stylesLanguage;
     this.config.set('styles-language', props.stylesLanguage);
     done();
   }.bind(this));
@@ -93,6 +94,7 @@ ReactWebpackGenerator.prototype.createIndexHtml = function createIndexHtml() {
 
 ReactWebpackGenerator.prototype.packageFiles = function () {
   this.reactRouter = this.env.options.reactRouter;
+  this.stylesLanguage = this.env.options.stylesLanguage;
   this.template('../../templates/common/_package.json', 'package.json');
   this.template('../../templates/common/_webpack.config.js', 'webpack.config.js');
   this.template('../../templates/common/_webpack.dist.config.js', 'webpack.dist.config.js');
