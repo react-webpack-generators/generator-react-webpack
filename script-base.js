@@ -19,6 +19,7 @@ var Generator = module.exports = function Generator() {
 	this.scriptAppName = this._.camelize(this._.capitalize(this.appname)) + generalUtils.appName(this);
 	this.classedFileName = this._.capitalizeFile(this.name);
     this.classedName = this._.capitalizeClass(this.name);
+    this.stylesLanguage = this.config.get('styles-language');
 
 	if (typeof this.options.appPath === 'undefined') {
 		this.options.appPath = this.options.appPath || 'src/scripts';
@@ -38,7 +39,7 @@ var Generator = module.exports = function Generator() {
 
 	this.stylesSuffix = '.css';
 
-    switch(this.config.get('styles-language')) {
+    switch(this.stylesLanguage) {
         case 'sass':
             this.stylesSuffix = '.sass';
             break;
