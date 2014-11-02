@@ -32,7 +32,10 @@ var ReactWebpackGenerator = module.exports = function ReactWebpackGenerator(args
     this.installDependencies({ skipInstall: options['skip-install'] });
   });
 
+
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+
+  this.config.save();
 };
 
 util.inherits(ReactWebpackGenerator, yeoman.generators.Base);

@@ -48,6 +48,7 @@ describe('react-webpack generator', function() {
     it('should generate dotfiles', function(done) {
       react.run({}, function() {
         helpers.assertFile([].concat(expected, [
+          '.yo-rc.json',
           '.editorconfig',
           '.gitignore',
           '.jshintrc'
