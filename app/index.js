@@ -32,7 +32,10 @@ var ReactWebpackGenerator = module.exports = function ReactWebpackGenerator(args
     this.installDependencies({ skipInstall: options['skip-install'] });
   });
 
+
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+
+  this.config.save();
 };
 
 util.inherits(ReactWebpackGenerator, yeoman.generators.Base);
@@ -56,6 +59,25 @@ ReactWebpackGenerator.prototype.askForReactRouter = function () {
     default : true
   }, function (props) {
     this.env.options.reactRouter = props.reactRouter;
+    done();
+  }.bind(this));
+};
+
+ReactWebpackGenerator.prototype.askForStylesLanguage = function () {
+  var done = this.async();
+  this.prompt({
+    type    : 'list',
+    name    : 'stylesLanguage',
+    message : 'Which styles language you want to use?',
+    choices: [
+        {name: 'CSS', value: 'css'},
+        {name: 'SASS', value: 'sass'},
+        {name: 'LESS', value: 'less'},
+        {name: 'Stylus', value: 'stylus'}
+    ],
+    default : 'css'
+  }, function (props) {
+    this.config.set('styles-language', props.stylesLanguage);
     done();
   }.bind(this));
 };
