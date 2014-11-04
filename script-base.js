@@ -19,6 +19,7 @@ var Generator = module.exports = function Generator() {
 	this.scriptAppName = this._.camelize(this._.capitalize(this.appname)) + generalUtils.appName(this);
 	this.classedFileName = this._.capitalizeFile(this.name);
     this.classedName = this._.capitalizeClass(this.name);
+    this.stylesLanguage = this.config.get('styles-language');
 
 	if (typeof this.options.appPath === 'undefined') {
 		this.options.appPath = this.options.appPath || 'src/scripts';
@@ -37,6 +38,18 @@ var Generator = module.exports = function Generator() {
 	this.reactSuffix = '.jsx';
 
 	this.stylesSuffix = '.css';
+
+    switch(this.stylesLanguage) {
+        case 'sass':
+            this.stylesSuffix = '.sass';
+            break;
+        case 'less':
+            this.stylesSuffix = '.less';
+            break;
+        case 'stylus':
+            this.stylesSuffix = '.styl';
+            break;
+    }
 
 	this.sourceRoot(path.join(__dirname, sourceRoot));
 };

@@ -48,6 +48,7 @@ describe('react-webpack generator', function() {
     it('should generate dotfiles', function(done) {
       react.run({}, function() {
         helpers.assertFile([].concat(expected, [
+          '.yo-rc.json',
           '.editorconfig',
           '.gitignore',
           '.jshintrc'
@@ -106,6 +107,46 @@ describe('react-webpack generator', function() {
         ]);
         done();
       });
+    });
+
+  });
+
+  describe('Generator', function () {
+
+    it('should contain info about used style lang', function (done) {
+      react.run({}, function() {
+        assert.ok(react.config.get('styles-language'));
+        done();
+      });
+    });
+
+    it('by default should use css style lang', function (done) {
+      react.run({}, function() {
+        assert.equal(react.config.get('styles-language'), 'css');
+        done();
+      });
+    });
+
+    var assertStyle = function (lang, done) {
+      helpers.mockPrompt(react, {
+        stylesLanguage: lang
+      });
+      react.run({}, function() {
+        assert.equal(react.config.get('styles-language'), lang);
+        done();
+      });
+    };
+
+    it('should use sass style lang', function (done) {
+      assertStyle('sass', done);
+    });
+
+    it('should use less style lang', function (done) {
+      assertStyle('less', done);
+    });
+
+    it('should use stylus style lang', function (done) {
+      assertStyle('stylus', done);
     });
 
   });

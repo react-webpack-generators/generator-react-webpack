@@ -20,7 +20,7 @@ module.exports = {
   devtool: false,
   entry: [
       'webpack/hot/only-dev-server',
-      './src/scripts/components/<%= pkg.mainInput %>.jsx'
+      './src/scripts/components/<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>.jsx'
   ],
 
   stats: {
@@ -38,11 +38,19 @@ module.exports = {
       exclude: 'node_modules',
       loader: 'jshint'
     }],
-
     loaders: [{
       test: /\.jsx$/,
       loader: 'react-hot!jsx-loader?harmony'
-    }, {
+    },<% if (stylesLanguage === 'sass') { %> {
+      test: /\.sass/,
+      loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+    },<% } %><% if (stylesLanguage === 'less') { %> {
+      test: /\.less/,
+      loader: 'style-loader!css-loader!less-loader'
+    },<% } %><% if (stylesLanguage === 'stylus') { %> {
+      test: /\.styl/,
+      loader: 'style-loader!css-loader!stylus-loader'
+    },<% } %> {
       test: /\.css$/,
       loader: 'style-loader!css-loader'
     }, {
