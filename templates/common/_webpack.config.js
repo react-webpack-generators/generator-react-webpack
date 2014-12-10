@@ -31,7 +31,6 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
-
   module: {
     preLoaders: [{
       test: '\\.js$',
