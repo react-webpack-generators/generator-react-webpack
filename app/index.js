@@ -7,6 +7,7 @@ var generalUtils = require('../util.js');
 var ReactWebpackGenerator = module.exports = function ReactWebpackGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
   this.option('es6');
+  // this.es6 = this.options.es6;
 
   this.argument('appname', { type: String, required: false });
   this.appname = this.appname || path.basename(process.cwd());
@@ -95,10 +96,11 @@ ReactWebpackGenerator.prototype.createIndexHtml = function createIndexHtml() {
 };
 
 ReactWebpackGenerator.prototype.packageFiles = function () {
+  this.es6 = this.options.es6;
   this.reactRouter = this.env.options.reactRouter;
   this.stylesLanguage = this.env.options.stylesLanguage;
   this.template('../../templates/common/_package.json', 'package.json');
-  this.template('../../templates/common/_webpack.config.js', 'webpack.config.js');
+  this.template('../../templates/common/_webpack.config.js', 'webpack.config.js', this, {es6:true});
   this.template('../../templates/common/_webpack.dist.config.js', 'webpack.dist.config.js');
   this.copy('../../templates/common/Gruntfile.js', 'Gruntfile.js');
   this.copy('../../templates/common/gitignore', '.gitignore');
