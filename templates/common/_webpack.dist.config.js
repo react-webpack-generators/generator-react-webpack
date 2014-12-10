@@ -45,7 +45,7 @@ module.exports = {
 
     loaders: [{
       test: /\.jsx$/,
-      loader: 'jsx-loader?harmony'
+      loader: '<% if (es6) { %>6to5!<% }%>jsx-loader?harmony'
     }, {
       test: /\.css$/,
       loader: 'style-loader!css-loader'

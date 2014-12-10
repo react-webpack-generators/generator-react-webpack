@@ -4,7 +4,6 @@
  * This file is set up for serving the webpak-dev-server, which will watch for changes and recompile as required if
  * the subfolder /webpack-dev-server/ is visited. Visiting the root will not automatically reload.
  */
-
 'use strict';
 var webpack = require('webpack');
 
@@ -31,7 +30,6 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
-
   module: {
     preLoaders: [{
       test: '\\.js$',
@@ -40,7 +38,7 @@ module.exports = {
     }],
     loaders: [{
       test: /\.jsx$/,
-      loader: 'react-hot!jsx-loader?harmony'
+      loader: 'react-hot!<% if (es6) { %>6to5!<% }%>jsx-loader?harmony'
     },<% if (stylesLanguage === 'sass') { %> {
       test: /\.sass/,
       loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'

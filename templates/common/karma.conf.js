@@ -28,7 +28,7 @@ module.exports = function (config) {
           loader: 'url-loader?limit=10000&mimetype=image/png'
         }, {
           test: /\.jsx$/,
-          loader: 'jsx-loader'
+          loader: '<% if (es6) { %>6to5!<% }%>jsx-loader'
         }]
       }
     },

@@ -6,11 +6,13 @@ var generalUtils = require('../util.js');
 
 var ReactWebpackGenerator = module.exports = function ReactWebpackGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
+  this.option('es6');
 
   this.argument('appname', { type: String, required: false });
   this.appname = this.appname || path.basename(process.cwd());
   this.appname = this._.camelize(this._.slugify(this._.humanize(this.appname)));
   this.scriptAppName = this._.capitalize(this.appname) + generalUtils.appName(this);
+
 
   args = ['main'];
 
@@ -93,6 +95,7 @@ ReactWebpackGenerator.prototype.createIndexHtml = function createIndexHtml() {
 };
 
 ReactWebpackGenerator.prototype.packageFiles = function () {
+  this.es6 = this.options.es6;
   this.reactRouter = this.env.options.reactRouter;
   this.stylesLanguage = this.env.options.stylesLanguage;
   this.template('../../templates/common/_package.json', 'package.json');

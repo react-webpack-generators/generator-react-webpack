@@ -19,5 +19,9 @@ var <%= classedName %> = React.createClass({
       );
   }
 });
-
+<% if (es6) { %>
+export default <%= classedName %>;
+<% } else { %>
 module.exports = <%= classedName %>;
+<% } %>
+
