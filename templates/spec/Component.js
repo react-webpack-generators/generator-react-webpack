@@ -4,7 +4,7 @@ describe('<%= classedName %>', function () {
   var <%= classedName %>, component;
 
   beforeEach(function () {
-    <%= classedName %> = require('../../../src/scripts/components/<%= classedFileName %>.jsx');
+    <%= classedName %> = require('../../../src/scripts/components/<%= classedFileName %>.js');
     component = <%= classedName %>();
   });
 

@@ -54,12 +54,8 @@ Example:
 yo react-webpack:component foo
 ```
 
-Produces `src/scripts/components/Foo.jsx` (*javascript - JSX*):
+Produces `src/scripts/components/Foo.js` (*javascript - JSX*):
 ```
-/**
- * @jsx React.DOM
- */
-
 'use strict';
 
 var React = require('react/addons');
@@ -79,7 +75,6 @@ module.exports = Foo;
 
 And `test/spec/components/Foo.js` (*javascript - jasmine*):
 ```
-
 'use strict';
 
 describe('Foo', function () {
@@ -98,7 +93,6 @@ describe('Foo', function () {
 
 And `src/styles/Foo.css`:
 ```
-
 .Foo{
   border: 1px dashed #f00;
 }
@@ -146,7 +140,7 @@ project
   karma.conf.js
 ```
 
-I have tried to keep the project structure as simple as possible and understand it may not suit everyone. 
+I have tried to keep the project structure as simple as possible and understand it may not suit everyone.
 
 ### Naming Components
 
@@ -160,10 +154,10 @@ Each component is a module and can be required using the [Webpack](http://webpac
 
 Out the box the [Gruntfile](http://gruntjs.com/api/grunt.file) is configured with the following:
 
-1. **webpack**: uses the [grunt-webpack](https://github.com/webpack/grunt-webpack) plugin to load all required modules and output to a single JS file `src/scripts/main.js`. This is included in the `src/index.html` file by default and will reload in the browser as and when it is recompiled. 
+1. **webpack**: uses the [grunt-webpack](https://github.com/webpack/grunt-webpack) plugin to load all required modules and output to a single JS file `src/scripts/main.js`. This is included in the `src/index.html` file by default and will reload in the browser as and when it is recompiled.
 2. **webpack-dev-server**: uses the [webpack-dev-server](https://github.com/webpack/webpack-dev-server) to watch for file changes and also serve the webpack app in development.
 3. **connect**: uses the [grunt-connect](https://github.com/gruntjs/grunt-contrib-connect) plugin to start a webserver at [localhost](http://localhost:8000).
-4. **karma**: uses the [grunt-karma](https://github.com/karma-runner/grunt-karma) plugin to load the Karma configuration file `karma.conf.js` located in the project root. This will run all tests using [PhantomJS](http://phantomjs.org/) by default but supports many other browsers. 
+4. **karma**: uses the [grunt-karma](https://github.com/karma-runner/grunt-karma) plugin to load the Karma configuration file `karma.conf.js` located in the project root. This will run all tests using [PhantomJS](http://phantomjs.org/) by default but supports many other browsers.
 
 ### CSS
 

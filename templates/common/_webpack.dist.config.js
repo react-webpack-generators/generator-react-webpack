@@ -18,7 +18,7 @@ module.exports = {
 
   debug: false,
   devtool: false,
-  entry: './src/scripts/components/<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>.jsx',
+  entry: './src/scripts/components/<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>.js',
 
   stats: {
     colors: true,
@@ -33,7 +33,7 @@ module.exports = {
   ],
 
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js']
   },
 
   module: {
@@ -44,7 +44,7 @@ module.exports = {
     }],
 
     loaders: [{
-      test: /\.jsx$/,
+      test: /\.js$/,
       loader: '<% if (es6) { %>6to5!<% }%>jsx-loader?harmony'
     }, {
       test: /\.css$/,

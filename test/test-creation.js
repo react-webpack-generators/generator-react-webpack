@@ -72,8 +72,8 @@ describe('react-webpack generator', function() {
       react.run({}, function() {
         setTimeout(function() {
           helpers.assertFile([].concat(expected, [
-            'src/scripts/components/TempTestApp.jsx',
-            'src/scripts/components/main.jsx'
+            'src/scripts/components/TempTestApp.js',
+            'src/scripts/components/main.js'
           ]));
           done();
         });
@@ -164,7 +164,7 @@ describe('react-webpack generator', function() {
         reactGenerator.run([], function() {
           helpers.assertFileContent([
 
-            [path.join('src/scripts', targetDirectory, name + '.jsx'), new RegExp('var ' + scriptNameFn(name) + suffix, 'g')],
+            [path.join('src/scripts', targetDirectory, name + '.js'), new RegExp('var ' + scriptNameFn(name) + suffix, 'g')],
             [path.join('test/spec', targetDirectory, name + '.js'), new RegExp('describe\\(\'' + specNameFn(name) + suffix + '\'', 'g')]
 
           ]);
