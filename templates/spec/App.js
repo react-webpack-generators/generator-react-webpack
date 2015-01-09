@@ -1,6 +1,7 @@
 'use strict';
 
 describe('<%= classedName %>', function () {
+  var React = require('react/addons');
   var <%= scriptAppName %>, component;
 
   beforeEach(function () {
@@ -8,8 +9,8 @@ describe('<%= classedName %>', function () {
     container.id = 'content';
     document.body.appendChild(container);
 
-    <%= scriptAppName %> = require('../../../src/scripts/components/<%= scriptAppName %>.jsx');
-    component = <%= scriptAppName %>();
+    <%= scriptAppName %> = require('../../../src/scripts/components/<%= scriptAppName %>.js');
+    component = React.createElement(<%= scriptAppName %>);
   });
 
   it('should create a new instance of <%= scriptAppName %>', function () {
