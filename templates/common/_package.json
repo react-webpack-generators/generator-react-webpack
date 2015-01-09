@@ -10,15 +10,15 @@
   "mainInput": "<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>",
   "mainOutput": "main",
   "dependencies": {<% if (reactRouter) { %>
-    "react-router": "^0.7.0",<% } %>
-    "react": "~0.11.2"
+    "react-router": "^0.11.6",<% } %>
+    "react": "~0.12.2"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
     "load-grunt-tasks": "~0.6.0",
     "grunt-contrib-connect": "~0.8.0",
     "webpack": "~1.4.3",
-    "jsx-loader": "~0.11.0",
+    "jsx-loader": "~0.12.2",
     "grunt-webpack": "~1.0.8",
     "style-loader": "~0.8.0",
     "url-loader": "~0.5.5",
@@ -35,12 +35,12 @@
     "grunt-open": "~0.2.3",
     "jshint-loader": "~0.8.0",
     "grunt-contrib-copy": "~0.5.0",<% if (es6) { %>
-    "6to5": "^1.10.10",
-    "6to5-loader": "^0.2.3",<% } %>
+    "6to5": "^2.7.1",
+    "6to5-loader": "^1.0.0",<% } %>
     "grunt-contrib-clean": "~0.6.0",<% if (stylesLanguage === 'sass') { %>
-    "sass-loader": "^0.2.0",<% } %><% if (stylesLanguage === 'less') { %>
-    "less-loader": "^0.7.7",<% } %><% if (stylesLanguage === 'stylus') { %>
-    "stylus-loader": "^0.4.0",<% } %>
-    "react-hot-loader": "^0.4.5"
+    "sass-loader": "^0.3.1",<% } %><% if (stylesLanguage === 'less') { %>
+    "less-loader": "^2.0.0",<% } %><% if (stylesLanguage === 'stylus') { %>
+    "stylus-loader": "^0.5.0",<% } %>
+    "react-hot-loader": "^1.0.7"
   }
 }

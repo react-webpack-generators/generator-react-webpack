@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 'use strict';
 
 var React = require('react/addons');
@@ -28,6 +24,6 @@ var <%= scriptAppName %> = React.createClass({
   }
 });
 <% if (!reactRouter) {
-%>React.renderComponent(<<%= scriptAppName %> />, document.getElementById('content')); // jshint ignore:line
+%>React.render(<<%= scriptAppName %> />, document.getElementById('content')); // jshint ignore:line
 <% } %>
 module.exports = <%= scriptAppName %>;

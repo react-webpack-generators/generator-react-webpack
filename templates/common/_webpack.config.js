@@ -19,7 +19,7 @@ module.exports = {
   devtool: false,
   entry: [
       'webpack/hot/only-dev-server',
-      './src/scripts/components/<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>.jsx'
+      './src/scripts/components/<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>.js'
   ],
 
   stats: {
@@ -28,7 +28,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js']
   },
   module: {
     preLoaders: [{
@@ -37,7 +37,7 @@ module.exports = {
       loader: 'jshint'
     }],
     loaders: [{
-      test: /\.jsx$/,
+      test: /\.js$/,
       loader: 'react-hot!<% if (es6) { %>6to5!<% }%>jsx-loader?harmony'
     },<% if (stylesLanguage === 'sass') { %> {
       test: /\.sass/,

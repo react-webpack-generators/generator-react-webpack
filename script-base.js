@@ -35,7 +35,7 @@ var Generator = module.exports = function Generator() {
 
 	var sourceRoot = '/templates/';
 	this.scriptSuffix = '.js';
-	this.reactSuffix = '.jsx';
+	this.reactSuffix = '.js';
 
 	this.stylesSuffix = '.css';
 
