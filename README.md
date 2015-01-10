@@ -20,7 +20,7 @@ Run `yo react-webpack`, optionally passing an app name:
 yo react-webpack [app-name]
 ```
 
-Run `grunt` for building and `grunt serve` for preview in the browser at [localhost](http://localhost:8000).
+Run `grunt build` for building and `grunt serve` for preview in the browser at [localhost](http://localhost:8000).
 
 ## Generators
 
@@ -107,7 +107,7 @@ A complete routing library for React. This option only adds the basic hooks to g
 
 ## Testing
 
-Running `grunt test` will run the unit tests with karma. Tests are written using [Jasmine](http://pivotal.github.io/jasmine/) by default.
+Running `grunt test` will run the unit tests with karma. Tests are written using [Jasmine](http://jasmine.github.io/1.3/introduction.html) by default.
 
 ## Further Information
 
