@@ -37,7 +37,7 @@
     "grunt-contrib-copy": "~0.5.0",<% if (es6) { %>
     "6to5": "^2.7.1",
     "6to5-loader": "^1.0.0",<% } %>
-    "grunt-contrib-clean": "~0.6.0",<% if (stylesLanguage === 'sass') { %>
+    "grunt-contrib-clean": "~0.6.0",<% if (stylesLanguage.match(/s[ac]ss/)) { %>
     "sass-loader": "^0.3.1",<% } %><% if (stylesLanguage === 'less') { %>
     "less-loader": "^2.0.0",<% } %><% if (stylesLanguage === 'stylus') { %>
     "stylus-loader": "^0.5.0",<% } %>

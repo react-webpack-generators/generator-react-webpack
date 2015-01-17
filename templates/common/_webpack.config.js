@@ -42,6 +42,9 @@ module.exports = {
     },<% if (stylesLanguage === 'sass') { %> {
       test: /\.sass/,
       loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+    },<% } %><% if (stylesLanguage === 'scss') { %> {
+      test: /\.scss/,
+      loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
     },<% } %><% if (stylesLanguage === 'less') { %> {
       test: /\.less/,
       loader: 'style-loader!css-loader!less-loader'
