@@ -43,6 +43,9 @@ var Generator = module.exports = function Generator() {
         case 'sass':
             this.stylesSuffix = '.sass';
             break;
+        case 'scss':
+            this.stylesSuffix = '.scss';
+            break;
         case 'less':
             this.stylesSuffix = '.less';
             break;

@@ -74,6 +74,7 @@ ReactWebpackGenerator.prototype.askForStylesLanguage = function () {
     choices: [
         {name: 'CSS', value: 'css'},
         {name: 'SASS', value: 'sass'},
+        {name: 'SCSS', value: 'scss'},
         {name: 'LESS', value: 'less'},
         {name: 'Stylus', value: 'stylus'}
     ],

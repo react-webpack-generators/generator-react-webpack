@@ -141,6 +141,10 @@ describe('react-webpack generator', function() {
       assertStyle('sass', done);
     });
 
+    it('should use scss style lang', function (done) {
+      assertStyle('scss', done);
+    });
+
     it('should use less style lang', function (done) {
       assertStyle('less', done);
     });
