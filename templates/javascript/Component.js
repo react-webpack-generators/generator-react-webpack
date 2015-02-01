@@ -1,11 +1,12 @@
 'use strict';
 
 var React = require('react/addons');
-<% if (stylesLanguage === 'css') { %>require('../../styles/<%= classedName %>.css');<% } %>
-<% if (stylesLanguage === 'sass') { %>require('../../styles/<%= classedName %>.sass');<% } %>
-<% if (stylesLanguage === 'scss') { %>require('../../styles/<%= classedName %>.scss');<% } %>
-<% if (stylesLanguage === 'less') { %>require('../../styles/<%= classedName %>.less');<% } %>
-<% if (stylesLanguage === 'stylus') { %>require('../../styles/<%= classedName %>.styl');<% } %>
+
+<% if (stylesLanguage === 'css') { %>require('../../styles/<%= classedName %>.css');<% } %><%
+if (stylesLanguage === 'sass')   { %>require('../../styles/<%= classedName %>.sass');<% } %><%
+if (stylesLanguage === 'scss')   { %>require('../../styles/<%= classedName %>.scss');<% } %><%
+if (stylesLanguage === 'less')   { %>require('../../styles/<%= classedName %>.less');<% } %><%
+if (stylesLanguage === 'stylus') { %>require('../../styles/<%= classedName %>.styl');<% } %>
 
 var <%= classedName %> = React.createClass({
   render: function () {
@@ -16,9 +17,7 @@ var <%= classedName %> = React.createClass({
       );
   }
 });
-<% if (es6) { %>
-export default <%= classedName %>;
-<% } else { %>
-module.exports = <%= classedName %>;
-<% } %>
+
+<% if (es6) { %>export default <%= classedName %>; <% }
+else { %>module.exports = <%= classedName %>; <% } %>
 
