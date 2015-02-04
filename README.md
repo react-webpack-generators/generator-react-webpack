@@ -107,7 +107,7 @@ A complete routing library for React. This option only adds the basic hooks to g
 
 ## Testing
 
-Running `grunt test` will run the unit tests with karma. Tests are written using [Jasmine](http://jasmine.github.io/1.3/introduction.html) by default.
+Running `grunt test` will run the unit tests with karma. Tests are written using [Jasmine](http://jasmine.github.io/) by default.
 
 ## Further Information
 
