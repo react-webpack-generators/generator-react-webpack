@@ -31,7 +31,7 @@ var ReactWebpackGenerator = module.exports = function ReactWebpackGenerator(args
   });
 
   this.on('end', function () {
-    this.installDependencies({ skipInstall: options['skip-install'] });
+    this.installDependencies({ skipInstall: options['skip-install'], bower: false });
   });
 
 
