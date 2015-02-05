@@ -15,9 +15,6 @@ module.exports = function (config) {
       cache: true,
       module: {
         loaders: [{
-          test: /\.css$/,
-          loader: 'style!css'
-        }, {
           test: /\.gif/,
           loader: 'url-loader?limit=10000&mimetype=image/gif'
         }, {
@@ -29,6 +26,21 @@ module.exports = function (config) {
         }, {
           test: /\.js$/,
           loader: '<% if (es6) { %>6to5!<% }%>jsx-loader?harmony'
+        },<% if (stylesLanguage === 'sass') { %> {
+          test: /\.sass/,
+          loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+        },<% } %><% if (stylesLanguage === 'scss') { %> {
+          test: /\.scss/,
+          loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+        },<% } %><% if (stylesLanguage === 'less') { %> {
+          test: /\.less/,
+          loader: 'style-loader!css-loader!less-loader'
+        },<% } %><% if (stylesLanguage === 'stylus') { %> {
+          test: /\.styl/,
+          loader: 'style-loader!css-loader!stylus-loader'
+        },<% } %> {
+          test: /\.css$/,
+          loader: 'style-loader!css-loader'
         }]
       }
     },
