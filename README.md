@@ -29,8 +29,6 @@ Available generators:
 * [react-webpack](#app) (aka [react-webpack:app](#app))
 * [react-webpack:component](#component)
 
-**Note: Generators are to be run from the root directory of your app.**
-
 ### App
 
 Sets up a new ReactJS app, generating all the boilerplate you need to get started. The app generator also facilitates the following:
