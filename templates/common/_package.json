@@ -34,6 +34,7 @@
     "webpack-dev-server": "~1.6.5",
     "grunt-open": "~0.2.3",
     "jshint-loader": "~0.8.0",
+    "jsxhint-loader": "~0.2.0",
     "grunt-contrib-copy": "~0.5.0",<% if (es6) { %>
     "babel": "^4.0.0",
     "babel-loader": "^4.0.0",<% } %>
