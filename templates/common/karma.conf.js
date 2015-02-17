@@ -25,7 +25,7 @@ module.exports = function (config) {
           loader: 'url-loader?limit=10000&mimetype=image/png'
         }, {
           test: /\.js$/,
-          loader: '<% if (es6) { %>6to5!<% }%>jsx-loader?harmony'
+          loader: '<% if (es6) { %>babel!<% }%>jsx-loader?harmony'
         },<% if (stylesLanguage === 'sass') { %> {
           test: /\.sass/,
           loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
