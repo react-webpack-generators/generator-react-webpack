@@ -38,6 +38,7 @@ module.exports = {
     }],
     loaders: [{
       test: /\.js$/,
+      exclude: /node_modules/,
       loader: 'react-hot!<% if (es6) { %>babel!<% }%>jsx-loader?harmony'
     },<% if (stylesLanguage === 'sass') { %> {
       test: /\.sass/,
