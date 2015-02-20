@@ -28,7 +28,10 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['', '.js'],
+    alias: {
+      'styles': './src/styles'
+    }
   },
   module: {
     preLoaders: [{

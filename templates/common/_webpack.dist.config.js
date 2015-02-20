@@ -34,6 +34,9 @@ module.exports = {
 
   resolve: {
     extensions: ['', '.js']
+    alias: {
+      'styles': './src/styles'
+    }
   },
 
   module: {
