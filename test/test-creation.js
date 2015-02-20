@@ -182,6 +182,13 @@ describe('react-webpack generator', function() {
       });
     });
 
+    it('should generate a subcomponent', function(done) {
+      react.run({}, function() {
+        var subComponentNameFn = function () { return 'Bar'; };
+        generatorTest('Foo/Bar', 'component', 'component', 'components', subComponentNameFn, subComponentNameFn, '', done);
+      });
+    });
+
   });
 
 });
