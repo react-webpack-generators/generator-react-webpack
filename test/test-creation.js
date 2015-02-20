@@ -159,7 +159,7 @@ describe('react-webpack generator', function() {
     var generatorTest = function(name, generatorType, specType, targetDirectory, scriptNameFn, specNameFn, suffix, done) {
 
       var deps = [path.join('../..', generatorType)];
-      genOptions.appPath += '/scripts'
+      genOptions.appPath = 'src/scripts'
 
       var reactGenerator = helpers.createGenerator('react-webpack:' + generatorType, deps, [name], genOptions);
 
