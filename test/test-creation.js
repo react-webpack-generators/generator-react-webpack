@@ -109,6 +109,18 @@ describe('react-webpack generator', function() {
       });
     });
 
+    it('should generate JS config with aliases', function(done) {
+      react.run({}, function() {
+        assert.fileContent([
+            // style aliases
+            ['webpack.config.js', /resolve[\S\s]+alias[\S\s]+styles/m],
+            ['karma.conf.js', /resolve[\S\s]+alias[\S\s]+styles/m],
+            ['webpack.dist.config.js', /resolve[\S\s]+alias[\S\s]+styles/m]
+        ]);
+        done();
+      });
+    });
+
   });
 
   describe('Generator', function () {
