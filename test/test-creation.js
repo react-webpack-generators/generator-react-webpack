@@ -156,9 +156,8 @@ describe('react-webpack generator', function() {
   });
 
   describe('Subgenerators', function() {
-    var generatorTest = function(generatorType, specType, targetDirectory, scriptNameFn, specNameFn, suffix, done) {
+    var generatorTest = function(name, generatorType, specType, targetDirectory, scriptNameFn, specNameFn, suffix, done) {
 
-      var name = 'Foo';
       var deps = [path.join('../..', generatorType)];
       genOptions.appPath += '/scripts'
 
@@ -179,7 +178,7 @@ describe('react-webpack generator', function() {
 
     it('should generate a new component', function(done) {
       react.run({}, function() {
-        generatorTest('component', 'component', 'components', _.capitalize, _.capitalize, '', done);
+        generatorTest('Foo', 'component', 'component', 'components', _.capitalize, _.capitalize, '', done);
       });
     });
 
