@@ -175,6 +175,10 @@ Thanks to [Edd Hannay](https://github.com/eddhannay) for his Webpack optimisatio
 
 Contributions are welcomed. When submitting a bugfix, write a test that exposes the bug and fails before applying your fix. Submit the test alongside the fix.
 
+### Running Tests
+
+`node node_modules/.bin/mocha`
+
 ## License
 
 [BSD license](http://opensource.org/licenses/bsd-license.php)
