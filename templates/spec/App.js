@@ -9,7 +9,7 @@ describe('<%= classedName %>', function () {
     container.id = 'content';
     document.body.appendChild(container);
 
-    <%= scriptAppName %> = require('../../../src/scripts/components/<%= scriptAppName %>.js');
+    <%= scriptAppName %> = require('components/<%= scriptAppName %>.js');
     component = React.createElement(<%= scriptAppName %>);
   });
 

@@ -42,6 +42,12 @@ module.exports = function (config) {
           test: /\.css$/,
           loader: 'style-loader!css-loader'
         }]
+      },
+      resolve: {
+        alias: {
+          'styles': './src/styles',
+          'components': './src/scripts/components/'
+        }
       }
     },
     webpackServer: {

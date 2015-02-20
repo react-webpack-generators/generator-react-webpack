@@ -109,6 +109,22 @@ describe('react-webpack generator', function() {
       });
     });
 
+    it('should generate JS config with aliases', function(done) {
+      react.run({}, function() {
+        assert.fileContent([
+            // style aliases
+            ['webpack.config.js', /resolve[\S\s]+alias[\S\s]+styles/m],
+            ['karma.conf.js', /resolve[\S\s]+alias[\S\s]+styles/m],
+            ['webpack.dist.config.js', /resolve[\S\s]+alias[\S\s]+styles/m],
+            // script/components aliases
+            ['webpack.config.js', /resolve[\S\s]+alias[\S\s]+components/m],
+            ['karma.conf.js', /resolve[\S\s]+alias[\S\s]+components/m],
+            ['webpack.dist.config.js', /resolve[\S\s]+alias[\S\s]+components/m]
+        ]);
+        done();
+      });
+    });
+
   });
 
   describe('Generator', function () {
@@ -156,11 +172,10 @@ describe('react-webpack generator', function() {
   });
 
   describe('Subgenerators', function() {
-    var generatorTest = function(generatorType, specType, targetDirectory, scriptNameFn, specNameFn, suffix, done) {
+    var generatorTest = function(name, generatorType, specType, targetDirectory, scriptNameFn, specNameFn, suffix, done) {
 
-      var name = 'Foo';
       var deps = [path.join('../..', generatorType)];
-      genOptions.appPath += '/scripts'
+      genOptions.appPath = 'src/scripts'
 
       var reactGenerator = helpers.createGenerator('react-webpack:' + generatorType, deps, [name], genOptions);
 
@@ -169,6 +184,9 @@ describe('react-webpack generator', function() {
           helpers.assertFileContent([
 
             [path.join('src/scripts', targetDirectory, name + '.js'), new RegExp('var ' + scriptNameFn(name) + suffix, 'g')],
+            [path.join('src/scripts', targetDirectory, name + '.js'), new RegExp('require\\(\'styles\\/' + name + suffix + '\\.[^\']+' + '\'\\)', 'g')],
+            [path.join('test/spec', targetDirectory, 'TempTestApp' + '.js'), new RegExp('require\\(\'components\\/' + 'TempTestApp' + suffix + '\\.[^\']+' + '\'\\)', 'g')],
+            [path.join('test/spec', targetDirectory, name + '.js'), new RegExp('require\\(\'components\\/' + name + suffix + '\\.[^\']+' + '\'\\)', 'g')],
             [path.join('test/spec', targetDirectory, name + '.js'), new RegExp('describe\\(\'' + specNameFn(name) + suffix + '\'', 'g')]
 
           ]);
@@ -179,7 +197,14 @@ describe('react-webpack generator', function() {
 
     it('should generate a new component', function(done) {
       react.run({}, function() {
-        generatorTest('component', 'component', 'components', _.capitalize, _.capitalize, '', done);
+        generatorTest('Foo', 'component', 'component', 'components', _.capitalize, _.capitalize, '', done);
+      });
+    });
+
+    it('should generate a subcomponent', function(done) {
+      react.run({}, function() {
+        var subComponentNameFn = function () { return 'Bar'; };
+        generatorTest('Foo/Bar', 'component', 'component', 'components', subComponentNameFn, subComponentNameFn, '', done);
       });
     });
 

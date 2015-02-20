@@ -5,7 +5,7 @@ describe('<%= classedName %>', function () {
   var <%= classedName %>, component;
 
   beforeEach(function () {
-    <%= classedName %> = require('../../../src/scripts/components/<%= classedFileName %>.js');
+    <%= classedName %> = require('components/<%= classedFileName %>.js');
     component = React.createElement(<%= classedName %>);
   });
 
