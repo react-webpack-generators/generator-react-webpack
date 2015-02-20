@@ -4,7 +4,7 @@ describe('main', function () {
   var main, component;
 
   beforeEach(function () {
-    main = require('../../../src/scripts/components/main.jsx');
+    main = require('components/main.jsx');
     component = main();
   });
 
