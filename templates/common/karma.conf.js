@@ -45,7 +45,8 @@ module.exports = function (config) {
       },
       resolve: {
         alias: {
-          'styles': './src/styles'
+          'styles': './src/styles',
+          'components': './src/scripts/components/'
         }
       }
     },
