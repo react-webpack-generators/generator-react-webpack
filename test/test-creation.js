@@ -115,7 +115,11 @@ describe('react-webpack generator', function() {
             // style aliases
             ['webpack.config.js', /resolve[\S\s]+alias[\S\s]+styles/m],
             ['karma.conf.js', /resolve[\S\s]+alias[\S\s]+styles/m],
-            ['webpack.dist.config.js', /resolve[\S\s]+alias[\S\s]+styles/m]
+            ['webpack.dist.config.js', /resolve[\S\s]+alias[\S\s]+styles/m],
+            // script/components aliases
+            ['webpack.config.js', /resolve[\S\s]+alias[\S\s]+components/m],
+            ['karma.conf.js', /resolve[\S\s]+alias[\S\s]+components/m],
+            ['webpack.dist.config.js', /resolve[\S\s]+alias[\S\s]+components/m]
         ]);
         done();
       });
