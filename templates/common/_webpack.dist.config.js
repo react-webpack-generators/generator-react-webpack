@@ -35,8 +35,8 @@ module.exports = {
   resolve: {
     extensions: ['', '.js'],
     alias: {
-      'styles': './src/styles',
-      'components': './src/scripts/components/'
+      'styles': '../../../src/styles',
+      'components': '../../../src/scripts/components/'
     }
   },
 
