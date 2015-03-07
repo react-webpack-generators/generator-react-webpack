@@ -1,3 +1,5 @@
+'use strict';
+
 var <%= scriptAppName %> = require('./<%= scriptAppName %>');
 var React = require('react');
 var Router = require('react-router');
