@@ -1,5 +1,7 @@
 'use strict';
 
+var path = require('path');
+
 module.exports = function (config) {
   config.set({
     basePath: '',
@@ -45,8 +47,8 @@ module.exports = function (config) {
       },
       resolve: {
         alias: {
-          'styles': './src/styles',
-          'components': './src/scripts/components/'
+          'styles': path.join(process.cwd(), './src/styles/'),
+          'components': path.join(process.cwd(), './src/scripts/components/')
         }
       }
     },
