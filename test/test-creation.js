@@ -235,7 +235,7 @@ describe('react-webpack generator', function() {
     })
   });
 
-  describe('Subgenerators', function() {
+  describe('When generating a Component', function() {
     var generatorTest = function(name, generatorType, specType, targetDirectory, scriptNameFn, specNameFn, suffix, done) {
 
       var deps = [path.join('../..', generatorType)];
@@ -274,4 +274,73 @@ describe('react-webpack generator', function() {
 
   });
 
+  describe('When generating an Action', function() {
+
+    beforeEach(function(done){
+      helpers.mockPrompt(react, {
+        flux: true
+      });
+
+      react.run({}, function() {
+        var generator =
+          helpers.createGenerator(
+            'react-webpack:action',
+            [path.join('../../action')],
+            ['Test'],
+            { appPath: 'src/scripts' }
+          );
+
+        react.run([], function() {
+          generator.run([], function() {
+            done();
+          })
+        });
+      });
+    });
+
+    it('should generate a new action with tests', function(done) {
+      assert.fileContent([
+        ['src/scripts/actions/TestActionCreators.js', /var TestActionCreators/g],
+        ['test/spec/actions/TestActionCreators.js', /require\('actions\/TestActionCreators.js'\)/g],
+        ['test/spec/actions/TestActionCreators.js', /describe\('TestActionCreators'/g]
+      ]);
+
+      done();
+    });
+  });
+
+  describe('When generating a Store', function() {
+
+    beforeEach(function(done) {
+      helpers.mockPrompt(react, {
+        flux: true
+      });
+
+      react.run({}, function() {
+        var generator =
+          helpers.createGenerator(
+            'react-webpack:store',
+            [path.join('../../store')],
+            ['Test'],
+            { appPath: 'src/scripts' }
+          );
+
+        react.run([], function() {
+          generator.run([], function() {
+            done();
+          });
+        });
+      });
+    });
+
+    it('should generate a new store with tests', function(done) {
+      assert.fileContent([
+        ['src/scripts/stores/TestStore.js', /var TestStore/g],
+        ['test/spec/stores/TestStore.js', /require\('stores\/TestStore.js'\)/g],
+        ['test/spec/stores/TestStore.js', /describe\('TestStore'/g]
+      ]);
+
+      done();
+    });
+  });
 });
