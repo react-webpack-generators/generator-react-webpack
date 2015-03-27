@@ -88,16 +88,8 @@ Generator.prototype.htmlTemplate = function (src, dest) {
 	]);
 };
 
-Generator.prototype.generateSourceAndTest = function (appTemplate, testTemplate, stylesTemplate, targetDirectory) {
+Generator.prototype.generateSourceAndTest = function (appTemplate, testTemplate, stylesTemplate, targetDirectory, includeStyles) {
 	this.appTemplate(appTemplate, path.join(targetDirectory, this._.capitalizeFile(this.name)));
 	this.testTemplate(testTemplate, path.join(targetDirectory, this._.capitalizeFile(this.name)));
-	this.stylesTemplate(stylesTemplate, path.join(this._.capitalizeFile(this.name)));
+	if(includeStyles) this.stylesTemplate(stylesTemplate, path.join(this._.capitalizeFile(this.name)));
 };
-
-Generator.prototype.generateAction = function() {
-  this.appTemplate('Action', path.join('actions', this._.capitalizeFile(this.name) + 'ActionCreators'));
-}
-
-Generator.prototype.generateStore = function() {
-  this.appTemplate('Store', path.join('stores', this._.capitalizeFile(this.name) + 'Store'));
-}

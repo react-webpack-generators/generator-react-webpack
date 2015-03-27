@@ -1,8 +1,8 @@
 'use strict';
 
-var <% classedName + 'ActionCreators' %> = {
+var <%= classedName %> = {
 
 }
 
-<% if (es6) { %> export default <%= classedName + 'ActionCreators' %>; <% }
-else { %>module.exports = <%= classedName + 'ActionCreators' %>; <% } %>
+<% if (es6) { %> export default <%= classedName %>; <% }
+else { %>module.exports = <%= classedName %>; <% } %>

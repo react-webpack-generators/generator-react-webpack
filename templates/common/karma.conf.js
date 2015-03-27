@@ -8,10 +8,14 @@ module.exports = function (config) {
     frameworks: ['jasmine'],
     files: [
       'test/helpers/**/*.js',
-      'test/spec/components/**/*.js'
+      'test/spec/components/**/*.js'<% if(flux) { %>,
+      'test/spec/stores/**/*.js',
+      'test/spec/actions/**/*.js'<% } %>
     ],
     preprocessors: {
-      'test/spec/components/**/*.js': ['webpack']
+      'test/spec/components/**/*.js': ['webpack']<% if(flux) { %>,
+      'test/spec/stores/**/*.js': ['webpack'],
+      'test/spec/actions/**/*.js': ['webpack']<% } %>
     },
     webpack: {
       cache: true,
@@ -48,7 +52,9 @@ module.exports = function (config) {
       resolve: {
         alias: {
           'styles': path.join(process.cwd(), './src/styles/'),
-          'components': path.join(process.cwd(), './src/scripts/components/')
+          'components': path.join(process.cwd(), './src/scripts/components/')<% if(flux) { %>,
+          'stores': '../../../src/scripts/stores/',
+          'actions': '../../../src/scripts/actions/'<% } %>
         }
       }
     },

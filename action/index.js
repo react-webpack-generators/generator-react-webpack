@@ -3,6 +3,7 @@ var util = require('util');
 var ScriptBase = require('../script-base.js');
 
 var ActionGenerator = module.exports = function ActionGenerator(args, options, config) {
+  args[0] += 'ActionCreators';
   ScriptBase.apply(this, arguments);
 }
 
@@ -13,5 +14,13 @@ ActionGenerator.prototype.createActionFile = function createActionFile() {
 
   this.es6 = this.options.es6;
 
-  this.generateAction();
+  console.log(this.name);
+
+  this.generateSourceAndTest(
+    'Action',
+    'spec/Action',
+    void(0),
+    'actions',
+    false
+  );
 }

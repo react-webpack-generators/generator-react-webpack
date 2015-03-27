@@ -4,11 +4,11 @@ var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var <%= dispatcherName %> = require('../dispatcher/<%= dispatcherName %>');
 
-var <%= classedName + 'Store' %> = assign({}, EventEmitter.prototype, {
+var <%= classedName %> = assign({}, EventEmitter.prototype, {
 
 });
 
-<%= classedName + 'Store' %>.dispatchToken = <%= dispatcherName %>.register(function(action) {
+<%= classedName %>.dispatchToken = <%= dispatcherName %>.register(function(action) {
 
   switch(action.type) {
     default:
@@ -16,5 +16,5 @@ var <%= classedName + 'Store' %> = assign({}, EventEmitter.prototype, {
 
 });
 
-<% if (es6) { %> export default <%= classedName + 'Store' %>; <% }
-else { %>module.exports = <%= classedName + 'Store' %>; <% } %>
+<% if (es6) { %> export default <%= classedName %>; <% }
+else { %>module.exports = <%= classedName %>; <% } %>

@@ -3,7 +3,6 @@ var util = require('util');
 var ScriptBase = require('../script-base.js');
 
 var ComponentGenerator = module.exports = function ComponentGenerator(args, options, config) {
-
   ScriptBase.apply(this, arguments);
 };
 
@@ -18,6 +17,7 @@ ComponentGenerator.prototype.createComponentFile = function createComponentFile(
     'Component',
     'spec/Component',
     'styles/Component',
-    'components'
+    'components',
+    true
   );
 };
