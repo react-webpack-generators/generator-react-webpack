@@ -125,6 +125,22 @@ describe('react-webpack generator', function() {
       });
     });
 
+    it('should not have any flux assets configured', function(done) {
+      react.run({}, function() {
+        assert.noFileContent([
+          ['package.json', /flux/],
+          ['package.json', /events/],
+          ['package.json', /object-assign/],
+          ['karma.conf.js', /resolve[\S\s]+alias[\S\s]+stores/m],
+          ['webpack.config.js', /resolve[\S\s]+alias[\S\s]+stores/m],
+          ['webpack.dist.config.js', /resolve[\S\s]+alias[\S\s]+stores/m]
+        ]);
+
+        assert.noFile('src/scripts/dispatcher/TempTestAppDispatcher.js');
+
+        done();
+      });
+    });
   });
 
   describe('Generator', function () {
@@ -169,6 +185,54 @@ describe('react-webpack generator', function() {
       assertStyle('stylus', done);
     });
 
+  });
+
+  describe('When using Flux', function() {
+
+    beforeEach(function(done) {
+      helpers.mockPrompt(react, {
+        flux: true
+      });
+
+      react.run({}, function() {
+        done();
+      })
+    });
+
+    it('should add flux, events, and object-assign packages', function(done) {
+      assert.fileContent([
+        ['package.json', /flux/],
+        ['package.json', /events/],
+        ['package.json', /object-assign/]
+      ]);
+
+      done();
+    });
+
+    it('should add stores and actions alias to karma config', function(done) {
+      assert.fileContent([
+        ['karma.conf.js', /resolve[\S\s]+alias[\S\s]+stores/m]
+      ]);
+
+      done();
+    });
+
+    it('should add stores and actions alias to webpack configs', function(done) {
+      assert.fileContent([
+        ['webpack.config.js', /resolve[\S\s]+alias[\S\s]+stores/m],
+        ['webpack.dist.config.js', /resolve[\S\s]+alias[\S\s]+stores/m]
+      ]);
+
+      done();
+    });
+
+    it('should have a Dispatcher generated', function(done) {
+      setTimeout(function(){
+        assert.file('src/scripts/dispatcher/TempTestAppDispatcher.js');
+
+        done();
+      });
+    })
   });
 
   describe('Subgenerators', function() {
