@@ -10,7 +10,6 @@ describe('react-webpack generator', function() {
   var react;
   var expected = [
     'src/favicon.ico',
-    'src/styles/normalize.css',
     'src/styles/main.css',
     'src/index.html',
     'Gruntfile.js',
