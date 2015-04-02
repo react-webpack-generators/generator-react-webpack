@@ -52,7 +52,7 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       exclude: /node_modules/,
-      loader: '<% if (es6) { %>babel!<% }%>jsx-loader?harmony'
+      loader: 'babel-loader'
     }, {
       test: /\.css$/,
       loader: 'style-loader!css-loader'

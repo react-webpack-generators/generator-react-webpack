@@ -45,7 +45,7 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       exclude: /node_modules/,
-      loader: 'react-hot!<% if (es6) { %>babel!<% }%>jsx-loader?harmony'
+      loader: 'react-hot!babel-loader'
     },<% if (stylesLanguage === 'sass') { %> {
       test: /\.sass/,
       loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'

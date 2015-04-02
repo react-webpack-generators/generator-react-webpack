@@ -14,14 +14,14 @@
     "flux": "^2.0.1",
     "events": "^1.0.2",
     "object-assign": "^2.0.0", <% } %>
-    "react": "~0.12.2"
+    "react": "~0.12.2",
+    "normalize.css": "~3.0.3"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
     "load-grunt-tasks": "~0.6.0",
     "grunt-contrib-connect": "~0.8.0",
     "webpack": "~1.4.3",
-    "jsx-loader": "~0.12.2",
     "grunt-webpack": "~1.0.8",
     "style-loader": "~0.8.0",
     "url-loader": "~0.5.5",
@@ -38,9 +38,9 @@
     "grunt-open": "~0.2.3",
     "jshint-loader": "~0.8.0",
     "jsxhint-loader": "~0.2.0",
-    "grunt-contrib-copy": "~0.5.0",<% if (es6) { %>
+    "grunt-contrib-copy": "~0.5.0",
     "babel": "^4.0.0",
-    "babel-loader": "^4.0.0",<% } %>
+    "babel-loader": "^4.0.0",
     "grunt-contrib-clean": "~0.6.0",<% if (stylesLanguage.match(/s[ac]ss/)) { %>
     "sass-loader": "^0.3.1",<% } %><% if (stylesLanguage === 'less') { %>
     "less-loader": "^2.0.0",<% } %><% if (stylesLanguage === 'stylus') { %>
