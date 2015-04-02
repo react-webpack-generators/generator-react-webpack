@@ -11,7 +11,8 @@
   "mainOutput": "main",
   "dependencies": {<% if (reactRouter) { %>
     "react-router": "^0.11.6",<% } %>
-    "react": "~0.12.2"
+    "react": "~0.12.2",
+    "normalize.css": "~3.0.3"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

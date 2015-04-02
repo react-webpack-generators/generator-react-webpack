@@ -108,9 +108,7 @@ ReactWebpackGenerator.prototype.packageFiles = function () {
 
 ReactWebpackGenerator.prototype.styleFiles = function styleFiles() {
   var mainFile = 'main.css';
-  var normalizeFile = 'normalize.css';
   this.copy('styles/' + mainFile, 'src/styles/' + mainFile);
-  this.copy('styles/' + normalizeFile, 'src/styles/' + normalizeFile);
 };
 
 ReactWebpackGenerator.prototype.imageFiles = function () {

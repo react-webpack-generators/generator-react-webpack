@@ -123,7 +123,6 @@ project
       main.js
     - styles
       main.css
-      normalize.css
     index.html
   - test
     - spec
