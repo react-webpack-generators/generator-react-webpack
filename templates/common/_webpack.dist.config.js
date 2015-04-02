@@ -36,7 +36,9 @@ module.exports = {
     extensions: ['', '.js'],
     alias: {
       'styles': '../../../src/styles',
-      'components': '../../../src/scripts/components/'
+      'components': '../../../src/scripts/components/'<% if(flux) { %>,
+      'stores': '../../../src/scripts/stores/',
+      'actions': '../../../src/scripts/actions/'<% } %>
     }
   },
 

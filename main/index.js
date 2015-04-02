@@ -20,3 +20,9 @@ MainGenerator.prototype.createMainFile = function createMainFile() {
     this.appTemplate('main', 'components/main');
   }
 };
+
+MainGenerator.prototype.createDispatcher = function createDispatcher() {
+  if(this.env.options.flux) {
+    this.appTemplate('Dispatcher', 'dispatcher/' + this.scriptAppName + 'Dispatcher');
+  }
+};

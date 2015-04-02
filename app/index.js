@@ -13,6 +13,7 @@ var ReactWebpackGenerator = module.exports = function ReactWebpackGenerator(args
   this.appname = this._.camelize(this._.slugify(this._.humanize(this.appname)));
   this.scriptAppName = this._.capitalize(this.appname) + generalUtils.appName(this);
 
+  this.config.set('app-name', this.appname);
 
   args = ['main'];
 
@@ -65,6 +66,20 @@ ReactWebpackGenerator.prototype.askForReactRouter = function () {
   }.bind(this));
 };
 
+ReactWebpackGenerator.prototype.askForFlux = function() {
+  var done = this.async();
+  this.prompt({
+    type    : 'confirm',
+    name    : 'flux',
+    message : 'Would you like to include flux?',
+    default : false
+  }, function(props) {
+    this.env.options.flux = props.flux;
+    this.config.set('flux', props.flux);
+    done();
+  }.bind(this));
+};
+
 ReactWebpackGenerator.prototype.askForStylesLanguage = function () {
   var done = this.async();
   this.prompt({
@@ -98,6 +113,7 @@ ReactWebpackGenerator.prototype.createIndexHtml = function createIndexHtml() {
 ReactWebpackGenerator.prototype.packageFiles = function () {
   this.es6 = this.options.es6;
   this.reactRouter = this.env.options.reactRouter;
+  this.flux = this.env.options.flux;
   this.stylesLanguage = this.env.options.stylesLanguage;
   this.template('../../templates/common/_package.json', 'package.json');
   this.template('../../templates/common/_webpack.config.js', 'webpack.config.js');
