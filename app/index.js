@@ -15,13 +15,14 @@ var ReactWebpackGenerator = module.exports = function ReactWebpackGenerator(args
 
   this.config.set('app-name', this.appname);
 
-  args = ['main'];
 
   if (typeof this.options.appPath === 'undefined') {
     this.options.appPath = this.options.appPath || 'src';
   }
 
   this.appPath = this.options.appPath;
+
+  args = [this.scriptAppName];
 
   this.composeWith('react-webpack:common', {
     args: args
