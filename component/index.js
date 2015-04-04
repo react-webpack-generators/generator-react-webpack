@@ -13,7 +13,7 @@ ComponentGenerator.prototype.createComponentFile = function createComponentFile(
 
   this.es6 = this.options.es6;
 
-  this.generateSourceAndTest(
+  this.generateComponentTestAndStyle(
     'Component',
     'spec/Component',
     'styles/Component',

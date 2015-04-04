@@ -20,6 +20,7 @@ var Generator = module.exports = function Generator() {
 	this.classedFileName = this._.capitalizeFile(this.name);
   this.classedName = this._.capitalizeClass(this.name);
   this.stylesLanguage = this.config.get('styles-language');
+  this.architecture = this.config.get('architecture');
 
 	if (typeof this.options.appPath === 'undefined') {
 		this.options.appPath = this.options.appPath || 'src/scripts';
@@ -61,6 +62,13 @@ util.inherits(Generator, yeoman.generators.NamedBase);
 
 Generator.prototype.appTemplate = function (src, dest) {
 	yeoman.generators.Base.prototype.template.apply(this, [
+		path.join('javascript', src + this.scriptSuffix),
+		path.join(this.options.appPath, dest) + this.scriptSuffix
+	]);
+};
+
+Generator.prototype.reactComponentTemplate = function (src, dest) {
+	yeoman.generators.Base.prototype.template.apply(this, [
 		path.join('javascript', src + this.reactSuffix),
 		path.join(this.options.appPath, dest) + this.reactSuffix
 	]);
@@ -88,8 +96,13 @@ Generator.prototype.htmlTemplate = function (src, dest) {
 	]);
 };
 
-Generator.prototype.generateSourceAndTest = function (appTemplate, testTemplate, stylesTemplate, targetDirectory, includeStyles) {
+Generator.prototype.generateSourceAndTest = function (appTemplate, testTemplate, targetDirectory) {
 	this.appTemplate(appTemplate, path.join(targetDirectory, this._.capitalizeFile(this.name)));
 	this.testTemplate(testTemplate, path.join(targetDirectory, this._.capitalizeFile(this.name)));
-	if(includeStyles) this.stylesTemplate(stylesTemplate, path.join(this._.capitalizeFile(this.name)));
+};
+
+Generator.prototype.generateComponentTestAndStyle = function (componentTemplate, testTemplate, stylesTemplate, targetDirectory) {
+  this.reactComponentTemplate(componentTemplate, path.join(targetDirectory, this._.capitalizeFile(this.name)));
+  this.testTemplate(testTemplate, path.join(targetDirectory, this._.capitalizeFile(this.name)));
+  this.stylesTemplate(stylesTemplate, path.join(this._.capitalizeFile(this.name)));
 };

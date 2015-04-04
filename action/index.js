@@ -5,22 +5,29 @@ var ScriptBase = require('../script-base.js');
 var ActionGenerator = module.exports = function ActionGenerator(args, options, config) {
   args[0] += 'ActionCreators';
   ScriptBase.apply(this, arguments);
-}
+};
 
 util.inherits(ActionGenerator, ScriptBase);
 
 ActionGenerator.prototype.createActionFile = function createActionFile() {
   this.option('es6');
-
   this.es6 = this.options.es6;
 
-  console.log(this.name);
+  var actionTemplate;
+  switch (this.architecture){
+    case 'flux':
+          actionTemplate = 'FluxAction';
+          break;
+    case 'reflux':
+          actionTemplate = 'RefluxAction';
+          break;
+  }
+
+  console.log('Creating ' + this.architecture + ' action');
 
   this.generateSourceAndTest(
-    'Action',
+    actionTemplate,
     'spec/Action',
-    void(0),
-    'actions',
-    false
+    'actions'
   );
-}
+};

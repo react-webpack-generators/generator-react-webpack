@@ -13,3 +13,4 @@ $RECYCLE.BIN/
 node_modules/
 /test/*
 npm-debug.log
+.idea/

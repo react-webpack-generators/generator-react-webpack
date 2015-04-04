@@ -66,16 +66,21 @@ ReactWebpackGenerator.prototype.askForReactRouter = function () {
   }.bind(this));
 };
 
-ReactWebpackGenerator.prototype.askForFlux = function() {
+ReactWebpackGenerator.prototype.askForArchitecture  = function() {
   var done = this.async();
   this.prompt({
-    type    : 'confirm',
-    name    : 'flux',
-    message : 'Would you like to include flux?',
+    type    : 'list',
+    name    : 'architecture',
+    message : 'Would you like to use one of those architectures?',
+    choices: [
+      {name:'No need for that, thanks',value:false},
+      {name:'Flux',value:'flux'},
+      {name:'ReFlux',value:'reflux'}
+    ],
     default : false
   }, function(props) {
-    this.env.options.flux = props.flux;
-    this.config.set('flux', props.flux);
+    this.env.options.architecture = props.architecture;
+    this.config.set('architecture', props.architecture);
     done();
   }.bind(this));
 };
@@ -113,7 +118,7 @@ ReactWebpackGenerator.prototype.createIndexHtml = function createIndexHtml() {
 ReactWebpackGenerator.prototype.packageFiles = function () {
   this.es6 = this.options.es6;
   this.reactRouter = this.env.options.reactRouter;
-  this.flux = this.env.options.flux;
+  this.architecture = this.env.options.architecture;
   this.stylesLanguage = this.env.options.stylesLanguage;
   this.template('../../templates/common/_package.json', 'package.json');
   this.template('../../templates/common/_webpack.config.js', 'webpack.config.js');
