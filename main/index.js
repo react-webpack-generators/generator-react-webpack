@@ -9,10 +9,10 @@ var MainGenerator = module.exports = function MainGenerator(args, options, confi
 
 util.inherits(MainGenerator, ScriptBase);
 
-MainGenerator.prototype.createAppFile = function createAppFile() {
+MainGenerator.prototype.createAppFile = function createAppFile(scriptAppName) {
   this.reactRouter = this.env.options.reactRouter;
-  this.appTemplate('App', 'components/' + this.scriptAppName);
-  this.testTemplate('spec/App', 'components/' + this.scriptAppName);
+  this.appTemplate('App', 'components/' + scriptAppName);
+  this.testTemplate('spec/App', 'components/' + scriptAppName);
 };
 
 MainGenerator.prototype.createMainFile = function createMainFile() {
