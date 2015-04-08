@@ -190,7 +190,7 @@ describe('react-webpack generator', function() {
 
     beforeEach(function(done) {
       helpers.mockPrompt(react, {
-        flux: true
+        architecture: 'flux'
       });
 
       react.run({}, function() {
@@ -277,7 +277,7 @@ describe('react-webpack generator', function() {
 
     beforeEach(function(done){
       helpers.mockPrompt(react, {
-        flux: true
+        architecture: 'flux'
       });
 
       react.run({}, function() {
@@ -312,7 +312,7 @@ describe('react-webpack generator', function() {
 
     beforeEach(function(done) {
       helpers.mockPrompt(react, {
-        flux: true
+        architecture: 'flux'
       });
 
       react.run({}, function() {
