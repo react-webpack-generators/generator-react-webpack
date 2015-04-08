@@ -29,7 +29,7 @@ Available generators:
 * [react-webpack](#app) (aka [react-webpack:app](#app))
 * [react-webpack:component](#component)
 
-and for **Flux** or **Reflux :
+and for **Flux** or **Reflux** :
 * [react-webpack:action](#action)
 * [react-webpack:store](#store)
 
@@ -231,6 +231,8 @@ A complete routing library for React. This option only adds the basic hooks to g
 ### styles language
 
 css, sass, scss, less or stylus
+
+Sets the style file's template and extension
 
 ### architecture
 
