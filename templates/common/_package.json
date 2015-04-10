@@ -42,7 +42,7 @@
     "babel": "^4.0.0",
     "babel-loader": "^4.0.0",
     "grunt-contrib-clean": "~0.6.0",<% if (stylesLanguage.match(/s[ac]ss/)) { %>
-    "sass-loader": "^0.3.1",<% } %><% if (stylesLanguage === 'less') { %>
+    "sass-loader": "^1.0.1",<% } %><% if (stylesLanguage === 'less') { %>
     "less-loader": "^2.0.0",<% } %><% if (stylesLanguage === 'stylus') { %>
     "stylus-loader": "^0.5.0",<% } %>
     "react-hot-loader": "^1.0.7"
