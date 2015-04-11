@@ -35,10 +35,11 @@ module.exports = {
   resolve: {
     extensions: ['', '.js'],
     alias: {
-      'styles': '../../../src/styles',
-      'components': '../../../src/scripts/components/'<% if(flux) { %>,
-      'stores': '../../../src/scripts/stores/',
-      'actions': '../../../src/scripts/actions/'<% } %>
+      'styles': __dirname + '/src/styles',
+      'mixins': __dirname + '/src/scripts/mixins',
+      'components': __dirname + '/src/scripts/components/'<% if(architecture==='flux'||architecture=='reflux') { %>,
+      'stores': __dirname + '/src/scripts/stores/',
+      'actions': __dirname + '/src/scripts/actions/'<% } %>
     }
   },
 

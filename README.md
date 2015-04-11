@@ -29,6 +29,11 @@ Available generators:
 * [react-webpack](#app) (aka [react-webpack:app](#app))
 * [react-webpack:component](#component)
 
+and for **Flux** or **Reflux** :
+* [react-webpack:action](#action)
+* [react-webpack:store](#store)
+
+
 ### App
 
 Sets up a new ReactJS app, generating all the boilerplate you need to get started. The app generator also facilitates the following:
@@ -45,7 +50,7 @@ yo react-webpack
 
 ### Component
 
-Generates a [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) component in `src/scripts/components` and it's corresponding test in `src/spec/components`.
+Generates a [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) component in `src/scripts/components`, its corresponding test in `src/spec/components` and its style in `src/style`.
 
 Example:
 ```bash
@@ -57,6 +62,8 @@ Produces `src/scripts/components/Foo.js` (*javascript - JSX*):
 'use strict';
 
 var React = require('react/addons');
+
+require('styles/componentName.css'); //or .sass,.less etc...
 
 var Foo = React.createClass({
   render: function () {
@@ -89,12 +96,130 @@ describe('Foo', function () {
 });
 ```
 
-And `src/styles/Foo.css`:
+And `src/styles/Foo.css` (or .sass, .less etc...) : 
 ```
 .Foo{
   border: 1px dashed #f00;
 }
 ```
+
+### Action
+
+When using Flux or Reflux architecture, it generates an actionCreator in `src/scripts/actions` and it's corresponding test in `src/spec/actions`.
+
+Example:
+```bash
+yo react-webpack:action bar
+```
+Will create a file - `src/scripts/actions/BarActionCreators.js`
+
+if 'architecture' is **Flux**, it Produces :
+```
+'use strict';
+
+var BarActionCreators = {
+
+}
+
+module.exports = BarActionCreators;
+```
+And if it's **Reflux**:
+```
+'use strict';
+
+var Reflux = require('reflux');
+
+var BarActionCreators  =  Reflux.createActions([
+
+]);
+
+
+module.exports = BarActionCreators;
+```
+
+and same test for both architectures:
+```
+'use strict';
+
+describe('BarActionCreators', function() {
+  var action;
+
+  beforeEach(function() {
+    action = require('actions/BarActionCreators.js');
+  });
+
+  it('should be defined', function() {
+    expect(action).toBeDefined();
+  });
+});
+```
+
+### Store
+
+When using Flux or Reflux architecture, it generates a store in `src/scripts/stores` and it's corresponding test in `src/spec/stores`.
+
+Example:
+```bash
+yo react-webpack:store baz
+```
+Will create a file - `src/scripts/stores/BazStore.js`
+
+if 'architecture' is **Flux**, it Produces :
+```
+'use strict';
+
+var EventEmitter = require('events').EventEmitter;
+var assign = require('object-assign');
+var MainAppDispatcher = require('../dispatcher/MainAppDispatcher');
+
+var BazStore = assign({}, EventEmitter.prototype, {
+
+});
+
+BazStore.dispatchToken = MainAppDispatcher.register(function(action) {
+
+  switch(action.type) {
+    default:
+  }
+
+});
+
+module.exports = BazStore;
+```
+And if it's **Reflux**:
+```
+'use strict';
+
+var Reflux = require('reflux');
+//var Actions = require('actions/..');
+
+
+var BazStore = Reflux.createStore({
+  listenables: Actions,
+
+
+});
+
+module.exports = BazStore; 
+```
+
+and same test for both architectures:
+```
+'use strict';
+
+describe('BazStore', function() {
+  var store;
+
+  beforeEach(function() {
+    store = require('stores/BazStore.js');
+  });
+
+  it('should be defined', function() {
+    expect(store).toBeDefined();
+  });
+});
+```
+
 
 ## Options
 Options are available as additional installs to the initial application generation phase.
@@ -102,6 +227,16 @@ Options are available as additional installs to the initial application generati
 ### [ReactRouter](https://github.com/rackt/react-router)
 
 A complete routing library for React. This option only adds the basic hooks to get started with [react router](https://github.com/rackt/react-router).
+
+### styles language
+
+css, sass, scss, less or stylus
+
+Sets the style file's template and extension
+
+### architecture
+
+[flux](https://facebook.github.io/flux/) or [reflux](https://github.com/spoike/refluxjs)
 
 ## Testing
 
@@ -118,23 +253,44 @@ project
   - src
     - scripts
       -components
-        ComponentOne.js
-        ComponentTwo.js
-      main.js
+        MainApp.js
+        Foo.js
+        AnotherComponent.js
+      
+      //for flux/reflux
+      -actions 
+        BarActionCreators.js
+      -stores
+        BazStore.js
+      //for flux
+      -dispatcher
+        FooAppDispatcher
+        
     - styles
       main.css
     index.html
   - test
     - spec
       - components
-        ComponentOne.js
-        ComponentTwo.js
+         MainApp.js
+         Foo.js
+         AnotherComponent.js
+      
+      //for flux/reflux
+      -actions 
+        BarActionCreators.js
+      -stores
+        BazStore.js
+          
     - helpers
       - react
         addons.js
       phantomjs-shims.js
   Gruntfile.js
   karma.conf.js
+  package.json
+  webpack.config.js
+  webpack.dist.config.js
 ```
 
 I have tried to keep the project structure as simple as possible and understand it may not suit everyone.

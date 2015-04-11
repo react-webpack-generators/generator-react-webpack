@@ -8,12 +8,12 @@ module.exports = function (config) {
     frameworks: ['jasmine'],
     files: [
       'test/helpers/**/*.js',
-      'test/spec/components/**/*.js'<% if(flux) { %>,
+      'test/spec/components/**/*.js'<% if(architecture === 'flux'||architecture === 'reflux') { %>,
       'test/spec/stores/**/*.js',
       'test/spec/actions/**/*.js'<% } %>
     ],
     preprocessors: {
-      'test/spec/components/**/*.js': ['webpack']<% if(flux) { %>,
+      'test/spec/components/**/*.js': ['webpack']<% if(architecture === 'flux'||architecture === 'reflux') { %>,
       'test/spec/stores/**/*.js': ['webpack'],
       'test/spec/actions/**/*.js': ['webpack']<% } %>
     },
@@ -52,7 +52,7 @@ module.exports = function (config) {
       resolve: {
         alias: {
           'styles': path.join(process.cwd(), './src/styles/'),
-          'components': path.join(process.cwd(), './src/scripts/components/')<% if(flux) { %>,
+          'components': path.join(process.cwd(), './src/scripts/components/')<% if(architecture === 'flux'||architecture === 'reflux') { %>,
           'stores': '../../../src/scripts/stores/',
           'actions': '../../../src/scripts/actions/'<% } %>
         }

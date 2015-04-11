@@ -2,24 +2,35 @@
 var util = require('util');
 var ScriptBase = require('../script-base.js');
 
-var ActionGenerator = module.exports = function ActionGenerator(args, options, config) {
+var StoreGenerator  = module.exports = function StoreGenerator(args, options, config) {
   args[0] += 'Store';
   ScriptBase.apply(this, arguments);
 }
 
-util.inherits(ActionGenerator, ScriptBase);
+util.inherits(StoreGenerator, ScriptBase);
 
-ActionGenerator.prototype.createActionFile = function createActionFile() {
+StoreGenerator .prototype.createStoreFile  = function createStoreFile() {
   this.option('es6');
 
   this.es6 = this.options.es6;
-  this.dispatcherName = this._.capitalizeFile(this.config.get('app-name')) + 'AppDispatcher';
+
+  var storeTemplate;
+  switch (this.architecture){
+    case 'flux':
+      storeTemplate = 'FluxStore';
+      this.dispatcherName = this._.capitalizeFile(this.config.get('app-name')) + 'AppDispatcher';
+      break;
+    case 'reflux':
+      storeTemplate = 'RefluxStore';
+      break;
+  }
+
+  console.log('Creating ' + this.architecture + ' store');
+
 
   this.generateSourceAndTest(
-    'Store',
+    storeTemplate,
     'spec/Store',
-    void(0),
-    'stores',
-    false
+    'stores'
   );
-}
+};
