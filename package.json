@@ -1,7 +1,7 @@
 {
   "name": "generator-react-webpack",
   "version": "1.2.1",
-  "description": "Yeoman generator for ReactJS and Webpack",
+  "description": "Yeoman generator for Facebook's ReactJS, with webpack, livereload, grunt, Flux/Reflux architecture options and support for sass, less or stylus  ",
   "keywords": [
     "yeoman-generator",
     "reactjs",
