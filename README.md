@@ -54,7 +54,7 @@ Generates a [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) compon
 
 Example:
 ```bash
-yo react-webpack:component foo
+yo react-webpack:component foo  //or just: yo react-webpack:c foo
 ```
 
 Produces `src/scripts/components/Foo.js` (*javascript - JSX*):
@@ -109,7 +109,7 @@ When using Flux or Reflux architecture, it generates an actionCreator in `src/sc
 
 Example:
 ```bash
-yo react-webpack:action bar
+yo react-webpack:action bar //or just: yo react-webpack:a bar
 ```
 Will create a file - `src/scripts/actions/BarActionCreators.js`
 
@@ -160,7 +160,7 @@ When using Flux or Reflux architecture, it generates a store in `src/scripts/sto
 
 Example:
 ```bash
-yo react-webpack:store baz
+yo react-webpack:store baz //or just: yo react-webpack:s baz
 ```
 Will create a file - `src/scripts/stores/BazStore.js`
 
