@@ -23,7 +23,7 @@ var Generator = module.exports = function Generator() {
   this.architecture = this.config.get('architecture');
 
 	if (typeof this.options.appPath === 'undefined') {
-		this.options.appPath = this.options.appPath || 'src/scripts';
+		this.options.appPath = this.options.appPath || 'src';
 	}
 
 	if (typeof this.options.testPath === 'undefined') {

@@ -19,7 +19,6 @@ module.exports = function (grunt) {
 
     webpack: {
       options: webpackDistConfig,
-
       dist: {
         cache: false
       }
