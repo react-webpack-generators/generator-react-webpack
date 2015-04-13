@@ -124,7 +124,7 @@ ReactWebpackGenerator.prototype.packageFiles = function () {
   this.template('../../templates/common/_package.json', 'package.json');
   this.template('../../templates/common/_webpack.config.js', 'webpack.config.js');
   this.template('../../templates/common/_webpack.dist.config.js', 'webpack.dist.config.js');
-  this.copy('../../templates/common/Gruntfile.js', 'Gruntfile.js');
+  this.copy('../../templates/common/Gruntfile.coffee', 'Gruntfile.coffee');
   this.copy('../../templates/common/gitignore', '.gitignore');
 };
 

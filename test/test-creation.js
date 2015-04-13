@@ -12,7 +12,7 @@ describe('react-webpack generator', function() {
     'src/favicon.ico',
     'src/styles/main.css',
     'src/index.html',
-    'Gruntfile.js',
+    'Gruntfile.coffee',
     'webpack.config.js',
     'karma.conf.js',
     'package.json'
@@ -98,7 +98,7 @@ describe('react-webpack generator', function() {
       react.run({}, function() {
         assert.fileContent([
             ['package.json', /react-hot-loader/],
-            ['Gruntfile.js', /hot:\s*true/],
+            ['Gruntfile.coffee', /hot:\s*true/],
             ['webpack.config.js', /react-hot/],
             ['webpack.config.js', /webpack\.HotModuleReplacementPlugin/],
             ['webpack.config.js', /webpack\.NoErrorsPlugin/],
