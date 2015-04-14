@@ -3,9 +3,12 @@ var util = require('util');
 var ScriptBase = require('../script-base.js');
 
 var StoreGenerator  = module.exports = function StoreGenerator(args, options, config) {
-  args[0] += 'Store';
-  ScriptBase.apply(this, arguments);
-}
+  if (!args[0]) console.log('\n Please specify a name for this store \n');
+  else {
+    args[0] += 'Store';
+    ScriptBase.apply(this, arguments)
+  }
+};
 
 util.inherits(StoreGenerator, ScriptBase);
 

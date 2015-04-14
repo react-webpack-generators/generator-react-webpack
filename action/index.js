@@ -3,8 +3,11 @@ var util = require('util');
 var ScriptBase = require('../script-base.js');
 
 var ActionGenerator = module.exports = function ActionGenerator(args, options, config) {
-  args[0] += 'ActionCreators';
-  ScriptBase.apply(this, arguments);
+  if (!args[0]) console.log('\n Please specify a name for this action creator \n');
+  else {
+    args[0] += 'ActionCreators';
+    ScriptBase.apply(this, arguments)
+  }
 };
 
 util.inherits(ActionGenerator, ScriptBase);
