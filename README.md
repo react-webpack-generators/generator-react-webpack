@@ -103,6 +103,45 @@ And `src/styles/Foo.css` (or .sass, .less etc...) :
 }
 ```
 
+### rich flag
+
+For all you lazy programmers out there, we've added another shortcut - `rich` flag:
+```bash
+yo react-webpack:c foofoo --rich 
+```
+This will give you all of react component's most common stuff :
+ ````
+ var React = require('react/addons');
+ 
+ require('styles/Foofoo.sass');
+ 
+ var Foofoo = React.createClass({
+   mixins: [],
+   getInitialState: function() { return({}) },
+   getDefaultProps: function() {},
+   componentWillMount: function() {},
+   componentDidMount: function() {},
+   shouldComponentUpdate: function() {},
+   componentDidUpdate: function() {},
+   componentWillUnmount: function() {},
+ 
+   render: function () {
+     return (
+         <div>
+           <p>Content for Foofoo</p>
+         </div>
+       );
+   }
+ });
+ 
+ module.exports = Foofoo; 
+ ````
+
+Just remove those you don't need, then fill and space out the rest. 
+
+
+
+
 ### Action
 
 When using Flux or Reflux architecture, it generates an actionCreator in `src/scripts/actions` and it's corresponding test in `src/spec/actions`.
@@ -237,6 +276,11 @@ Sets the style file's template and extension
 ### architecture
 
 [flux](https://facebook.github.io/flux/) or [reflux](https://github.com/spoike/refluxjs)
+
+### es6
+
+If you are using `es6`, and want to use its export functionality (and not webpack's), just add `--es6` flag when you create a component, action or srore.
+
 
 ## Testing
 
