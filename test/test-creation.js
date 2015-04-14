@@ -71,8 +71,8 @@ describe('react-webpack generator', function() {
       react.run({}, function() {
         setTimeout(function() {
           helpers.assertFile([].concat(expected, [
-            'src/scripts/components/TempTestApp.js',
-            'src/scripts/components/main.js'
+            'src/components/TempTestApp.js',
+            'src/components/main.js'
           ]));
           done();
         });
@@ -135,7 +135,7 @@ describe('react-webpack generator', function() {
           ['webpack.dist.config.js', /resolve[\S\s]+alias[\S\s]+stores/m]
         ]);
 
-        assert.noFile('src/scripts/dispatcher/TempTestAppDispatcher.js');
+        assert.noFile('src/dispatcher/TempTestAppDispatcher.js');
 
         done();
       });
@@ -227,7 +227,7 @@ describe('react-webpack generator', function() {
 
     it('should have a Dispatcher generated', function(done) {
       setTimeout(function(){
-        assert.file('src/scripts/dispatcher/TempTestAppDispatcher.js');
+        assert.file('src/dispatcher/TempTestAppDispatcher.js');
 
         done();
       });
@@ -238,7 +238,7 @@ describe('react-webpack generator', function() {
     var generatorTest = function(name, generatorType, specType, targetDirectory, scriptNameFn, specNameFn, suffix, done) {
 
       var deps = [path.join('../..', generatorType)];
-      genOptions.appPath = 'src/scripts'
+      genOptions.appPath = 'src';
 
       var reactGenerator = helpers.createGenerator('react-webpack:' + generatorType, deps, [name], genOptions);
 
@@ -246,8 +246,8 @@ describe('react-webpack generator', function() {
         reactGenerator.run([], function() {
           helpers.assertFileContent([
 
-            [path.join('src/scripts', targetDirectory, name + '.js'), new RegExp('var ' + scriptNameFn(name) + suffix, 'g')],
-            [path.join('src/scripts', targetDirectory, name + '.js'), new RegExp('require\\(\'styles\\/' + name + suffix + '\\.[^\']+' + '\'\\)', 'g')],
+            [path.join('src', targetDirectory, name + '.js'), new RegExp('var ' + scriptNameFn(name) + suffix, 'g')],
+            [path.join('src', targetDirectory, name + '.js'), new RegExp('require\\(\'styles\\/' + name + suffix + '\\.[^\']+' + '\'\\)', 'g')],
             [path.join('test/spec', targetDirectory, 'TempTestApp' + '.js'), new RegExp('require\\(\'components\\/' + 'TempTestApp' + suffix + '\\.[^\']+' + '\'\\)', 'g')],
             [path.join('test/spec', targetDirectory, name + '.js'), new RegExp('require\\(\'components\\/' + name + suffix + '\\.[^\']+' + '\'\\)', 'g')],
             [path.join('test/spec', targetDirectory, name + '.js'), new RegExp('describe\\(\'' + specNameFn(name) + suffix + '\'', 'g')]
@@ -286,7 +286,7 @@ describe('react-webpack generator', function() {
             'react-webpack:action',
             [path.join('../../action')],
             ['Test'],
-            { appPath: 'src/scripts' }
+            { appPath: 'src' }
           );
 
         react.run([], function() {
@@ -299,7 +299,7 @@ describe('react-webpack generator', function() {
 
     it('should generate a new action with tests', function(done) {
       assert.fileContent([
-        ['src/scripts/actions/TestActionCreators.js', /var TestActionCreators/g],
+        ['src/actions/TestActionCreators.js', /var TestActionCreators/g],
         ['test/spec/actions/TestActionCreators.js', /require\('actions\/TestActionCreators.js'\)/g],
         ['test/spec/actions/TestActionCreators.js', /describe\('TestActionCreators'/g]
       ]);
@@ -321,7 +321,7 @@ describe('react-webpack generator', function() {
             'react-webpack:store',
             [path.join('../../store')],
             ['Test'],
-            { appPath: 'src/scripts' }
+            { appPath: 'src' }
           );
 
         react.run([], function() {
@@ -334,7 +334,7 @@ describe('react-webpack generator', function() {
 
     it('should generate a new store with tests', function(done) {
       assert.fileContent([
-        ['src/scripts/stores/TestStore.js', /var TestStore/g],
+        ['src/stores/TestStore.js', /var TestStore/g],
         ['test/spec/stores/TestStore.js', /require\('stores\/TestStore.js'\)/g],
         ['test/spec/stores/TestStore.js', /describe\('TestStore'/g]
       ]);

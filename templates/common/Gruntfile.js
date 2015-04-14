@@ -19,7 +19,6 @@ module.exports = function (grunt) {
 
     webpack: {
       options: webpackDistConfig,
-
       dist: {
         cache: false
       }
@@ -31,11 +30,11 @@ module.exports = function (grunt) {
         port: 8000,
         webpack: webpackDevConfig,
         publicPath: '/assets/',
-        contentBase: './<%= pkg.src %>/',
+        contentBase: './<%= pkg.src %>/'
       },
 
       start: {
-        keepAlive: true,
+        keepAlive: true
       }
     },
 
@@ -90,7 +89,7 @@ module.exports = function (grunt) {
             expand: true,
             src: ['<%= pkg.src %>/images/*'],
             dest: '<%= pkg.dist %>/images/'
-          },
+          }
         ]
       }
     },

@@ -18,7 +18,7 @@ module.exports = {
 
   debug: false,
   devtool: false,
-  entry: './src/scripts/components/<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>.js',
+  entry: './src/components/<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>.js',
 
   stats: {
     colors: true,
@@ -36,10 +36,10 @@ module.exports = {
     extensions: ['', '.js'],
     alias: {
       'styles': __dirname + '/src/styles',
-      'mixins': __dirname + '/src/scripts/mixins',
-      'components': __dirname + '/src/scripts/components/'<% if(architecture==='flux'||architecture=='reflux') { %>,
-      'stores': __dirname + '/src/scripts/stores/',
-      'actions': __dirname + '/src/scripts/actions/'<% } %>
+      'mixins': __dirname + '/src/mixins',
+      'components': __dirname + '/src/components/'<% if(architecture==='flux'||architecture=='reflux') { %>,
+      'stores': __dirname + '/src/stores/',
+      'actions': __dirname + '/src/actions/'<% } %>
     }
   },
 

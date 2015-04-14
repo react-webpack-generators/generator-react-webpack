@@ -52,9 +52,9 @@ module.exports = function (config) {
       resolve: {
         alias: {
           'styles': path.join(process.cwd(), './src/styles/'),
-          'components': path.join(process.cwd(), './src/scripts/components/')<% if(architecture === 'flux'||architecture === 'reflux') { %>,
-          'stores': '../../../src/scripts/stores/',
-          'actions': '../../../src/scripts/actions/'<% } %>
+          'components': path.join(process.cwd(), './src/components/')<% if(architecture === 'flux'||architecture === 'reflux') { %>,
+          'stores': '../../../src/stores/',
+          'actions': '../../../src/actions/'<% } %>
         }
       }
     },
