@@ -14,9 +14,6 @@ ComponentGenerator.prototype.createComponentFile = function createComponentFile(
 
   this.es6 = this.options.es6;
   this.rich = this.options.rich;
-  console.log(this.architecture)
-
-  console.log('Creating a component');
 
   this.generateComponentTestAndStyle(
     'Component',
