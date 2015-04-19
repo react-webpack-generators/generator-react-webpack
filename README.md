@@ -57,7 +57,7 @@ Example:
 yo react-webpack:component foo  //or just: yo react-webpack:c foo
 ```
 
-Produces `src/scripts/components/Foo.js` (*javascript - JSX*):
+Produces `src/components/Foo.js` (*javascript - JSX*):
 ```
 'use strict';
 
@@ -86,7 +86,7 @@ describe('Foo', function () {
   var Foo, component;
 
   beforeEach(function () {
-    Foo = require('../../../src/scripts/components/Foo');
+    Foo = require('../../../src/components/Foo');
     component = Foo();
   });
 
@@ -144,13 +144,13 @@ Just remove those you don't need, then fill and space out the rest.
 
 ### Action
 
-When using Flux or Reflux architecture, it generates an actionCreator in `src/scripts/actions` and it's corresponding test in `src/spec/actions`.
+When using Flux or Reflux architecture, it generates an actionCreator in `src/actions` and it's corresponding test in `src/spec/actions`.
 
 Example:
 ```bash
 yo react-webpack:action bar //or just: yo react-webpack:a bar
 ```
-Will create a file - `src/scripts/actions/BarActionCreators.js`
+Will create a file - `src/actions/BarActionCreators.js`
 
 if 'architecture' is **Flux**, it Produces :
 ```
@@ -195,13 +195,13 @@ describe('BarActionCreators', function() {
 
 ### Store
 
-When using Flux or Reflux architecture, it generates a store in `src/scripts/stores` and it's corresponding test in `src/spec/stores`.
+When using Flux or Reflux architecture, it generates a store in `src/stores` and it's corresponding test in `src/spec/stores`.
 
 Example:
 ```bash
 yo react-webpack:store baz //or just: yo react-webpack:s baz
 ```
-Will create a file - `src/scripts/stores/BazStore.js`
+Will create a file - `src/stores/BazStore.js`
 
 if 'architecture' is **Flux**, it Produces :
 ```
@@ -295,20 +295,19 @@ The react-webpack generator automates the setup of a [ReactJS](http://facebook.g
 ```
 project
   - src
-    - scripts
-      -components
-        MainApp.js
-        Foo.js
-        AnotherComponent.js
+    -components
+      MainApp.js
+      Foo.js
+      AnotherComponent.js
       
-      //for flux/reflux
-      -actions 
-        BarActionCreators.js
-      -stores
-        BazStore.js
-      //for flux
-      -dispatcher
-        FooAppDispatcher
+    //for flux/reflux
+    -actions 
+      BarActionCreators.js
+    -stores
+      BazStore.js
+    //for flux
+    -dispatcher
+      FooAppDispatcher
         
     - styles
       main.css
@@ -351,14 +350,14 @@ Each component is a module and can be required using the [Webpack](http://webpac
 
 Out the box the [Gruntfile](http://gruntjs.com/api/grunt.file) is configured with the following:
 
-1. **webpack**: uses the [grunt-webpack](https://github.com/webpack/grunt-webpack) plugin to load all required modules and output to a single JS file `src/scripts/main.js`. This is included in the `src/index.html` file by default and will reload in the browser as and when it is recompiled.
+1. **webpack**: uses the [grunt-webpack](https://github.com/webpack/grunt-webpack) plugin to load all required modules and output to a single JS file `src/main.js`. This is included in the `src/index.html` file by default and will reload in the browser as and when it is recompiled.
 2. **webpack-dev-server**: uses the [webpack-dev-server](https://github.com/webpack/webpack-dev-server) to watch for file changes and also serve the webpack app in development.
 3. **connect**: uses the [grunt-connect](https://github.com/gruntjs/grunt-contrib-connect) plugin to start a webserver at [localhost](http://localhost:8000).
 4. **karma**: uses the [grunt-karma](https://github.com/karma-runner/grunt-karma) plugin to load the Karma configuration file `karma.conf.js` located in the project root. This will run all tests using [PhantomJS](http://phantomjs.org/) by default but supports many other browsers.
 
 ### CSS
 
-Included in the project is the [normalize.css](http://necolas.github.io/normalize.css/) script. There is also a `src/styles/main.css` script that's required by the core `src/scripts/components/App.js` component using Webpack.
+Included in the project is the [normalize.css](http://necolas.github.io/normalize.css/) script. There is also a `src/styles/main.css` script that's required by the core `src/components/App.js` component using Webpack.
 
 ### JSHint
 
