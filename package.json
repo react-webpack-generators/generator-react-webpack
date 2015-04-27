@@ -32,7 +32,9 @@
   },
   "devDependencies": {
     "mocha": "^1.21.4",
-    "underscore.string": "^2.3.3"
+    "underscore.string": "^2.3.3",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13"
   },
   "peerDependencies": {
     "yo": ">=1.2.0"
