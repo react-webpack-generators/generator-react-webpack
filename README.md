@@ -54,7 +54,7 @@ Generates a [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) compon
 
 Example:
 ```bash
-yo react-webpack:component foo
+yo react-webpack:component foo  //or just: yo react-webpack:c foo
 ```
 
 Produces `src/components/Foo.js` (*javascript - JSX*):
@@ -103,13 +103,52 @@ And `src/styles/Foo.css` (or .sass, .less etc...) :
 }
 ```
 
+### rich flag
+
+For all you lazy programmers out there, we've added another shortcut - `rich` flag:
+```bash
+yo react-webpack:c foofoo --rich 
+```
+This will give you all of react component's most common stuff :
+ ````
+ var React = require('react/addons');
+ 
+ require('styles/Foofoo.sass');
+ 
+ var Foofoo = React.createClass({
+   mixins: [],
+   getInitialState: function() { return({}) },
+   getDefaultProps: function() {},
+   componentWillMount: function() {},
+   componentDidMount: function() {},
+   shouldComponentUpdate: function() {},
+   componentDidUpdate: function() {},
+   componentWillUnmount: function() {},
+ 
+   render: function () {
+     return (
+         <div>
+           <p>Content for Foofoo</p>
+         </div>
+       );
+   }
+ });
+ 
+ module.exports = Foofoo; 
+ ````
+
+Just remove those you don't need, then fill and space out the rest. 
+
+
+
+
 ### Action
 
 When using Flux or Reflux architecture, it generates an actionCreator in `src/actions` and it's corresponding test in `src/spec/actions`.
 
 Example:
 ```bash
-yo react-webpack:action bar
+yo react-webpack:action bar //or just: yo react-webpack:a bar
 ```
 Will create a file - `src/actions/BarActionCreators.js`
 
@@ -160,7 +199,7 @@ When using Flux or Reflux architecture, it generates a store in `src/stores` and
 
 Example:
 ```bash
-yo react-webpack:store baz
+yo react-webpack:store baz //or just: yo react-webpack:s baz
 ```
 Will create a file - `src/stores/BazStore.js`
 
@@ -237,6 +276,11 @@ Sets the style file's template and extension
 ### architecture
 
 [flux](https://facebook.github.io/flux/) or [reflux](https://github.com/spoike/refluxjs)
+
+### es6
+
+If you are using `es6`, and want to use its export functionality (and not webpack's), just add `--es6` flag when you create a component, action or srore.
+
 
 ## Testing
 

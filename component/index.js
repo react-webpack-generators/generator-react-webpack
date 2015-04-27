@@ -10,8 +10,10 @@ util.inherits(ComponentGenerator, ScriptBase);
 
 ComponentGenerator.prototype.createComponentFile = function createComponentFile() {
   this.option('es6');
+  this.option('rich');
 
   this.es6 = this.options.es6;
+  this.rich = this.options.rich;
 
   this.generateComponentTestAndStyle(
     'Component',

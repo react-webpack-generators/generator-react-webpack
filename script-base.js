@@ -82,7 +82,6 @@ Generator.prototype.testTemplate = function (src, dest) {
 };
 
 Generator.prototype.stylesTemplate = function (src, dest) {
-	console.log(src);
 	yeoman.generators.Base.prototype.template.apply(this, [
 		src + this.stylesSuffix,
 		path.join(this.options.stylesPath, dest) + this.stylesSuffix
