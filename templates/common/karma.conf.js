@@ -47,6 +47,12 @@ module.exports = function (config) {
         },<% } %> {
           test: /\.css$/,
           loader: 'style-loader!css-loader'
+        }, {
+          test: /\.woff/,
+          loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+        }, {
+          test: /\.woff2/,
+          loader: 'url-loader?limit=10000&mimetype=application/font-woff2'
         }]
       },
       resolve: {
