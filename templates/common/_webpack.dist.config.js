@@ -70,7 +70,7 @@ module.exports = {
       test: /\.styl/,
       loader: 'style-loader!stylus-loader!less-loader'
     },<% } %> {
-      test: /\.(png|jpg)$/,
+      test: /\.(png|jpg|woff|woff2)$/,
       loader: 'url-loader?limit=8192'
     }]
   }
