@@ -28,7 +28,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js'],
+    extensions: ['', '.js', '.jsx'],
     alias: {
       'styles': __dirname + '/src/styles',
       'mixins': __dirname + '/src/mixins',
@@ -39,12 +39,12 @@ module.exports = {
   },
   module: {
     preLoaders: [{
-      test: /\.js$/,
+      test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       loader: 'jsxhint'
     }],
     loaders: [{
-      test: /\.js$/,
+      test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       loader: 'react-hot!babel-loader'
     },<% if (stylesLanguage === 'sass') { %> {

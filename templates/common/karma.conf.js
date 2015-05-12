@@ -13,7 +13,8 @@ module.exports = function (config) {
       'test/spec/actions/**/*.js'<% } %>
     ],
     preprocessors: {
-      'test/spec/components/**/*.js': ['webpack']<% if(architecture === 'flux'||architecture === 'reflux') { %>,
+      'test/spec/components/**/*.js': ['webpack'],
+      'test/spec/components/**/*.jsx': ['webpack']<% if(architecture === 'flux'||architecture === 'reflux') { %>,
       'test/spec/stores/**/*.js': ['webpack'],
       'test/spec/actions/**/*.js': ['webpack']<% } %>
     },
@@ -30,7 +31,7 @@ module.exports = function (config) {
           test: /\.png/,
           loader: 'url-loader?limit=10000&mimetype=image/png'
         }, {
-          test: /\.js$/,
+          test: /\.(js|jsx)$/,
           loader: 'babel-loader'
         },<% if (stylesLanguage === 'sass') { %> {
           test: /\.sass/,
