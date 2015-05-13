@@ -96,7 +96,7 @@ describe('Foo', function () {
 });
 ```
 
-And `src/styles/Foo.css` (or .sass, .less etc...) : 
+And `src/styles/Foo.css` (or .sass, .less etc...) :
 ```
 .Foo{
   border: 1px dashed #f00;
@@ -107,14 +107,14 @@ And `src/styles/Foo.css` (or .sass, .less etc...) :
 
 For all you lazy programmers out there, we've added another shortcut - `rich` flag:
 ```bash
-yo react-webpack:c foofoo --rich 
+yo react-webpack:c foofoo --rich
 ```
 This will give you all of react component's most common stuff :
  ````
  var React = require('react/addons');
- 
+
  require('styles/Foofoo.sass');
- 
+
  var Foofoo = React.createClass({
    mixins: [],
    getInitialState: function() { return({}) },
@@ -124,7 +124,7 @@ This will give you all of react component's most common stuff :
    shouldComponentUpdate: function() {},
    componentDidUpdate: function() {},
    componentWillUnmount: function() {},
- 
+
    render: function () {
      return (
          <div>
@@ -133,11 +133,11 @@ This will give you all of react component's most common stuff :
        );
    }
  });
- 
- module.exports = Foofoo; 
+
+ module.exports = Foofoo;
  ````
 
-Just remove those you don't need, then fill and space out the rest. 
+Just remove those you don't need, then fill and space out the rest.
 
 
 
@@ -239,7 +239,7 @@ var BazStore = Reflux.createStore({
 
 });
 
-module.exports = BazStore; 
+module.exports = BazStore;
 ```
 
 and same test for both architectures:
@@ -273,6 +273,19 @@ css, sass, scss, less or stylus
 
 Sets the style file's template and extension
 
+### component suffix
+
+js or jsx
+
+Sets the file suffix for generated components. Defaults to "js". Please note that you need to require files *including* the file ending when using jsx as suffix. Example:
+
+```javascript
+var MyJSComponent = require('./MyJSComponent');
+var MyJSX = require('./MySQJ.jsx');
+```
+
+Generated files and tests are automatically created this way so they will include the correct type by default.
+
 ### architecture
 
 [flux](https://facebook.github.io/flux/) or [reflux](https://github.com/spoike/refluxjs)
@@ -299,16 +312,16 @@ project
       MainApp.js
       Foo.js
       AnotherComponent.js
-      
+
     //for flux/reflux
-    -actions 
+    -actions
       BarActionCreators.js
     -stores
       BazStore.js
     //for flux
     -dispatcher
       FooAppDispatcher
-        
+
     - styles
       main.css
     index.html
@@ -318,13 +331,13 @@ project
          MainApp.js
          Foo.js
          AnotherComponent.js
-      
+
       //for flux/reflux
-      -actions 
+      -actions
         BarActionCreators.js
       -stores
         BazStore.js
-          
+
     - helpers
       - react
         addons.js

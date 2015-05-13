@@ -114,7 +114,7 @@ ReactWebpackGenerator.prototype.askForComponentSuffix = function() {
   this.prompt({
     type: 'list',
     name: 'componentSuffix',
-    message: 'Which file suffix do you want to use for actions?',
+    message: 'Which file suffix do you want to use for components?',
     choices: [
       { name: '.js (default)', value: 'js' },
       { name: '.jsx (deprecated)', value: 'jsx' }
