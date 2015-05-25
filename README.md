@@ -279,7 +279,7 @@ Sets the style file's template and extension
 
 ### es6
 
-If you are using `es6`, and want to use its export functionality (and not webpack's), just add `--es6` flag when you create a component, action or srore.
+If you are using `es6`, and want to use its export functionality (and not webpack's), just add `--es6` flag when you create a component, action or store.
 
 
 ## Testing
