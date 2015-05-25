@@ -27,3 +27,9 @@ MainGenerator.prototype.createDispatcher = function createDispatcher() {
     this.appTemplate('Dispatcher', 'dispatcher/' + this.scriptAppName + 'Dispatcher');
   }
 };
+
+MainGenerator.prototype.createAltjsFile = function createAltjsFile() {
+  if(this.env.options.architecture=='alt') {
+    this.appTemplate('alt', 'alt');
+  }
+};

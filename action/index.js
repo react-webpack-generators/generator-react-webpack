@@ -24,6 +24,9 @@ ActionGenerator.prototype.createActionFile = function createActionFile() {
     case 'reflux':
           actionTemplate = 'RefluxAction';
           break;
+    case 'alt':
+          actionTemplate = 'AltAction';
+          break;
   }
 
   console.log('Creating ' + this.architecture + ' action');
