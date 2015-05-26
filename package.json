@@ -1,6 +1,6 @@
 {
   "name": "generator-react-webpack",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "Yeoman generator for ReactJS and Webpack",
   "keywords": [
     "yeoman-generator",
@@ -40,7 +40,8 @@
     "yo": ">=1.2.0"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=0.10.0",
+    "iojs": ">=1.1.0"
   },
   "licenses": [
     {

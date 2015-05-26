@@ -58,7 +58,7 @@ yo react-webpack:component foo  //or just: yo react-webpack:c foo
 ```
 
 Produces `src/components/Foo.js` (*javascript - JSX*):
-```
+```js
 'use strict';
 
 var React = require('react/addons');
@@ -79,7 +79,7 @@ module.exports = Foo;
 ```
 
 And `test/spec/components/Foo.js` (*javascript - jasmine*):
-```
+```js
 'use strict';
 
 describe('Foo', function () {
@@ -97,7 +97,7 @@ describe('Foo', function () {
 ```
 
 And `src/styles/Foo.css` (or .sass, .less etc...) :
-```
+```css
 .Foo{
   border: 1px dashed #f00;
 }
@@ -110,7 +110,7 @@ For all you lazy programmers out there, we've added another shortcut - `rich` fl
 yo react-webpack:c foofoo --rich
 ```
 This will give you all of react component's most common stuff :
- ````
+ ```js
  var React = require('react/addons');
 
  require('styles/Foofoo.sass');
@@ -135,7 +135,7 @@ This will give you all of react component's most common stuff :
  });
 
  module.exports = Foofoo;
- ````
+ ```
 
 Just remove those you don't need, then fill and space out the rest.
 
@@ -153,7 +153,7 @@ yo react-webpack:action bar //or just: yo react-webpack:a bar
 Will create a file - `src/actions/BarActionCreators.js`
 
 if 'architecture' is **Flux**, it Produces :
-```
+```js
 'use strict';
 
 var BarActionCreators = {
@@ -163,7 +163,7 @@ var BarActionCreators = {
 module.exports = BarActionCreators;
 ```
 And if it's **Reflux**:
-```
+```js
 'use strict';
 
 var Reflux = require('reflux');
@@ -177,7 +177,7 @@ module.exports = BarActionCreators;
 ```
 
 and same test for both architectures:
-```
+```js
 'use strict';
 
 describe('BarActionCreators', function() {
@@ -204,7 +204,7 @@ yo react-webpack:store baz //or just: yo react-webpack:s baz
 Will create a file - `src/stores/BazStore.js`
 
 if 'architecture' is **Flux**, it Produces :
-```
+```js
 'use strict';
 
 var EventEmitter = require('events').EventEmitter;
@@ -226,7 +226,7 @@ BazStore.dispatchToken = MainAppDispatcher.register(function(action) {
 module.exports = BazStore;
 ```
 And if it's **Reflux**:
-```
+```js
 'use strict';
 
 var Reflux = require('reflux');
@@ -243,7 +243,7 @@ module.exports = BazStore;
 ```
 
 and same test for both architectures:
-```
+```js
 'use strict';
 
 describe('BazStore', function() {
@@ -279,12 +279,10 @@ js or jsx
 
 Sets the file suffix for generated components. Defaults to "js". Please note that you need to require files *including* the file ending when using jsx as suffix. Example:
 
-```javascript
+```js
 var MyJSComponent = require('./MyJSComponent');
-var MyJSX = require('./MySQJ.jsx');
+var MyJSX = require('./MyJSX.jsx');
 ```
-
-Generated files and tests are automatically created this way so they will include the correct type by default.
 
 ### architecture
 
@@ -292,7 +290,7 @@ Generated files and tests are automatically created this way so they will includ
 
 ### es6
 
-If you are using `es6`, and want to use its export functionality (and not webpack's), just add `--es6` flag when you create a component, action or srore.
+If you are using `es6`, and want to use its export functionality (and not webpack's), just add `--es6` flag when you create a component, action or store.
 
 
 ## Testing

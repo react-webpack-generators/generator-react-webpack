@@ -26,6 +26,9 @@ StoreGenerator .prototype.createStoreFile  = function createStoreFile() {
     case 'reflux':
       storeTemplate = 'RefluxStore';
       break;
+    case 'alt':
+      storeTemplate = 'AltStore';
+      break;
   }
 
   console.log('Creating ' + this.architecture + ' store');

@@ -14,7 +14,8 @@
     "flux": "^2.0.1",
     "events": "^1.0.2",
     "object-assign": "^2.0.0", <% } if (architecture === 'reflux') {%>
-    "reflux": "^0.2.7", <% } %>
+    "reflux": "^0.2.7", <% } if (architecture === 'alt') { %>
+    "alt": "^0.16.5", <% } %>
     "react": "~0.12.2",
     "normalize.css": "~3.0.3"
   },

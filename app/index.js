@@ -72,11 +72,12 @@ ReactWebpackGenerator.prototype.askForArchitecture  = function() {
   this.prompt({
     type    : 'list',
     name    : 'architecture',
-    message : 'Would you like to use one of those architectures?',
+    message : 'Would you like to use one of these architectures?',
     choices: [
       {name:'No need for that, thanks',value:false},
       {name:'Flux',value:'flux'},
-      {name:'ReFlux',value:'reflux'}
+      {name:'ReFlux',value:'reflux'},
+      {name:'Alt',value:'alt'}
     ],
     default : false
   }, function(props) {
