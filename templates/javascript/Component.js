@@ -23,7 +23,7 @@ var <%= classedName %> = React.createClass({<% if(rich){%>
 
   render: function () {
     return (
-        <div>
+        <div className="<%= classedName %>">
           <p>Content for <%= classedName %></p>
         </div>
       );

@@ -108,6 +108,26 @@ ReactWebpackGenerator.prototype.askForStylesLanguage = function () {
   }.bind(this));
 };
 
+// Allow to set the generated files suffix for the project when using components
+// @see https://github.com/newtriks/generator-react-webpack/issues/99
+ReactWebpackGenerator.prototype.askForComponentSuffix = function() {
+  var done = this.async();
+  this.prompt({
+    type: 'list',
+    name: 'componentSuffix',
+    message: 'Which file suffix do you want to use for components?',
+    choices: [
+      { name: '.js (default)', value: 'js' },
+      { name: '.jsx (deprecated)', value: 'jsx' }
+    ],
+    default: 'js'
+  }, function (props) {
+    this.env.options.componentSuffix = props.componentSuffix;
+    this.config.set('component-suffix', props.componentSuffix);
+    done();
+  }.bind(this));
+};
+
 ReactWebpackGenerator.prototype.readIndex = function readIndex() {
   this.indexFile = this.engine(this.read('../../templates/common/index.html'), this);
 };
