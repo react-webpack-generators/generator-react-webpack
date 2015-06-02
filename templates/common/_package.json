@@ -10,13 +10,13 @@
   "mainInput": "<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>",
   "mainOutput": "main",
   "dependencies": {<% if (reactRouter) { %>
-    "react-router": "^0.11.6",<% } if (architecture === 'flux') { %>
+    "react-router": "0.13.x",<% } if (architecture === 'flux') { %>
     "flux": "^2.0.1",
     "events": "^1.0.2",
     "object-assign": "^2.0.0", <% } if (architecture === 'reflux') {%>
     "reflux": "^0.2.7", <% } if (architecture === 'alt') { %>
     "alt": "^0.16.5", <% } %>
-    "react": "~0.12.2",
+    "react": "0.13.x",
     "normalize.css": "~3.0.3"
   },
   "devDependencies": {
