@@ -30,6 +30,6 @@ var <%= classedName %> = React.createClass({<% if(rich){%>
   }
 });
 
-<% if (es6) { %>export default <%= classedName %>; <% }
-else { %>module.exports = <%= classedName %>; <% } %>
+<% if (es6) { %>export default <%= classedName %>;<% }
+else { %>module.exports = <%= classedName %>;<% } %>
 
