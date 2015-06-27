@@ -50,7 +50,7 @@ yo react-webpack
 
 ### Component
 
-Generates a [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) component in `src/scripts/components`, its corresponding test in `src/spec/components` and its style in `src/style`.
+Generates a [JSX](http://facebook.github.io/react/docs/jsx-in-depth.html) component in `src/components`, its corresponding test in `test/spec/components` and its style in `src/styles`.
 
 Example:
 ```bash
