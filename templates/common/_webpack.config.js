@@ -41,7 +41,7 @@ module.exports = {
     preLoaders: [{
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      loader: 'jsxhint'
+      loader: 'eslint-loader'
     }],
     loaders: [{
       test: /\.(js|jsx)$/,
@@ -69,8 +69,7 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ]
 
 };

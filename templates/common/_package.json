@@ -21,6 +21,9 @@
   },
   "devDependencies": {
     "grunt": "~0.4.5",
+    "eslint": "^0.21.2",
+    "eslint-loader": "^0.11.2",
+    "eslint-plugin-react": "^2.4.0",
     "load-grunt-tasks": "~0.6.0",
     "grunt-contrib-connect": "~0.8.0",
     "webpack": "~1.4.3",
@@ -38,8 +41,6 @@
     "karma-webpack": "~1.2.2",
     "webpack-dev-server": "~1.6.5",
     "grunt-open": "~0.2.3",
-    "jshint-loader": "~0.8.0",
-    "jsxhint-loader": "~0.2.0",
     "grunt-contrib-copy": "~0.5.0",
     "babel": "^4.0.0",
     "babel-loader": "^4.0.0",
