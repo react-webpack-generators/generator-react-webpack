@@ -186,14 +186,14 @@ and same test for both architectures:
 ```js
 'use strict';
 
-describe('BarActionCreators', function() {
-  var action;
+describe('BarActionCreators', () => {
+  let action;
 
   beforeEach(function() {
     action = require('actions/BarActionCreators.js');
   });
 
-  it('should be defined', function() {
+  it('should be defined', () => {
     expect(action).toBeDefined();
   });
 });
@@ -252,14 +252,14 @@ and same test for both architectures:
 ```js
 'use strict';
 
-describe('BazStore', function() {
-  var store;
+describe('BazStore', () => {
+  let store;
 
-  beforeEach(function() {
+  beforeEach(() => {
     store = require('stores/BazStore.js');
   });
 
-  it('should be defined', function() {
+  it('should be defined', () => {
     expect(store).toBeDefined();
   });
 });
