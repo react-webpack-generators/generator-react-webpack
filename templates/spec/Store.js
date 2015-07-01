@@ -1,13 +1,13 @@
 'use strict';
 
-describe('<%= classedName %>', function() {
-  var store;
+describe('<%= classedName %>', () => {
+  let store;
 
-  beforeEach(function() {
+  beforeEach(() => {
     store = require('stores/<%= classedFileName %>.js');
   });
 
-  it('should be defined', function() {
+  it('should be defined', () => {
     expect(store).toBeDefined();
   });
 });

@@ -7,12 +7,14 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'test/helpers/**/*.js',
+      'test/helpers/pack/**/*.js',
+      'test/helpers/react/**/*.js',
       'test/spec/components/**/*.js'<% if(architecture === 'flux'||architecture === 'reflux') { %>,
       'test/spec/stores/**/*.js',
       'test/spec/actions/**/*.js'<% } %>
     ],
     preprocessors: {
+      'test/helpers/createComponent.js': ['webpack'],
       'test/spec/components/**/*.js': ['webpack'],
       'test/spec/components/**/*.jsx': ['webpack']<% if(architecture === 'flux'||architecture === 'reflux') { %>,
       'test/spec/stores/**/*.js': ['webpack'],
@@ -32,7 +34,8 @@ module.exports = function (config) {
           loader: 'url-loader?limit=10000&mimetype=image/png'
         }, {
           test: /\.(js|jsx)$/,
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          exclude: /node_modules/
         },<% if (stylesLanguage === 'sass') { %> {
           test: /\.sass/,
           loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
@@ -61,11 +64,13 @@ module.exports = function (config) {
           'styles': path.join(process.cwd(), './src/styles/'),
           'components': path.join(process.cwd(), './src/components/')<% if(architecture === 'flux'||architecture === 'reflux') { %>,
           'stores': '../../../src/stores/',
-          'actions': '../../../src/actions/'<% } %>
+          'actions': '../../../src/actions/'<% } %>,
+          'helpers': path.join(process.cwd(), './test/helpers/')
         }
       }
     },
-    webpackServer: {
+    webpackMiddleware: {
+      noInfo: true,
       stats: {
         colors: true
       }
@@ -75,17 +80,14 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     colors: true,
     autoWatch: false,
-    // Start these browsers, currently available:
-    // - Chrome
-    // - ChromeCanary
-    // - Firefox
-    // - Opera
-    // - Safari (only Mac)
-    // - PhantomJS
-    // - IE (only Windows)
     browsers: ['PhantomJS'],
-    reporters: ['progress'],
+    reporters: ['dots'],
     captureTimeout: 60000,
-    singleRun: true
+    singleRun: true,
+    plugins: [
+        require('karma-webpack'),
+        require('karma-jasmine'),
+        require('karma-phantomjs-launcher')
+    ]
   });
 };

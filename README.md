@@ -78,27 +78,34 @@ var Foo = React.createClass({
 module.exports = Foo;
 ```
 
-And `test/spec/components/Foo.js` (*javascript - jasmine*):
+And `test/spec/components/Foo.js` (*javascript - jasmine, as seen on http://simonsmith.io/unit-testing-react-components-without-a-dom/*):
 ```js
 'use strict';
 
-describe('Foo', function () {
-  var Foo, component;
+// Uncomment the following lines to use the react test utilities
+// import React from 'react/addons';
+// const TestUtils = React.addons.TestUtils;
 
-  beforeEach(function () {
-    Foo = require('../../../src/components/Foo');
-    component = Foo();
-  });
+import createComponent from 'helpers/createComponent';
+import Foo from 'components/Foo.js';
 
-  it('should create a new instance of Foo', function () {
-    expect(component).toBeDefined();
-  });
+describe('Foo', () => {
+
+    let FooComponent;
+
+    beforeEach(() => {
+        FooComponent = createComponent(Foo);
+    });
+
+    it('should have its component name as default className', () => {
+        expect(FooComponent._store.props.className).toBe('Foo');
+    });
 });
 ```
 
 And `src/styles/Foo.css` (or .sass, .less etc...) :
 ```css
-.Foo{
+.Foo {
   border: 1px dashed #f00;
 }
 ```
@@ -117,7 +124,9 @@ This will give you all of react component's most common stuff :
 
  var Foofoo = React.createClass({
    mixins: [],
-   getInitialState: function() { return({}) },
+   getInitialState: function() {
+     return {};
+   },
    getDefaultProps: function() {},
    componentWillMount: function() {},
    componentDidMount: function() {},
@@ -138,9 +147,6 @@ This will give you all of react component's most common stuff :
  ```
 
 Just remove those you don't need, then fill and space out the rest.
-
-
-
 
 ### Action
 
@@ -364,15 +370,19 @@ Out the box the [Gruntfile](http://gruntjs.com/api/grunt.file) is configured wit
 1. **webpack**: uses the [grunt-webpack](https://github.com/webpack/grunt-webpack) plugin to load all required modules and output to a single JS file `src/main.js`. This is included in the `src/index.html` file by default and will reload in the browser as and when it is recompiled.
 2. **webpack-dev-server**: uses the [webpack-dev-server](https://github.com/webpack/webpack-dev-server) to watch for file changes and also serve the webpack app in development.
 3. **connect**: uses the [grunt-connect](https://github.com/gruntjs/grunt-contrib-connect) plugin to start a webserver at [localhost](http://localhost:8000).
-4. **karma**: uses the [grunt-karma](https://github.com/karma-runner/grunt-karma) plugin to load the Karma configuration file `karma.conf.js` located in the project root. This will run all tests using [PhantomJS](http://phantomjs.org/) by default but supports many other browsers.
+4. **karma**: uses the [grunt-karma](https://github.com/karma-runner/grunt-karma) plugin to load the Karma configuration file `karma.conf.js` located in the project root. This will run all tests using [PhantomJS](http://phantomjs.org/) by default but supports many other browsers. Please note that karma-launchers other than PhantomJS must be installed separately and configured in `karma.conf.js`.
 
 ### CSS
 
 Included in the project is the [normalize.css](http://necolas.github.io/normalize.css/) script. There is also a `src/styles/main.css` script that's required by the core `src/components/App.js` component using Webpack.
 
-### JSHint
+### Linting
 
-Please use [JSXHint](https://github.com/STRML/JSXHint) for linting JSX and the corresponding Sublime package if using SLT3 [SublimeLinter-jsxhint](https://github.com/SublimeLinter/SublimeLinter-jsxhint). Note this is a global npm install and JSX files will need to be associated with the JSX file type withing SLT3.
+Webpack is automatically configured to run esLint (http://eslint.org) on every file change or build. The configuration can be found in `PROJECTROOT/.eslintrc`. There are plugins for different editors that use this tool directly:
+- linter-eslint for Atom
+- Sublime-Linter-eslint for Sublime
+
+You could also use jsxhint, the corresponding rules file is located in `PROJECTROOT/.jshintrc`. However, the support for jsxhint is planned to be dropped in a later release and only available for backwards compatibility.
 
 ## Props
 

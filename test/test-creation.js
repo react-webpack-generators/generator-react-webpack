@@ -85,7 +85,8 @@ describe('react-webpack generator', function() {
         // files not present at point of test...
         setTimeout(function() {
           helpers.assertFile([].concat(expected, [
-            'test/helpers/phantomjs-shims.js',
+            'test/helpers/pack/phantomjs-shims.js',
+            'test/helpers/createComponent.js',
             'test/helpers/react/addons.js',
             'test/spec/components/TempTestApp.js'
           ]));
@@ -235,7 +236,6 @@ describe('react-webpack generator', function() {
 
   describe('When generating a Component', function() {
     var generatorTest = function(name, generatorType, specType, targetDirectory, scriptNameFn, specNameFn, suffix, done) {
-
       var deps = [path.join('../..', generatorType)];
       genOptions.appPath = 'src';
 
@@ -244,13 +244,11 @@ describe('react-webpack generator', function() {
       react.run([], function() {
         reactGenerator.run([], function() {
           helpers.assertFileContent([
-
             [path.join('src', targetDirectory, name + '.js'), new RegExp('var ' + scriptNameFn(name) + suffix, 'g')],
             [path.join('src', targetDirectory, name + '.js'), new RegExp('require\\(\'styles\\/' + name + suffix + '\\.[^\']+' + '\'\\)', 'g')],
             [path.join('test/spec', targetDirectory, 'TempTestApp' + '.js'), new RegExp('require\\(\'components\\/' + 'TempTestApp' + suffix + '\\.[^\']+' + '\'\\)', 'g')],
-            [path.join('test/spec', targetDirectory, name + '.js'), new RegExp('require\\(\'components\\/' + name + suffix + '\\.[^\']+' + '\'\\)', 'g')],
+            [path.join('test/spec', targetDirectory, name + '.js'), new RegExp('import ' + scriptNameFn(name) + ' from \'components\/Foo', 'g')],
             [path.join('test/spec', targetDirectory, name + '.js'), new RegExp('describe\\(\'' + specNameFn(name) + suffix + '\'', 'g')]
-
           ]);
           done();
         });

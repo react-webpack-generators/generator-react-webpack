@@ -1,11 +1,11 @@
 'use strict';
 
-describe('<%= classedName %>', function () {
-  var React = require('react/addons');
-  var <%= scriptAppName %>, component;
+describe('<%= classedName %>', () => {
+  let React = require('react/addons');
+  let <%= scriptAppName %>, component;
 
-  beforeEach(function () {
-    var container = document.createElement('div');
+  beforeEach(() => {
+    let container = document.createElement('div');
     container.id = 'content';
     document.body.appendChild(container);
 
@@ -13,7 +13,7 @@ describe('<%= classedName %>', function () {
     component = React.createElement(<%= scriptAppName %>);
   });
 
-  it('should create a new instance of <%= scriptAppName %>', function () {
+  it('should create a new instance of <%= scriptAppName %>', () => {
     expect(component).toBeDefined();
   });
 });

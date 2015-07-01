@@ -1,15 +1,20 @@
 'use strict';
 
-describe('<%= classedName %>', function () {
-  var React = require('react/addons');
-  var <%= classedName %>, component;
+// Uncomment the following lines to use the react test utilities
+// import React from 'react/addons';
+// const TestUtils = React.addons.TestUtils;
 
-  beforeEach(function () {
-    <%= classedName %> = require('components/<%= classedFileName %><%= reactComponentSuffix %>');
-    component = React.createElement(<%= classedName %>);
-  });
+import createComponent from 'helpers/createComponent';
+import <%= classedName %> from 'components/<%= classedFileName %><%= reactComponentSuffix %>';
 
-  it('should create a new instance of <%= classedName %>', function () {
-    expect(component).toBeDefined();
-  });
+describe('<%= classedName %>', () => {
+    let <%= classedName %>Component;
+
+    beforeEach(() => {
+        <%= classedName %>Component = createComponent(<%= classedName %>);
+    });
+
+    it('should have its component name as default className', () => {
+        expect(<%= classedName %>Component._store.props.className).toBe('<%= classedName %>');
+    });
 });
