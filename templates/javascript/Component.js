@@ -13,7 +13,9 @@ if (stylesLanguage === 'stylus') { %>require('styles/<%= classedFileName %>.styl
 
 var <%= classedName %> = React.createClass({<% if(rich){%>
   mixins: [<% if(architecture === 'reflux'){%>Reflux.ListenerMixin<%}%>],
-  getInitialState: function() { return({}) },
+  getInitialState: function() {
+    return {};
+  },
   getDefaultProps: function() {},
   componentWillMount: function() {},
   componentDidMount: function() {},
@@ -32,4 +34,3 @@ var <%= classedName %> = React.createClass({<% if(rich){%>
 
 <% if (es6) { %>export default <%= classedName %>;<% }
 else { %>module.exports = <%= classedName %>;<% } %>
-

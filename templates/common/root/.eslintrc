@@ -3,7 +3,8 @@
     "react"
   ],
   "ecmaFeatures": {
-    "jsx": true
+    "jsx": true,
+    "modules": true
   },
   "env": {
     "browser": true,
@@ -14,6 +15,7 @@
     "quotes": [ 1, "single" ],
     "no-undef": false,
     "global-strict": false,
-    "no-extra-semi": 1
+    "no-extra-semi": 1,
+    "no-underscore-dangle": false
   }
 }

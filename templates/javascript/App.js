@@ -12,7 +12,7 @@ var imageURL = require('../images/yeoman.png');
 var <%= scriptAppName %> = React.createClass({
   render: function() {
     return (
-      <div className='main'>
+      <div className="main">
         <ReactTransitionGroup transitionName="fade">
           <img src={imageURL} />
         </ReactTransitionGroup>

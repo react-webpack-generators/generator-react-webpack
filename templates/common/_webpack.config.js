@@ -16,7 +16,7 @@ module.exports = {
 
   cache: true,
   debug: true,
-  devtool: false,
+  devtool: 'sourcemap',
   entry: [
       'webpack/hot/only-dev-server',
       './src/components/<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>.js'

@@ -1,14 +1,14 @@
 'use strict';
 
-describe('main', function () {
-  var main, component;
+describe('main', () => {
+  let main, component;
 
-  beforeEach(function () {
+  beforeEach(() => {
     main = require('components/main.jsx');
     component = main();
   });
 
-  it('should create a new instance of main', function () {
+  it('should create a new instance of main', () => {
     expect(component).toBeDefined();
   });
 });
