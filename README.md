@@ -20,7 +20,7 @@ Run `yo react-webpack`, optionally passing an app name:
 yo react-webpack [app-name]
 ```
 
-Run `grunt build` for building and `grunt serve` for preview in the browser at [localhost](http://localhost:8000).
+Run `grunt build` for building and `grunt` for preview in the browser at [localhost](http://localhost:8000).
 
 ## Generators
 
@@ -346,7 +346,7 @@ project
       - react
         addons.js
       phantomjs-shims.js
-  Gruntfile.js
+  Gruntfile.coffee
   karma.conf.js
   package.json
   webpack.config.js
