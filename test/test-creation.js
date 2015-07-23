@@ -50,7 +50,7 @@ describe('react-webpack generator', function() {
           '.yo-rc.json',
           '.editorconfig',
           '.gitignore',
-          '.jshintrc'
+          '.eslintrc'
         ]));
         done();
       });
@@ -186,54 +186,6 @@ describe('react-webpack generator', function() {
 
   });
 
-  describe('When using Flux', function() {
-
-    beforeEach(function(done) {
-      helpers.mockPrompt(react, {
-        architecture: 'flux'
-      });
-
-      react.run({}, function() {
-        done();
-      })
-    });
-
-    it('should add flux, events, and object-assign packages', function(done) {
-      assert.fileContent([
-        ['package.json', /flux/],
-        ['package.json', /events/],
-        ['package.json', /object-assign/]
-      ]);
-
-      done();
-    });
-
-    it('should add stores and actions alias to karma config', function(done) {
-      assert.fileContent([
-        ['karma.conf.js', /resolve[\S\s]+alias[\S\s]+stores/m]
-      ]);
-
-      done();
-    });
-
-    it('should add stores and actions alias to webpack configs', function(done) {
-      assert.fileContent([
-        ['webpack.config.js', /resolve[\S\s]+alias[\S\s]+stores/m],
-        ['webpack.dist.config.js', /resolve[\S\s]+alias[\S\s]+stores/m]
-      ]);
-
-      done();
-    });
-
-    it('should have a Dispatcher generated', function(done) {
-      setTimeout(function(){
-        assert.file('src/dispatcher/TempTestAppDispatcher.js');
-
-        done();
-      });
-    })
-  });
-
   describe('When generating a Component', function() {
     var generatorTest = function(name, generatorType, specType, targetDirectory, scriptNameFn, specNameFn, suffix, done) {
       var deps = [path.join('../..', generatorType)];
@@ -268,75 +220,5 @@ describe('react-webpack generator', function() {
       });
     });
 
-  });
-
-  describe('When generating an Action', function() {
-
-    beforeEach(function(done){
-      helpers.mockPrompt(react, {
-        architecture: 'flux'
-      });
-
-      react.run({}, function() {
-        var generator =
-          helpers.createGenerator(
-            'react-webpack:action',
-            [path.join('../../action')],
-            ['Test'],
-            { appPath: 'src' }
-          );
-
-        react.run([], function() {
-          generator.run([], function() {
-            done();
-          })
-        });
-      });
-    });
-
-    it('should generate a new action with tests', function(done) {
-      assert.fileContent([
-        ['src/actions/TestActionCreators.js', /var TestActionCreators/g],
-        ['test/spec/actions/TestActionCreators.js', /require\('actions\/TestActionCreators.js'\)/g],
-        ['test/spec/actions/TestActionCreators.js', /describe\('TestActionCreators'/g]
-      ]);
-
-      done();
-    });
-  });
-
-  describe('When generating a Store', function() {
-
-    beforeEach(function(done) {
-      helpers.mockPrompt(react, {
-        architecture: 'flux'
-      });
-
-      react.run({}, function() {
-        var generator =
-          helpers.createGenerator(
-            'react-webpack:store',
-            [path.join('../../store')],
-            ['Test'],
-            { appPath: 'src' }
-          );
-
-        react.run([], function() {
-          generator.run([], function() {
-            done();
-          });
-        });
-      });
-    });
-
-    it('should generate a new store with tests', function(done) {
-      assert.fileContent([
-        ['src/stores/TestStore.js', /var TestStore/g],
-        ['test/spec/stores/TestStore.js', /require\('stores\/TestStore.js'\)/g],
-        ['test/spec/stores/TestStore.js', /describe\('TestStore'/g]
-      ]);
-
-      done();
-    });
   });
 });

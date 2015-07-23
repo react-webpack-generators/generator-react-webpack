@@ -67,26 +67,6 @@ ReactWebpackGenerator.prototype.askForReactRouter = function () {
   }.bind(this));
 };
 
-ReactWebpackGenerator.prototype.askForArchitecture  = function() {
-  var done = this.async();
-  this.prompt({
-    type    : 'list',
-    name    : 'architecture',
-    message : 'Would you like to use one of these architectures?',
-    choices: [
-      {name:'No need for that, thanks',value:false},
-      {name:'Flux',value:'flux'},
-      {name:'ReFlux',value:'reflux'},
-      {name:'Alt',value:'alt'}
-    ],
-    default : false
-  }, function(props) {
-    this.env.options.architecture = props.architecture;
-    this.config.set('architecture', props.architecture);
-    done();
-  }.bind(this));
-};
-
 ReactWebpackGenerator.prototype.askForStylesLanguage = function () {
   var done = this.async();
   this.prompt({
@@ -140,7 +120,6 @@ ReactWebpackGenerator.prototype.createIndexHtml = function createIndexHtml() {
 ReactWebpackGenerator.prototype.packageFiles = function () {
   this.es6 = this.options.es6;
   this.reactRouter = this.env.options.reactRouter;
-  this.architecture = this.env.options.architecture;
   this.stylesLanguage = this.env.options.stylesLanguage;
   this.template('../../templates/common/_package.json', 'package.json');
   this.template('../../templates/common/_webpack.config.js', 'webpack.config.js');

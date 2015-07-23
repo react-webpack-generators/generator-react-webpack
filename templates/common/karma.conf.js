@@ -9,16 +9,12 @@ module.exports = function (config) {
     files: [
       'test/helpers/pack/**/*.js',
       'test/helpers/react/**/*.js',
-      'test/spec/components/**/*.js'<% if(architecture === 'flux'||architecture === 'reflux') { %>,
-      'test/spec/stores/**/*.js',
-      'test/spec/actions/**/*.js'<% } %>
+      'test/spec/components/**/*.js'
     ],
     preprocessors: {
       'test/helpers/createComponent.js': ['webpack'],
       'test/spec/components/**/*.js': ['webpack'],
-      'test/spec/components/**/*.jsx': ['webpack']<% if(architecture === 'flux'||architecture === 'reflux') { %>,
-      'test/spec/stores/**/*.js': ['webpack'],
-      'test/spec/actions/**/*.js': ['webpack']<% } %>
+      'test/spec/components/**/*.jsx': ['webpack']
     },
     webpack: {
       cache: true,
@@ -62,9 +58,7 @@ module.exports = function (config) {
       resolve: {
         alias: {
           'styles': path.join(process.cwd(), './src/styles/'),
-          'components': path.join(process.cwd(), './src/components/')<% if(architecture === 'flux'||architecture === 'reflux') { %>,
-          'stores': '../../../src/stores/',
-          'actions': '../../../src/actions/'<% } %>,
+          'components': path.join(process.cwd(), './src/components/'),
           'helpers': path.join(process.cwd(), './test/helpers/')
         }
       }

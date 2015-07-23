@@ -1,18 +1,14 @@
 'use strict';
 
-var React = require('react/addons');<% if(rich && architecture === 'reflux'){%>
-var Reflux = require('Reflux'); <%}%>
-<% if(rich && architecture === 'flux' || architecture === 'reflux'){%>
-//var Actions = require('actions/xxx')<%}%>
-
-<% if (stylesLanguage === 'css') { %>require('styles/<%= classedFileName %>.css');<% } %><%
-if (stylesLanguage === 'sass')   { %>require('styles/<%= classedFileName %>.sass');<% } %><%
-if (stylesLanguage === 'scss')   { %>require('styles/<%= classedFileName %>.scss');<% } %><%
-if (stylesLanguage === 'less')   { %>require('styles/<%= classedFileName %>.less');<% } %><%
-if (stylesLanguage === 'stylus') { %>require('styles/<%= classedFileName %>.styl');<% } %>
+var React = require('react/addons');
+<% if (stylesLanguage === 'css')    { %>require('styles/<%= classedFileName %>.css'); <% } %>
+<% if (stylesLanguage === 'sass')   { %>require('styles/<%= classedFileName %>.sass');<% } %>
+<% if (stylesLanguage === 'scss')   { %>require('styles/<%= classedFileName %>.scss');<% } %>
+<% if (stylesLanguage === 'less')   { %>require('styles/<%= classedFileName %>.less');<% } %>
+<% if (stylesLanguage === 'stylus') { %>require('styles/<%= classedFileName %>.styl');<% } %>
 
 var <%= classedName %> = React.createClass({<% if(rich){%>
-  mixins: [<% if(architecture === 'reflux'){%>Reflux.ListenerMixin<%}%>],
+  mixins: [],
   getInitialState: function() {
     return {};
   },

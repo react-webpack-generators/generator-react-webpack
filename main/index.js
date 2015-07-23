@@ -21,15 +21,3 @@ MainGenerator.prototype.createMainFile = function createMainFile() {
     this.appTemplate('main', 'components/main');
   }
 };
-
-MainGenerator.prototype.createDispatcher = function createDispatcher() {
-  if(this.env.options.architecture=='flux') {
-    this.appTemplate('Dispatcher', 'dispatcher/' + this.scriptAppName + 'Dispatcher');
-  }
-};
-
-MainGenerator.prototype.createAltjsFile = function createAltjsFile() {
-  if(this.env.options.architecture=='alt') {
-    this.appTemplate('alt', 'alt');
-  }
-};

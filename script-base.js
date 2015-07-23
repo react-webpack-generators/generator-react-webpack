@@ -20,7 +20,6 @@ var Generator = module.exports = function Generator() {
   this.classedFileName = this._.capitalizeFile(this.name);
   this.classedName = this._.capitalizeClass(this.name);
   this.stylesLanguage = this.config.get('styles-language');
-  this.architecture = this.config.get('architecture');
 
   if (typeof this.options.appPath === 'undefined') {
     this.options.appPath = this.options.appPath || 'src';

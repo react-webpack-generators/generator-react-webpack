@@ -1,7 +1,20 @@
-# generator-react-webpack [![Build Status](https://secure.travis-ci.org/newtriks/generator-react-webpack.png?branch=master)](https://travis-ci.org/newtriks/generator-react-webpack)  [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+# generator-react-webpack [![Build Status](https://secure.travis-ci.org/newtriks/generator-react-webpack.png?branch=master)](https://travis-ci.org/newtriks/generator-react-webpack)  [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/newtriks/generator-react-webpack/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
 
 > Yeoman generator for [ReactJS](http://facebook.github.io/react/) - lets you quickly set up a project including karma test runner and [Webpack](http://webpack.github.io/) module system.
 
+## Warning! About this branch, the current state and refactoring
+The generator itself is currently in a phase of refactoring. The following steps are currently planned and will get developed against the *v1 branch*.
+
+The current release will stay unaltered by the current refactoring.
+If you want to help out, please see https://github.com/newtriks/generator-react-webpack/issues/130 and https://github.com/newtriks/generator-react-webpack/issues/129.
+
+- [x] Strip back the generator to the original bare bones of functionality.
+- [ ] Update all packages both in templates and generator.
+- [ ] Fix existing issues related to core generated project.
+- [ ] Optimise for ES2015, etc.
+- [ ] Create a new release and merge back into master.
+- [ ] Focus on composing with other generators.
 
 ## Usage
 
@@ -28,11 +41,6 @@ Available generators:
 
 * [react-webpack](#app) (aka [react-webpack:app](#app))
 * [react-webpack:component](#component)
-
-and for **Flux** or **Reflux** :
-* [react-webpack:action](#action)
-* [react-webpack:store](#store)
-
 
 ### App
 
@@ -148,124 +156,6 @@ This will give you all of react component's most common stuff :
 
 Just remove those you don't need, then fill and space out the rest.
 
-### Action
-
-When using Flux or Reflux architecture, it generates an actionCreator in `src/actions` and it's corresponding test in `src/spec/actions`.
-
-Example:
-```bash
-yo react-webpack:action bar //or just: yo react-webpack:a bar
-```
-Will create a file - `src/actions/BarActionCreators.js`
-
-if 'architecture' is **Flux**, it Produces :
-```js
-'use strict';
-
-var BarActionCreators = {
-
-}
-
-module.exports = BarActionCreators;
-```
-And if it's **Reflux**:
-```js
-'use strict';
-
-var Reflux = require('reflux');
-
-var BarActionCreators  =  Reflux.createActions([
-
-]);
-
-
-module.exports = BarActionCreators;
-```
-
-and same test for both architectures:
-```js
-'use strict';
-
-describe('BarActionCreators', () => {
-  let action;
-
-  beforeEach(function() {
-    action = require('actions/BarActionCreators.js');
-  });
-
-  it('should be defined', () => {
-    expect(action).toBeDefined();
-  });
-});
-```
-
-### Store
-
-When using Flux or Reflux architecture, it generates a store in `src/stores` and it's corresponding test in `src/spec/stores`.
-
-Example:
-```bash
-yo react-webpack:store baz //or just: yo react-webpack:s baz
-```
-Will create a file - `src/stores/BazStore.js`
-
-if 'architecture' is **Flux**, it Produces :
-```js
-'use strict';
-
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
-var MainAppDispatcher = require('../dispatcher/MainAppDispatcher');
-
-var BazStore = assign({}, EventEmitter.prototype, {
-
-});
-
-BazStore.dispatchToken = MainAppDispatcher.register(function(action) {
-
-  switch(action.type) {
-    default:
-  }
-
-});
-
-module.exports = BazStore;
-```
-And if it's **Reflux**:
-```js
-'use strict';
-
-var Reflux = require('reflux');
-//var Actions = require('actions/..');
-
-
-var BazStore = Reflux.createStore({
-  listenables: Actions,
-
-
-});
-
-module.exports = BazStore;
-```
-
-and same test for both architectures:
-```js
-'use strict';
-
-describe('BazStore', () => {
-  let store;
-
-  beforeEach(() => {
-    store = require('stores/BazStore.js');
-  });
-
-  it('should be defined', () => {
-    expect(store).toBeDefined();
-  });
-});
-```
-
-
 ## Options
 Options are available as additional installs to the initial application generation phase.
 
@@ -290,10 +180,6 @@ var MyJSComponent = require('./MyJSComponent');
 var MyJSX = require('./MyJSX.jsx');
 ```
 
-### architecture
-
-[flux](https://facebook.github.io/flux/) or [reflux](https://github.com/spoike/refluxjs)
-
 ### es6
 
 If you are using `es6`, and want to use its export functionality (and not webpack's), just add `--es6` flag when you create a component, action or store.
@@ -316,16 +202,6 @@ project
       MainApp.js
       Foo.js
       AnotherComponent.js
-
-    //for flux/reflux
-    -actions
-      BarActionCreators.js
-    -stores
-      BazStore.js
-    //for flux
-    -dispatcher
-      FooAppDispatcher
-
     - styles
       main.css
     index.html
@@ -335,13 +211,6 @@ project
          MainApp.js
          Foo.js
          AnotherComponent.js
-
-      //for flux/reflux
-      -actions
-        BarActionCreators.js
-      -stores
-        BazStore.js
-
     - helpers
       - react
         addons.js
@@ -382,8 +251,6 @@ Webpack is automatically configured to run esLint (http://eslint.org) on every f
 - linter-eslint for Atom
 - Sublime-Linter-eslint for Sublime
 
-You could also use jsxhint, the corresponding rules file is located in `PROJECTROOT/.jshintrc`. However, the support for jsxhint is planned to be dropped in a later release and only available for backwards compatibility.
-
 ## Props
 
 Thanks to all who contributed to [generator-angular](https://github.com/yeoman/generator-angular) as the majority of code here has been shamelessy sourced from that repos.
@@ -401,5 +268,3 @@ Contributions are welcomed. When submitting a bugfix, write a test that exposes 
 ## License
 
 [BSD license](http://opensource.org/licenses/bsd-license.php)
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/newtriks/generator-react-webpack/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
