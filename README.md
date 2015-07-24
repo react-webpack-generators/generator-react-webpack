@@ -10,7 +10,7 @@ The current release will stay unaltered by the current refactoring.
 If you want to help out, please see https://github.com/newtriks/generator-react-webpack/issues/130 and https://github.com/newtriks/generator-react-webpack/issues/129.
 
 - [x] Strip back the generator to the original bare bones of functionality.
-- [ ] Update all packages both in templates and generator.
+- [x] Update all packages both in templates and generator.
 - [ ] Fix existing issues related to core generated project.
 - [ ] Optimise for ES2015, etc.
 - [ ] Create a new release and merge back into master.
