@@ -3,22 +3,24 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var generalUtils = require('./util.js');
+var dash = require('lodash');
+var _ = require('underscore.string');
 
 var Generator = module.exports = function Generator() {
   yeoman.generators.NamedBase.apply(this, arguments);
 
   // Add capitalize mixin
-  this._.mixin({ 'capitalize': generalUtils.capitalize });
-  this._.mixin({ 'capitalizeFile': generalUtils.capitalizeFile });
-  this._.mixin({ 'capitalizeClass': generalUtils.capitalizeClass });
-  this._.mixin({ 'lowercase': generalUtils.lowercase });
+  dash.mixin(_, { 'capitalize': generalUtils.capitalize });
+  dash.mixin(_, { 'capitalizeFile': generalUtils.capitalizeFile });
+  dash.mixin(_, { 'capitalizeClass': generalUtils.capitalizeClass });
+  dash.mixin(_, { 'lowercase': generalUtils.lowercase });
 
   this.appname = path.basename(process.cwd());
 
-  this.appname = this._.slugify(this._.humanize(this.appname));
-  this.scriptAppName = this._.camelize(this._.capitalize(this.appname)) + generalUtils.appName(this);
-  this.classedFileName = this._.capitalizeFile(this.name);
-  this.classedName = this._.capitalizeClass(this.name);
+  this.appname = _.slugify(_.humanize(this.appname));
+  this.scriptAppName = _.camelize(_.capitalize(this.appname)) + generalUtils.appName(this);
+  this.classedFileName = _.capitalizeFile(this.name);
+  this.classedName = _.capitalizeClass(this.name);
   this.stylesLanguage = this.config.get('styles-language');
 
   if (typeof this.options.appPath === 'undefined') {
@@ -106,12 +108,12 @@ Generator.prototype.htmlTemplate = function (src, dest) {
 };
 
 Generator.prototype.generateSourceAndTest = function (appTemplate, testTemplate, targetDirectory) {
-  this.appTemplate(appTemplate, path.join(targetDirectory, this._.capitalizeFile(this.name)));
-  this.testTemplate(testTemplate, path.join(targetDirectory, this._.capitalizeFile(this.name)));
+  this.appTemplate(appTemplate, path.join(targetDirectory, _.capitalizeFile(this.name)));
+  this.testTemplate(testTemplate, path.join(targetDirectory, _.capitalizeFile(this.name)));
 };
 
 Generator.prototype.generateComponentTestAndStyle = function (componentTemplate, testTemplate, stylesTemplate, targetDirectory) {
-  this.reactComponentTemplate(componentTemplate, path.join(targetDirectory, this._.capitalizeFile(this.name)));
-  this.testTemplate(testTemplate, path.join(targetDirectory, this._.capitalizeFile(this.name)));
-  this.stylesTemplate(stylesTemplate, path.join(this._.capitalizeFile(this.name)));
+  this.reactComponentTemplate(componentTemplate, path.join(targetDirectory, _.capitalizeFile(this.name)));
+  this.testTemplate(testTemplate, path.join(targetDirectory, _.capitalizeFile(this.name)));
+  this.stylesTemplate(stylesTemplate, path.join(_.capitalizeFile(this.name)));
 };

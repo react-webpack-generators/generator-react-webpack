@@ -1,7 +1,7 @@
 'use strict';
 var path = require('path');
 var fs = require('fs');
-
+var _ = require('underscore.string');
 
 module.exports = {
   rewrite: rewrite,
@@ -90,6 +90,5 @@ function appName(self) {
   if (counter === 0 || (typeof suffix === 'boolean' && suffix)) {
     suffix = 'App';
   }
-  return suffix ? self._.classify(suffix) : '';
+  return suffix ? _.classify(suffix) : '';
 }
-

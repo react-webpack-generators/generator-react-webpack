@@ -3,6 +3,9 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var generalUtils = require('../util.js');
+var wiring = require('html-wiring');
+var _ = require('underscore.string');
+var ejs = require('ejs');
 
 var ReactWebpackGenerator = module.exports = function ReactWebpackGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
@@ -10,11 +13,10 @@ var ReactWebpackGenerator = module.exports = function ReactWebpackGenerator(args
 
   this.argument('appname', { type: String, required: false });
   this.appname = this.appname || path.basename(process.cwd());
-  this.appname = this._.camelize(this._.slugify(this._.humanize(this.appname)));
-  this.scriptAppName = this._.capitalize(this.appname) + generalUtils.appName(this);
+  this.appname = _.camelize(_.slugify(_.humanize(this.appname)));
+  this.scriptAppName = _.capitalize(this.appname) + generalUtils.appName(this);
 
   this.config.set('app-name', this.appname);
-
 
   if (typeof this.options.appPath === 'undefined') {
     this.options.appPath = this.options.appPath || 'src';
@@ -32,12 +34,7 @@ var ReactWebpackGenerator = module.exports = function ReactWebpackGenerator(args
     args: args
   });
 
-  this.on('end', function () {
-    this.installDependencies({ skipInstall: options['skip-install'], bower: false });
-  });
-
-
-  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+  this.pkg = JSON.parse(wiring.readFileAsString(path.join(__dirname, '../package.json')));
 
   this.config.save();
 };
@@ -45,12 +42,9 @@ var ReactWebpackGenerator = module.exports = function ReactWebpackGenerator(args
 util.inherits(ReactWebpackGenerator, yeoman.generators.Base);
 
 ReactWebpackGenerator.prototype.welcome = function welcome() {
-  // welcome message
   if (!this.options['skip-welcome-message']) {
-    console.log(this.yeoman);
-    console.log(
-      'Out of the box I include Webpack and some default React components.\n'
-    );
+    this.log(require('yeoman-welcome'));
+    this.log('Out of the box I include Webpack and some default React components.\n');
   }
 };
 
@@ -109,7 +103,9 @@ ReactWebpackGenerator.prototype.askForComponentSuffix = function() {
 };
 
 ReactWebpackGenerator.prototype.readIndex = function readIndex() {
-  this.indexFile = this.engine(this.read('../../templates/common/index.html'), this);
+  this.indexFile = ejs.render(
+    this.read('../../templates/common/index.html')
+  );
 };
 
 ReactWebpackGenerator.prototype.createIndexHtml = function createIndexHtml() {
@@ -121,11 +117,12 @@ ReactWebpackGenerator.prototype.packageFiles = function () {
   this.es6 = this.options.es6;
   this.reactRouter = this.env.options.reactRouter;
   this.stylesLanguage = this.env.options.stylesLanguage;
-  this.template('../../templates/common/_package.json', 'package.json');
-  this.template('../../templates/common/_webpack.config.js', 'webpack.config.js');
-  this.template('../../templates/common/_webpack.dist.config.js', 'webpack.dist.config.js');
-  this.copy('../../templates/common/Gruntfile.js', 'Gruntfile.js');
-  this.copy('../../templates/common/gitignore', '.gitignore');
+
+  this.template('../../templates/common/_package.json', 'package.json', { data: this, _: _ });
+  this.template('../../templates/common/_webpack.config.js', 'webpack.config.js', { data: this, _: _ });
+  this.template('../../templates/common/_webpack.dist.config.js', 'webpack.dist.config.js', { data: this, _: _ });
+  this.fs.copy(this.templatePath('../../templates/common/Gruntfile.js'), this.destinationPath('Gruntfile.js'));
+  this.fs.copy(this.templatePath('../../templates/common/gitignore'), this.destinationPath('.gitignore'));
 };
 
 ReactWebpackGenerator.prototype.styleFiles = function styleFiles() {
@@ -140,4 +137,10 @@ ReactWebpackGenerator.prototype.imageFiles = function () {
 
 ReactWebpackGenerator.prototype.karmaFiles = function () {
   this.copy('../../templates/common/karma.conf.js', 'karma.conf.js');
+};
+
+ReactWebpackGenerator.prototype.install = function() {
+  if(!this.options['skip-install']) {
+    this.installDependencies({ bower: false });
+  }
 };

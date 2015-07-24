@@ -17,7 +17,7 @@ describe('react-webpack generator', function() {
     'karma.conf.js',
     'package.json'
   ];
-  var mockPrompts = {};
+
   var genOptions = {
     'appPath': 'src',
     'skip-install': true,
@@ -37,7 +37,7 @@ describe('react-webpack generator', function() {
         return done(err);
       }
       react = helpers.createGenerator('react-webpack:app', deps, false, genOptions);
-      helpers.mockPrompt(react, mockPrompts);
+      helpers.mockPrompt(react);
 
       done();
     });
@@ -45,8 +45,8 @@ describe('react-webpack generator', function() {
 
   describe('App files', function() {
     it('should generate dotfiles', function(done) {
-      react.run({}, function() {
-        helpers.assertFile([].concat(expected, [
+      react.run(function() {
+        assert.file([].concat(expected, [
           '.yo-rc.json',
           '.editorconfig',
           '.gitignore',
@@ -57,20 +57,20 @@ describe('react-webpack generator', function() {
     });
 
     it('should generate app files', function(done) {
-      react.run({}, function() {
+      react.run(function() {
         // TODO: Hack, no time to work out why generated
         // files not present at point of test...
         setTimeout(function() {
-          helpers.assertFile(expected);
+          assert.file(expected);
           done();
         });
       });
     });
 
     it('should generate expected JS files', function(done) {
-      react.run({}, function() {
+      react.run(function() {
         setTimeout(function() {
-          helpers.assertFile([].concat(expected, [
+          assert.file([].concat(expected, [
             'src/components/TempTestApp.js',
             'src/components/main.js'
           ]));
@@ -80,11 +80,11 @@ describe('react-webpack generator', function() {
     });
 
     it('should generate expected test JS files', function(done) {
-      react.run({}, function() {
+      react.run(function() {
         // TODO: Hack, no time to work out why generated
         // files not present at point of test...
         setTimeout(function() {
-          helpers.assertFile([].concat(expected, [
+          assert.file([].concat(expected, [
             'test/helpers/pack/phantomjs-shims.js',
             'test/helpers/createComponent.js',
             'test/helpers/react/addons.js',
@@ -96,7 +96,7 @@ describe('react-webpack generator', function() {
     });
 
     it('should use HMR webpack API inside of configs', function (done) {
-      react.run({}, function() {
+      react.run(function() {
         assert.fileContent([
             ['package.json', /react-hot-loader/],
             ['Gruntfile.js', /hot:\s*true/],
@@ -109,7 +109,7 @@ describe('react-webpack generator', function() {
     });
 
     it('should generate JS config with aliases', function(done) {
-      react.run({}, function() {
+      react.run(function() {
         assert.fileContent([
             // style aliases
             ['webpack.config.js', /resolve[\S\s]+alias[\S\s]+styles/m],
@@ -125,7 +125,7 @@ describe('react-webpack generator', function() {
     });
 
     it('should not have any flux assets configured', function(done) {
-      react.run({}, function() {
+      react.run(function() {
         assert.noFileContent([
           ['package.json', /flux/],
           ['package.json', /events/],
@@ -145,14 +145,14 @@ describe('react-webpack generator', function() {
   describe('Generator', function () {
 
     it('should contain info about used style lang', function (done) {
-      react.run({}, function() {
+      react.run(function() {
         assert.ok(react.config.get('styles-language'));
         done();
       });
     });
 
     it('by default should use css style lang', function (done) {
-      react.run({}, function() {
+      react.run(function() {
         assert.equal(react.config.get('styles-language'), 'css');
         done();
       });
@@ -162,7 +162,7 @@ describe('react-webpack generator', function() {
       helpers.mockPrompt(react, {
         stylesLanguage: lang
       });
-      react.run({}, function() {
+      react.run(function() {
         assert.equal(react.config.get('styles-language'), lang);
         done();
       });
@@ -187,15 +187,16 @@ describe('react-webpack generator', function() {
   });
 
   describe('When generating a Component', function() {
+
     var generatorTest = function(name, generatorType, specType, targetDirectory, scriptNameFn, specNameFn, suffix, done) {
       var deps = [path.join('../..', generatorType)];
       genOptions.appPath = 'src';
 
       var reactGenerator = helpers.createGenerator('react-webpack:' + generatorType, deps, [name], genOptions);
 
-      react.run([], function() {
-        reactGenerator.run([], function() {
-          helpers.assertFileContent([
+      react.run(function() {
+        reactGenerator.run(function() {
+          assert.fileContent([
             [path.join('src', targetDirectory, name + '.js'), new RegExp('var ' + scriptNameFn(name) + suffix, 'g')],
             [path.join('src', targetDirectory, name + '.js'), new RegExp('require\\(\'styles\\/' + name + suffix + '\\.[^\']+' + '\'\\)', 'g')],
             [path.join('test/spec', targetDirectory, 'TempTestApp' + '.js'), new RegExp('require\\(\'components\\/' + 'TempTestApp' + suffix + '\\.[^\']+' + '\'\\)', 'g')],
@@ -208,13 +209,13 @@ describe('react-webpack generator', function() {
     }
 
     it('should generate a new component', function(done) {
-      react.run({}, function() {
+      react.run(function() {
         generatorTest('Foo', 'component', 'component', 'components', _.capitalize, _.capitalize, '', done);
       });
     });
 
     it('should generate a subcomponent', function(done) {
-      react.run({}, function() {
+      react.run(function() {
         var subComponentNameFn = function () { return 'Bar'; };
         generatorTest('Foo/Bar', 'component', 'component', 'components', subComponentNameFn, subComponentNameFn, '', done);
       });

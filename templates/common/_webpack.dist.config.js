@@ -18,7 +18,7 @@ module.exports = {
 
   debug: false,
   devtool: false,
-  entry: './src/components/<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>.js',
+  entry: './src/components/<% if (data.reactRouter) { %>main<% } else { %><%= data.scriptAppName %><% } %>.js',
 
   stats: {
     colors: true,
@@ -55,16 +55,16 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: 'style-loader!css-loader'
-    },<% if (stylesLanguage === 'sass') { %> {
+    },<% if (data.stylesLanguage === 'sass') { %> {
       test: /\.sass/,
       loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
-    },<% } %><% if (stylesLanguage === 'scss') { %> {
+    },<% } %><% if (data.stylesLanguage === 'scss') { %> {
       test: /\.scss/,
       loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
-    },<% } %><% if (stylesLanguage === 'less') { %> {
+    },<% } %><% if (data.stylesLanguage === 'less') { %> {
       test: /\.less/,
       loader: 'style-loader!css-loader!less-loader'
-    },<% } %><% if (stylesLanguage === 'stylus') { %> {
+    },<% } %><% if (data.stylesLanguage === 'stylus') { %> {
       test: /\.styl/,
       loader: 'style-loader!stylus-loader!less-loader'
     },<% } %> {

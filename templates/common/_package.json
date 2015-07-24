@@ -1,5 +1,5 @@
 {
-  "name": "<%= _.slugify(appname) %>",
+  "name": "<%= _.slugify(data.appname) %>",
   "version": "0.0.0",
   "description": "",
   "repository": "",
@@ -7,10 +7,10 @@
   "src": "src",
   "test": "test",
   "dist": "dist",
-  "mainInput": "<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>",
+  "mainInput": "<% if (data.reactRouter) { %>main<% } else { %><%= data.scriptAppName %><% } %>",
   "mainOutput": "main",
   "dependencies": {
-    <% if (reactRouter) { %>"react-router": "0.13.x",<% } %>
+    <% if (data.reactRouter) { %>"react-router": "0.13.x",<% } %>
     "react": "0.13.x",
     "normalize.css": "~3.0.3"
   },
@@ -36,9 +36,9 @@
     "grunt-karma": "~0.8.3",
     "grunt-open": "~0.2.3",
     "grunt-contrib-copy": "~0.5.0",
-    "grunt-contrib-clean": "~0.6.0",<% if (stylesLanguage.match(/s[ac]ss/)) { %>
-    "sass-loader": "^1.0.1",<% } %><% if (stylesLanguage === 'less') { %>
-    "less-loader": "^2.0.0",<% } %><% if (stylesLanguage === 'stylus') { %>
+    "grunt-contrib-clean": "~0.6.0",<% if (data.stylesLanguage.match(/s[ac]ss/)) { %>
+    "sass-loader": "^1.0.1",<% } %><% if (data.stylesLanguage === 'less') { %>
+    "less-loader": "^2.0.0",<% } %><% if (data.stylesLanguage === 'stylus') { %>
     "stylus-loader": "^0.5.0",<% } %>
     "react-hot-loader": "^1.0.7",
     "webpack": "~1.10.0",
