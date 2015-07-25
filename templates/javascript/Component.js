@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react/addons');<% if(rich && architecture === 'reflux'){%>
-var Reflux = require('Reflux'); <%}%>
+var Reflux = require('Reflux');<%}%>
 <% if(rich && architecture === 'flux' || architecture === 'reflux'){%>
 //var Actions = require('actions/xxx')<%}%>
 
