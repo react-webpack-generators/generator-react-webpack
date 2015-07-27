@@ -87,7 +87,6 @@ describe('react-webpack generator', function() {
           assert.file([].concat(expected, [
             'test/helpers/pack/phantomjs-shims.js',
             'test/helpers/createComponent.js',
-            'test/helpers/react/addons.js',
             'test/spec/components/TempTestApp.js'
           ]));
           done();
@@ -197,7 +196,7 @@ describe('react-webpack generator', function() {
       react.run(function() {
         reactGenerator.run(function() {
           assert.fileContent([
-            [path.join('src', targetDirectory, name + '.js'), new RegExp('var ' + scriptNameFn(name) + suffix, 'g')],
+            [path.join('src', targetDirectory, name + '.js'), new RegExp('class ' + scriptNameFn(name) + suffix, 'g')],
             [path.join('src', targetDirectory, name + '.js'), new RegExp('require\\(\'styles\\/' + name + suffix + '\\.[^\']+' + '\'\\)', 'g')],
             [path.join('test/spec', targetDirectory, 'TempTestApp' + '.js'), new RegExp('require\\(\'components\\/' + 'TempTestApp' + suffix + '\\.[^\']+' + '\'\\)', 'g')],
             [path.join('test/spec', targetDirectory, name + '.js'), new RegExp('import ' + scriptNameFn(name) + ' from \'components\/Foo', 'g')],

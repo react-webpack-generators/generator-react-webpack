@@ -1,32 +1,27 @@
 'use strict';
 
 var React = require('react/addons');
-<% if (stylesLanguage === 'css')    { %>require('styles/<%= classedFileName %>.css'); <% } %>
-<% if (stylesLanguage === 'sass')   { %>require('styles/<%= classedFileName %>.sass');<% } %>
-<% if (stylesLanguage === 'scss')   { %>require('styles/<%= classedFileName %>.scss');<% } %>
-<% if (stylesLanguage === 'less')   { %>require('styles/<%= classedFileName %>.less');<% } %>
-<% if (stylesLanguage === 'stylus') { %>require('styles/<%= classedFileName %>.styl');<% } %>
+<% if(stylePath) { %>require('<%= stylePath %>');<% } %>
 
-var <%= classedName %> = React.createClass({<% if(rich){%>
-  mixins: [],
-  getInitialState: function() {
-    return {};
-  },
-  getDefaultProps: function() {},
-  componentWillMount: function() {},
-  componentDidMount: function() {},
-  shouldComponentUpdate: function() {},
-  componentDidUpdate: function() {},
-  componentWillUnmount: function() {},<%}%>
-
-  render: function () {
-    return (
-        <div className="<%= classedName %>">
-          <p>Content for <%= classedName %></p>
-        </div>
-      );
+class <%= classedName %> extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
-});
+  render() {
+    return (
+      <div className="<%= classedName %>">
+        <p>Content for <%= classedName %></p>
+      </div>
+    );
+  }<% if(rich) { %>
+  componentWillMount() {}
+  componentDidMount() {}
+  shouldComponentUpdate() {}
+  componentDidUpdate() {}
+  componentWillUnmount() {}<% } %>
+}<% if(rich) { %>
+<%= classedName %>.propTypes = {};
+<%= classedName %>.defaultProps = {};<% } %>
 
-<% if (es6) { %>export default <%= classedName %>;<% }
-else { %>module.exports = <%= classedName %>;<% } %>
+export default <%= classedName %>;

@@ -9,8 +9,8 @@ require('../styles/main.css');
 
 var imageURL = require('../images/yeoman.png');
 
-var <%= scriptAppName %> = React.createClass({
-  render: function() {
+class <%= scriptAppName %> extends React.Component {
+  render() {
     return (
       <div className="main">
         <ReactTransitionGroup transitionName="fade">
@@ -19,8 +19,8 @@ var <%= scriptAppName %> = React.createClass({
       </div>
     );
   }
-});
+};
 <% if (!reactRouter) {
 %>React.render(<<%= scriptAppName %> />, document.getElementById('content')); // jshint ignore:line
 <% } %>
-module.exports = <%= scriptAppName %>;
+export default <%= scriptAppName %>;

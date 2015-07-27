@@ -9,7 +9,6 @@ var ejs = require('ejs');
 
 var ReactWebpackGenerator = module.exports = function ReactWebpackGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
-  this.option('es6');
 
   this.argument('appname', { type: String, required: false });
   this.appname = this.appname || path.basename(process.cwd());
@@ -114,7 +113,6 @@ ReactWebpackGenerator.prototype.createIndexHtml = function createIndexHtml() {
 };
 
 ReactWebpackGenerator.prototype.packageFiles = function () {
-  this.es6 = this.options.es6;
   this.reactRouter = this.env.options.reactRouter;
   this.stylesLanguage = this.env.options.stylesLanguage;
 

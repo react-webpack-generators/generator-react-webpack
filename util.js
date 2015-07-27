@@ -9,7 +9,8 @@ module.exports = {
   appName: appName,
   capitalize: capitalize,
   capitalizeClass: capitalizeClass,
-  capitalizeFile: capitalizeFile
+  capitalizeFile: capitalizeFile,
+  getLayoutFilePath: getLayoutFilePath
 };
 
 function rewriteFile (args) {
@@ -91,4 +92,40 @@ function appName(self) {
     suffix = 'App';
   }
   return suffix ? _.classify(suffix) : '';
+}
+
+/**
+ * Get the complete layout file path for the given layout language type
+ * @param {String} filename Filename to use
+ * @param {String} type Layout language type
+ * @return {String|Boolean} The layout language path or false if it cannot be found
+ */
+function getLayoutFilePath(filename, type) {
+
+  if(!filename || !type) {
+    return false;
+  }
+
+  var path;
+  switch(type) {
+    case 'css':
+    case 'sass':
+    case 'scss':
+    case 'less':
+      path = type;
+      break;
+    case 'stylus':
+      path = 'styl';
+      break;
+    default:
+      path = false;
+  }
+
+  // Add the styles prefix and file type suffix
+  // to the filename if we have a valid one.
+  if(path) {
+    path = 'styles/' + filename + '.' + path;
+  }
+
+  return path;
 }

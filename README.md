@@ -11,8 +11,8 @@ If you want to help out, please see https://github.com/newtriks/generator-react-
 
 - [x] Strip back the generator to the original bare bones of functionality.
 - [x] Update all packages both in templates and generator.
-- [ ] Fix existing issues related to core generated project.
-- [ ] Optimise for ES2015, etc.
+- [x] Fix existing issues related to core generated project.
+- [x] Optimise for ES2015, etc.
 - [ ] Create a new release and merge back into master.
 - [ ] Focus on composing with other generators.
 
@@ -70,20 +70,23 @@ Produces `src/components/Foo.js` (*javascript - JSX*):
 'use strict';
 
 var React = require('react/addons');
+require('styles/Foo.css');
 
-require('styles/componentName.css'); //or .sass,.less etc...
-
-var Foo = React.createClass({
-  render: function () {
-    return (
-        <div>
-          <p>Content for Foo</p>
-        </div>
-      )
+class Foo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
-});
+  render() {
+    return (
+      <div className="Foo">
+        <p>Content for Foo</p>
+      </div>
+    );
+  }
+}
 
-module.exports = Foo;
+export default Foo;
 ```
 
 And `test/spec/components/Foo.js` (*javascript - jasmine, as seen on http://simonsmith.io/unit-testing-react-components-without-a-dom/*):
@@ -126,33 +129,34 @@ yo react-webpack:c foofoo --rich
 ```
 This will give you all of react component's most common stuff :
  ```js
- var React = require('react/addons');
+ 'use strict';
 
- require('styles/Foofoo.sass');
+var React = require('react/addons');
+require('styles/Foo.css');
 
- var Foofoo = React.createClass({
-   mixins: [],
-   getInitialState: function() {
-     return {};
-   },
-   getDefaultProps: function() {},
-   componentWillMount: function() {},
-   componentDidMount: function() {},
-   shouldComponentUpdate: function() {},
-   componentDidUpdate: function() {},
-   componentWillUnmount: function() {},
+class Foo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  render() {
+    return (
+      <div className="Foo">
+        <p>Content for Foo</p>
+      </div>
+    );
+  }
+  componentWillMount() {}
+  componentDidMount() {}
+  shouldComponentUpdate() {}
+  componentDidUpdate() {}
+  componentWillUnmount() {}
+}
+Foo.propTypes = {};
+Foo.defaultProps = {};
 
-   render: function () {
-     return (
-         <div>
-           <p>Content for Foofoo</p>
-         </div>
-       );
-   }
- });
-
- module.exports = Foofoo;
- ```
+export default Foo;
+```
 
 Just remove those you don't need, then fill and space out the rest.
 
@@ -179,11 +183,6 @@ Sets the file suffix for generated components. Defaults to "js". Please note tha
 var MyJSComponent = require('./MyJSComponent');
 var MyJSX = require('./MyJSX.jsx');
 ```
-
-### es6
-
-If you are using `es6`, and want to use its export functionality (and not webpack's), just add `--es6` flag when you create a component, action or store.
-
 
 ## Testing
 
@@ -212,9 +211,9 @@ project
          Foo.js
          AnotherComponent.js
     - helpers
-      - react
+      - pack
+          phantomjs-shims.js
         addons.js
-      phantomjs-shims.js
   Gruntfile.js
   karma.conf.js
   package.json
