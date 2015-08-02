@@ -1,6 +1,7 @@
 'use strict';
 
 var path = require('path');
+var alias = require('./webpack.alias');
 
 module.exports = function (config) {
   config.set({
@@ -60,13 +61,7 @@ module.exports = function (config) {
         }]
       },
       resolve: {
-        alias: {
-          'styles': path.join(process.cwd(), './src/styles/'),
-          'components': path.join(process.cwd(), './src/components/')<% if(architecture === 'flux'||architecture === 'reflux') { %>,
-          'stores': '../../../src/stores/',
-          'actions': '../../../src/actions/'<% } %>,
-          'helpers': path.join(process.cwd(), './test/helpers/')
-        }
+        alias: alias
       }
     },
     webpackMiddleware: {
