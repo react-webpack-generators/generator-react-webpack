@@ -112,8 +112,7 @@ describe('react-webpack generator', function() {
       react.run({}, function () {
         assert.fileContent([
           //alias file
-          ['webpack.alias.js', /resolve[\S\s]+alias[\S\s]+style/m],
-          ['webpack.alias.js', /resolve[\S\s]+alias[\S\s]+components/m],
+          ['webpack.alias.js', /alias[\S\s]+styles[\S\s]+styles/m],
           // config files
           ['webpack.config.js', /resolve[\S\s]+alias[\S\s]+alias/m],
           ['karma.conf.js', /resolve[\S\s]+alias[\S\s]+alias/m],
@@ -209,7 +208,7 @@ describe('react-webpack generator', function() {
 
     it('should add stores and actions alias to alias config', function(done) {
       assert.fileContent([
-        ['webpack.alias.js', /resolve[\S\s]+alias[\S\s]+stores/m]
+        ['webpack.alias.js', /alias[\S\s]+stores[\S\s]+stores/m]
       ]);
 
       done();
