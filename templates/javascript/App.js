@@ -19,7 +19,7 @@ class <%= scriptAppName %> extends React.Component {
       </div>
     );
   }
-};
+}
 <% if (!reactRouter) {
 %>React.render(<<%= scriptAppName %> />, document.getElementById('content')); // jshint ignore:line
 <% } %>
