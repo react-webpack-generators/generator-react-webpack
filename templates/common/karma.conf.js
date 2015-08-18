@@ -7,18 +7,10 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'test/helpers/pack/**/*.js',
-      'test/helpers/react/**/*.js',
-      'test/spec/components/**/*.js'<% if(architecture === 'flux'||architecture === 'reflux') { %>,
-      'test/spec/stores/**/*.js',
-      'test/spec/actions/**/*.js'<% } %>
+      'test/spec/**/*.{js,jsx}'
     ],
     preprocessors: {
-      'test/helpers/createComponent.js': ['webpack'],
-      'test/spec/components/**/*.js': ['webpack'],
-      'test/spec/components/**/*.jsx': ['webpack']<% if(architecture === 'flux'||architecture === 'reflux') { %>,
-      'test/spec/stores/**/*.js': ['webpack'],
-      'test/spec/actions/**/*.js': ['webpack']<% } %>
+      'test/spec/**/*.{js,jsx}': ['webpack']
     },
     webpack: {
       cache: true,
@@ -79,11 +71,11 @@ module.exports = function (config) {
     port: 8080,
     logLevel: config.LOG_INFO,
     colors: true,
-    autoWatch: false,
+    autoWatch: true,
     browsers: ['PhantomJS'],
     reporters: ['dots'],
     captureTimeout: 60000,
-    singleRun: true,
+    singleRun: false,
     plugins: [
         require('karma-webpack'),
         require('karma-jasmine'),
