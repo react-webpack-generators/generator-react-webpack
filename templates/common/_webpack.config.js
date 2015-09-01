@@ -6,7 +6,7 @@
  */
 'use strict';
 var webpack = require('webpack');
-var alias = require('./webpack.alias');
+var settings = require('./webpack.settings.js');
 
 module.exports = {
 
@@ -20,7 +20,7 @@ module.exports = {
   devtool: 'sourcemap',
   entry: [
       'webpack/hot/only-dev-server',
-      './src/components/<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>.js'
+      settings.entry
   ],
 
   stats: {
@@ -30,7 +30,7 @@ module.exports = {
 
   resolve: {
     extensions: ['', '.js', '.jsx'],
-    alias: alias
+    alias: settings.alias
   },
   module: {
     preLoaders: [{

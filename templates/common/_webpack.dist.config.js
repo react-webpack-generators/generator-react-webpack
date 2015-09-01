@@ -7,7 +7,7 @@
 'use strict';
 
 var webpack = require('webpack');
-var alias = require('./webpack.alias');
+var settings = require('./webpack.settings.js');
 
 module.exports = {
 
@@ -19,7 +19,7 @@ module.exports = {
 
   debug: false,
   devtool: false,
-  entry: './src/components/<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>.js',
+  entry: settings.entry,
 
   stats: {
     colors: true,
@@ -36,7 +36,7 @@ module.exports = {
 
   resolve: {
     extensions: ['', '.js', '.jsx'],
-    alias: alias
+    alias: settings.alias
   },
 
   module: {

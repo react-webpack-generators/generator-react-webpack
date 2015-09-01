@@ -1,7 +1,7 @@
 'use strict';
 
 var path = require('path');
-var alias = require('./webpack.alias');
+var settings = require('./webpack.settings.js');
 
 module.exports = function (config) {
   config.set({
@@ -61,7 +61,7 @@ module.exports = function (config) {
         }]
       },
       resolve: {
-        alias: alias
+        alias: settings.alias
       }
     },
     webpackMiddleware: {
