@@ -108,24 +108,22 @@ describe('react-webpack generator', function() {
       });
     });
 
-    it('should generate JS config with aliases', function(done) {
-      react.run({}, function() {
+    it('should generate JS config with aliases', function (done) {
+      react.run({}, function () {
         assert.fileContent([
-            // style aliases
-            ['webpack.config.js', /resolve[\S\s]+alias[\S\s]+styles/m],
-            ['karma.conf.js', /resolve[\S\s]+alias[\S\s]+styles/m],
-            ['webpack.dist.config.js', /resolve[\S\s]+alias[\S\s]+styles/m],
-            // script/components aliases
-            ['webpack.config.js', /resolve[\S\s]+alias[\S\s]+components/m],
-            ['karma.conf.js', /resolve[\S\s]+alias[\S\s]+components/m],
-            ['webpack.dist.config.js', /resolve[\S\s]+alias[\S\s]+components/m]
+          //alias file
+          ['webpack.settings.js', /alias[\S\s]+styles[\S\s]+styles/m],
+          // config files
+          ['webpack.config.js', /resolve[\S\s]+alias[\S\s]+alias/m],
+          ['karma.conf.js', /resolve[\S\s]+alias[\S\s]+alias/m],
+          ['webpack.dist.config.js', /resolve[\S\s]+alias[\S\s]+alias/m]
         ]);
         done();
       });
     });
 
-    it('should not have any flux assets configured', function(done) {
-      react.run({}, function() {
+    it('should not have any flux assets configured', function (done) {
+      react.run({}, function () {
         assert.noFileContent([
           ['package.json', /flux/],
           ['package.json', /events/],
@@ -208,18 +206,9 @@ describe('react-webpack generator', function() {
       done();
     });
 
-    it('should add stores and actions alias to karma config', function(done) {
+    it('should add stores and actions alias to alias config', function(done) {
       assert.fileContent([
-        ['karma.conf.js', /resolve[\S\s]+alias[\S\s]+stores/m]
-      ]);
-
-      done();
-    });
-
-    it('should add stores and actions alias to webpack configs', function(done) {
-      assert.fileContent([
-        ['webpack.config.js', /resolve[\S\s]+alias[\S\s]+stores/m],
-        ['webpack.dist.config.js', /resolve[\S\s]+alias[\S\s]+stores/m]
+        ['webpack.settings.js', /alias[\S\s]+stores[\S\s]+stores/m]
       ]);
 
       done();

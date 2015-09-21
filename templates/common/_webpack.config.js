@@ -6,6 +6,7 @@
  */
 'use strict';
 var webpack = require('webpack');
+var settings = require('./webpack.settings.js');
 
 module.exports = {
 
@@ -19,7 +20,7 @@ module.exports = {
   devtool: 'sourcemap',
   entry: [
       'webpack/hot/only-dev-server',
-      './src/components/<% if (reactRouter) { %>main<% } else { %><%= scriptAppName %><% } %>.js'
+      settings.entry
   ],
 
   stats: {
@@ -29,13 +30,7 @@ module.exports = {
 
   resolve: {
     extensions: ['', '.js', '.jsx'],
-    alias: {
-      'styles': __dirname + '/src/styles',
-      'mixins': __dirname + '/src/mixins',
-      'components': __dirname + '/src/components/'<% if(architecture==='flux'||architecture=='reflux') { %>,
-      'stores': __dirname + '/src/stores/',
-      'actions': __dirname + '/src/actions/'<% } %>
-    }
+    alias: settings.alias
   },
   module: {
     preLoaders: [{

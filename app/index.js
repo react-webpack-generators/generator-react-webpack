@@ -143,6 +143,7 @@ ReactWebpackGenerator.prototype.packageFiles = function () {
   this.architecture = this.env.options.architecture;
   this.stylesLanguage = this.env.options.stylesLanguage;
   this.template('../../templates/common/_package.json', 'package.json');
+  this.template('../../templates/common/_webpack.settings.js', 'webpack.settings.js');
   this.template('../../templates/common/_webpack.config.js', 'webpack.config.js');
   this.template('../../templates/common/_webpack.dist.config.js', 'webpack.dist.config.js');
   this.copy('../../templates/common/Gruntfile.js', 'Gruntfile.js');
