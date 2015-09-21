@@ -3,7 +3,7 @@
 > Yeoman generator for [ReactJS](http://facebook.github.io/react/) - lets you quickly set up a project including karma test runner and [Webpack](http://webpack.github.io/) module system.
 
 # About
-Generator-React-Webpack will help you build new Reactprojects using modern technologies.
+Generator-React-Webpack will help you build new React projects using modern technologies.
 
 Out of the box it comes with support for:
 - Webpack
@@ -12,11 +12,14 @@ Out of the box it comes with support for:
 - Automatic code linting via esLint
 - Ability to unit test components via Karma and Mocha/Chai
 
-## Subgenerators
-This generator is also the base project for some other generators that depend on it:
-### Generator-React-Webpack-Alt
-(https://github.com/weblogixx/generator-react-webpack-alt)
-Generator based on generator-react-webpack, providing support for Alt.js.
+## Changes in Version 2.0
+The new version of generator-react-webpack does __NOT__ include support for Flux-Frameworks directly. Instead, we will use it as a base to provide own generators that use it as a base. This will make the base generator easier to use and update.
+
+Currently, there are no stable flux implementation based on generator-react-webpack v2. We are working on an implementation for alt.js.
+
+If you are interested, feel free to write your own generator and use generator-react-webpack as a base (via composition).
+
+If you have build a generator using generator-react-webpack, tell us and we will add a link to our README.
 
 ---
 
@@ -73,11 +76,9 @@ npm run copy
 ```
 
 ### Naming Components
-
-I have opted to follow [@floydophone](https://twitter.com/floydophone) convention of uppercase for component file naming e.g. [Component.js](https://github.com/petehunt/ReactHack/tree/master/src/components). I am open to suggestions if there is a general objection to this decision.
+We have opted to follow [@floydophone](https://twitter.com/floydophone) convention of uppercase for component file naming e.g. [Component.js](https://github.com/petehunt/ReactHack/tree/master/src/components). I am open to suggestions if there is a general objection to this decision.
 
 ### Modules
-
 Each component is a module and can be required using the [Webpack](http://webpack.github.io/) module system. [Webpack](http://webpack.github.io/) uses [Loaders](http://webpack.github.io/docs/loaders.html) which means you can also require CSS and a host of other file types. Read the [Webpack documentation](http://webpack.github.io/docs/home.html) to find out more.
 
 ## Props
@@ -91,7 +92,6 @@ Thanks to [Edd Hannay](https://github.com/eddhannay) for his Webpack optimisatio
 Contributions are welcomed. When submitting a bugfix, write a test that exposes the bug and fails before applying your fix. Submit the test alongside the fix.
 
 ### Running Tests
-
 `npm test` or `node node_modules/.bin/mocha`
 
 ## License
