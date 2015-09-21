@@ -3,6 +3,12 @@
 var React = require('react/addons');
 var ReactTransitionGroup = React.addons.TransitionGroup;
 
+<% if(architecture === 'flux' || architecture === 'reflux'){%>
+var req = require.context("stores", true, /^(.*\.(js$))[^.]*$/igm);
+req.keys().forEach((key)=>{
+	req(key);
+});<%}%>
+
 // CSS
 require('normalize.css');
 require('../styles/main.css');
