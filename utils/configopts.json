@@ -1,0 +1,84 @@
+{
+  "path": {
+    "options": [
+      {
+        "name": "base",
+        "path": "src"
+      },
+      {
+        "name": "action",
+        "path": "src/actions"
+      },
+      {
+        "name": "component",
+        "path": "src/components"
+      },
+      {
+        "name": "image",
+        "path": "src/images"
+      },
+      {
+        "name": "source",
+        "path": "src/sources"
+      },
+      {
+        "name": "store",
+        "path": "src/stores"
+      },
+      {
+        "name": "style",
+        "path": "src/styles"
+      },
+      {
+        "name": "test",
+        "path": "test"
+      },
+      {
+        "name": "dist",
+        "path": "dist"
+      }
+    ]
+  },
+  "style": {
+    "options": [
+      {
+        "name": "css",
+        "value": "css",
+        "suffix": ".css"
+      },
+      {
+        "name": "sass",
+        "value": "sass",
+        "suffix": ".sass",
+        "packages": [
+          { "name": "sass-loader", "version": "^1.0.1" }
+        ]
+      },
+      {
+        "name": "scss",
+        "value": "scss",
+        "suffix": ".scss",
+        "packages": [
+          { "name": "sass-loader", "version": "^1.0.1" }
+        ]
+      },
+      {
+        "name": "less",
+        "value": "less",
+        "suffix": ".less",
+        "packages": [
+          { "name": "less-loader", "version": "^2.0.0" }
+        ]
+      },
+      {
+        "name": "stylus",
+        "value": "stylus",
+        "suffix": ".styl",
+        "packages": [
+          { "name": "stylus-loader", "version": "^0.5.0" }
+        ]
+      }
+    ],
+    "default": "css"
+  }
+}

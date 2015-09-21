@@ -1,6 +1,6 @@
 {
   "name": "generator-react-webpack",
-  "version": "1.2.13",
+  "version": "1.2.23",
   "description": "Yeoman generator for ReactJS and Webpack",
   "keywords": [
     "yeoman-generator",
@@ -19,7 +19,14 @@
     "email": "simon@newtriks.com",
     "url": "https://github.com/newtriks"
   },
-  "main": "app/index.js",
+  "contributors": [
+    {
+      "name": "Christian Schilling",
+      "email": "cs@weblogixx.de",
+      "url": "https://github.com/weblogixx"
+    }
+  ],
+  "main": "generators/app/index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/newtriks/generator-react-webpack.git"
@@ -28,24 +35,18 @@
     "test": "mocha"
   },
   "dependencies": {
-    "yeoman-generator": "^0.17.6"
+    "react-webpack-template": "^0.1.0",
+    "underscore.string": "^3.2.2",
+    "yeoman-generator": "^0.20.3",
+    "yeoman-welcome": "^1.0.1"
   },
   "devDependencies": {
-    "mocha": "^1.21.4",
-    "underscore.string": "^2.3.3",
-    "grunt": "^0.4.5",
-    "grunt-cli": "^0.1.13"
-  },
-  "peerDependencies": {
-    "yo": ">=1.2.0"
+    "chai": "^3.2.0",
+    "mocha": "^2.3.2"
   },
   "engines": {
-    "node": ">=0.10.0",
+    "node": ">=4.0.0",
     "iojs": ">=1.1.0"
   },
-  "licenses": [
-    {
-      "type": "MIT"
-    }
-  ]
+  "license": "MIT"
 }
