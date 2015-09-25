@@ -6,7 +6,7 @@ let path = require('path');
 let fs = require('fs');
 
 // Set the base root directory for our files
-let baseRootPath = path.join(__dirname, '../../node_modules/react-webpack-template');
+let baseRootPath = path.dirname(require.resolve("react-webpack-template"));
 
 module.exports = generator.Base.extend({
 
