@@ -109,4 +109,12 @@ describe('Utilities:Yeoman', () => {
     });
   });
 
+  describe('#getDestinationClassName', () => {
+
+    it('should return the correct javascript class name for the given paths', () => {
+      expect(utils.getDestinationClassName('test', 'action', 'Actions')).to.equal('TestActions');
+      expect(utils.getDestinationClassName('test', 'source', 'Source')).to.equal('TestSource');
+      expect(utils.getDestinationClassName('test', 'store', 'Store')).to.equal('TestStore');
+    });
+  });
 });

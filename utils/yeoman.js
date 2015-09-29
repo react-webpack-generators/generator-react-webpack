@@ -139,11 +139,25 @@ let getDestinationPath = (name, type, suffix) => {
   return `${fullPath}.js`;
 };
 
+/**
+ * Get the destinations class name
+ * @param  {String} name Name of the file
+ * @param  {String} type The type to use (e.g. action, store, ...)
+ * @param  {Suffix} suffix The suffix to use for the file (e.g. Store, Actions, ...)
+ * @return {String} The javascript class name to use
+ */
+let getDestinationClassName = (name, type, suffix) => {
+
+  let fixedName = getDestinationPath(name, type, suffix);
+  return _.capitalize(fixedName.split('/').pop().split('.js')[0]);
+};
+
 module.exports = {
   getBaseDir: getBaseDir,
   getAllSettingsFromComponentName: getAllSettingsFromComponentName,
   getAppName: getAppName,
   getCleanedPathName: getCleanedPathName,
   getComponentStyleName: getComponentStyleName,
-  getDestinationPath: getDestinationPath
+  getDestinationPath: getDestinationPath,
+  getDestinationClassName: getDestinationClassName
 };
