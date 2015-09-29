@@ -113,10 +113,37 @@ let getAppName = (appName) => {
   return _.camelize(_.slugify(_.humanize(appName)));
 };
 
+/**
+ * Get the wanted destination path
+ * @param  {String} name Name of the file
+ * @param  {String} type The type to use (e.g. action, store, ...)
+ * @param  {Suffix} suffix The suffix to use for the file (e.g. Store, Actions, ...)
+ * @return {String} Final path
+ */
+let getDestinationPath = (name, type, suffix) => {
+
+  let cleanedPaths = getCleanedPathName(name, suffix);
+  let fsParts = cleanedPaths.split('/');
+  let actionBaseName = _.capitalize(fsParts.pop());
+  let partPath = fsParts.join('/');
+
+  let fsPath = configUtils.getChoiceByKey('path', type).path;
+
+  let parts = [ fsPath ];
+  if(partPath.length > 0) {
+    parts.push(partPath);
+  }
+  parts.push(actionBaseName);
+  let fullPath = parts.join('/');
+
+  return `${fullPath}.js`;
+};
+
 module.exports = {
   getBaseDir: getBaseDir,
   getAllSettingsFromComponentName: getAllSettingsFromComponentName,
   getAppName: getAppName,
   getCleanedPathName: getCleanedPathName,
-  getComponentStyleName: getComponentStyleName
+  getComponentStyleName: getComponentStyleName,
+  getDestinationPath: getDestinationPath
 };

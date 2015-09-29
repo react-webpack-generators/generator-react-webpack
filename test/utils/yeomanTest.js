@@ -94,4 +94,19 @@ describe('Utilities:Yeoman', () => {
     });
   });
 
+  describe('#getDestinationPath', () => {
+
+    it('should return the correct filesystem path for all components', () => {
+
+      expect(utils.getDestinationPath('test', 'action', 'Actions')).to.equal('src/actions/TestActions.js');
+      expect(utils.getDestinationPath('subfolder/test', 'action', 'Actions')).to.equal('src/actions/subfolder/TestActions.js');
+
+      expect(utils.getDestinationPath('test', 'source', 'Source')).to.equal('src/sources/TestSource.js');
+      expect(utils.getDestinationPath('subfolder/test', 'source', 'Source')).to.equal('src/sources/subfolder/TestSource.js');
+
+      expect(utils.getDestinationPath('test', 'store', 'Store')).to.equal('src/stores/TestStore.js');
+      expect(utils.getDestinationPath('subfolder/test', 'store', 'Store')).to.equal('src/stores/subfolder/TestStore.js');
+    });
+  });
+
 });
