@@ -14,11 +14,12 @@ Out of the box it comes with support for:
 ## Changes in Version 2.0
 The new version of generator-react-webpack does __NOT__ include support for Flux-Frameworks directly. Instead, we will use it as a base to provide own generators that use it as a base. This will make the base generator easier to use and update.
 
-Currently, there are no stable flux implementation based on generator-react-webpack v2. We are working on an implementation for alt.js.
-
 If you are interested, feel free to write your own generator and use generator-react-webpack as a base (via composition).
 
 If you have build a generator using generator-react-webpack, tell us and we will add a link to our README.
+
+## Generators that extend generator-react-webpack
+- [Generator-React-Webpack-Alt](https://github.com/weblogixx/generator-react-webpack-alt) (Adds ability to create actions, stores and sources for [alt.js](http://alt.js.org))
 
 ---
 
