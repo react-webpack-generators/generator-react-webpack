@@ -1,14 +1,16 @@
 {
   "name": "generator-react-webpack",
   "version": "2.1.0",
-  "description": "Yeoman generator for ReactJS and Webpack",
+  "description": "Yeoman generator for using React with Webpack",
   "keywords": [
     "yeoman-generator",
+    "react",
     "reactjs",
     "webpack",
     "scaffold",
     "framework",
     "component",
+    "frontend",
     "front-end",
     "app"
   ],
