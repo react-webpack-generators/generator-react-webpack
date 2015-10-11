@@ -12,11 +12,11 @@ Out of the box it comes with support for:
 - Ability to unit test components via Karma and Mocha/Chai
 
 ## Changes in Version 2.0
-The new version of generator-react-webpack does __NOT__ include support for Flux-Frameworks directly. Instead, we will use it as a base to provide own generators that use it as a base. This will make the base generator easier to use and update.
+The new version of generator-react-webpack does __NOT__ include support for Flux-Frameworks directly. Instead, we will use it as a base for other generators to build upon. This will make the base generator easier to use and update.
 
 If you are interested, feel free to write your own generator and use generator-react-webpack as a base (via composition).
 
-If you have build a generator using generator-react-webpack, tell us and we will add a link to our README.
+If you have built a generator using generator-react-webpack, tell us and we will add a link to our README.
 
 ## Generators that extend generator-react-webpack
 - [Generator-React-Webpack-Alt](https://github.com/weblogixx/generator-react-webpack-alt) (Adds ability to create actions, stores and sources for [alt.js](http://alt.js.org))
@@ -83,9 +83,9 @@ Each component is a module and can be required using the [Webpack](http://webpac
 
 ## Props
 
-Thanks to all who contributed to [generator-angular](https://github.com/yeoman/generator-angular) as the majority of code here has been shamelessy sourced from that repos.
+Thanks to all who contributed to [generator-angular](https://github.com/yeoman/generator-angular) as the majority of code here has been shamelessy sourced from that repo.
 
-Thanks to [Edd Hannay](https://github.com/eddhannay) for his Webpack optimisations, my local merge and testing meant his additions lost his signature (my fault sorry) so big thanks Edd.
+Thanks to [Edd Hannay](https://github.com/eddhannay) for his Webpack optimisations, my local merge and testing meant his additions lost his signature (my fault, sorry). So, big thanks Edd.
 
 ## Contribute
 
