@@ -91,6 +91,7 @@ module.exports = generator.Base.extend({
     let excludeList = [
       'LICENCE',
       'README.md',
+      'CHANGELOG.md',
       'node_modules',
       'package.json'
     ];
