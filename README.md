@@ -12,7 +12,7 @@ Out of the box it comes with support for:
 - Ability to unit test components via Karma and Mocha/Chai
 
 ## Changes in Version 2.0
-Tthis generator is written in ES2015. This means it is ___not compatible with node.js versions before 4.0___.
+This generator is written in ES2015. This means it is ___not compatible with node.js versions before 4.0___.
 
 It also does __NOT__ include support for Flux-Frameworks anymore. Instead, we will use it as a base for other generators to build upon. This will make the base generator easier to use and update.
 
