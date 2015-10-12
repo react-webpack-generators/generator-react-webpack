@@ -1,7 +1,7 @@
 {
   "name": "generator-react-webpack",
   "version": "2.1.0",
-  "description": "Yeoman generator for using React with Webpack",
+  "description": "Yeoman generator for using React with Webpack via Babel",
   "keywords": [
     "yeoman-generator",
     "react",
@@ -37,7 +37,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "react-webpack-template": "^0.1.0",
+    "react-webpack-template": "^0.2.0",
     "underscore.string": "^3.2.2",
     "yeoman-generator": "^0.20.3",
     "yeoman-welcome": "^1.0.1"

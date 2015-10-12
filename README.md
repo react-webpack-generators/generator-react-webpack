@@ -12,7 +12,9 @@ Out of the box it comes with support for:
 - Ability to unit test components via Karma and Mocha/Chai
 
 ## Changes in Version 2.0
-The new version of generator-react-webpack does __NOT__ include support for Flux-Frameworks directly. Instead, we will use it as a base for other generators to build upon. This will make the base generator easier to use and update.
+Tthis generator is written in ES2015. This means it is ___not compatible with node.js versions before 4.0___.
+
+It also does __NOT__ include support for Flux-Frameworks anymore. Instead, we will use it as a base for other generators to build upon. This will make the base generator easier to use and update.
 
 If you are interested, feel free to write your own generator and use generator-react-webpack as a base (via composition).
 
@@ -82,13 +84,9 @@ We have opted to follow [@floydophone](https://twitter.com/floydophone) conventi
 Each component is a module and can be required using the [Webpack](http://webpack.github.io/) module system. [Webpack](http://webpack.github.io/) uses [Loaders](http://webpack.github.io/docs/loaders.html) which means you can also require CSS and a host of other file types. Read the [Webpack documentation](http://webpack.github.io/docs/home.html) to find out more.
 
 ## Props
-
-Thanks to all who contributed to [generator-angular](https://github.com/yeoman/generator-angular) as the majority of code here has been shamelessy sourced from that repo.
-
 Thanks to [Edd Hannay](https://github.com/eddhannay) for his Webpack optimisations, my local merge and testing meant his additions lost his signature (my fault, sorry). So, big thanks Edd.
 
 ## Contribute
-
 Contributions are welcomed. When submitting a bugfix, write a test that exposes the bug and fails before applying your fix. Submit the test alongside the fix.
 
 ### Running Tests
