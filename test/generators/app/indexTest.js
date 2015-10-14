@@ -44,6 +44,7 @@ describe('react-webpack:app', () => {
       assert.file([
         '.editorconfig',
         '.eslintrc',
+        '.gitignore',
         '.npmignore',
         '.yo-rc.json'
       ]);

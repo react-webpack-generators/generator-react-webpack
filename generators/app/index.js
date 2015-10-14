@@ -111,6 +111,9 @@ module.exports = generator.Base.extend({
         if(fs.lstatSync(fullPath).isDirectory()) {
           this.bulkDirectory(item, item);
         } else {
+          if (item === '.npmignore') {
+            this.copy(item, '.gitignore');
+          }
           this.copy(item, item);
         }
       }
