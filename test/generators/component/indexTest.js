@@ -47,6 +47,14 @@ describe('react-webpack:component', () => {
           done();
         });
       });
+
+      it('should have its displayName set per default', (done) => {
+
+        createGeneratedComponent('mycomponent', 'css', () => {
+          assert.fileContent('src/components/MycomponentComponent.js', `displayName = 'MycomponentComponent';`);
+          done();
+        });
+      });
     });
 
     describe('Style', () => {

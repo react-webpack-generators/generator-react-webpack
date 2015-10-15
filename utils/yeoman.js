@@ -33,6 +33,9 @@ let getAllSettingsFromComponentName = (componentName, style) => {
   let componentBaseName = _.capitalize(componentParts.pop());
   let componentPartPath = componentParts.join('/');
 
+  // Get the components displayName property
+  let componentFullName = _.classify(_.replaceAll(componentName, '/', '_'));
+
   // Configure Styles
   let stylePaths = configUtils.getChoiceByKey('path', 'style');
   let styleSettings = configUtils.getChoiceByKey('style', style);
@@ -56,6 +59,7 @@ let getAllSettingsFromComponentName = (componentName, style) => {
       path: `${componentPath.path}/${componentPartPath}/`,
       fileName: `${componentBaseName}Component.js`,
       className: `${componentBaseName}Component`,
+      displayName: `${componentFullName}Component`,
       suffix: '.js'
     },
     test: {

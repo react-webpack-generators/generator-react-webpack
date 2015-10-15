@@ -14,8 +14,11 @@ class <%= component.className %> extends React.Component {
   }
 }
 
+<%= component.className %>.displayName = '<%= component.displayName %>';
+
 // Uncomment properties you need
 // <%= component.className %>.propTypes = {};
 // <%= component.className %>.defaultProps = {};
+
 
 export default <%= component.className %>;

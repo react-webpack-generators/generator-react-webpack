@@ -82,6 +82,7 @@ describe('Utilities:Yeoman', () => {
           path: 'src/components/my/component/',
           fileName: 'TestComponent.js',
           className: 'TestComponent',
+          displayName: 'MyComponentTestComponent',
           suffix: '.js'
         },
         test: {
