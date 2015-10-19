@@ -54,7 +54,7 @@ The above command will create a new component, as well as its stylesheet and a b
 
 ## Generating new stateless functional components
 ```
-yo react-webpack:component:stateless my/namespaced/components/name
+yo react-webpack:component my/namespaced/components/name --stateless
 ```
 
 Stateless functional components where introduced in React v0.14. They have a much shorter syntax than regular ones and no state or lifecycle methods at all. Please read the [React 0.14 release notes](https://facebook.github.io/react/blog/2015/10/07/react-v0.14.html) to get more information about those components.
