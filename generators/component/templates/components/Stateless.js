@@ -4,15 +4,11 @@ import React from 'react';
 
 require('<%= style.webpackPath %>');
 
-class <%= component.className %> extends React.Component {
-  render() {
-    return (
-      <div className="<%= style.className %>">
-        Please edit <%= component.path %>/<%= component.fileName %> to update this component!
-      </div>
-    );
-  }
-}
+let <%= component.className %> = (props) => (
+  <div className="<%= style.className %>">
+    Please edit <%= component.path %>/<%= component.fileName %> to update this component!
+  </div>
+);
 
 <%= component.className %>.displayName = '<%= component.displayName %>';
 

@@ -27,8 +27,9 @@ If you have built a generator using generator-react-webpack, tell us and we will
 
 ## Installation
 ```bash
+# Make sure both is installed globally
 npm install -g yo
-npm install generator-react-webpack
+npm install -g generator-react-webpack
 ```
 
 ## Setting up projects
@@ -50,6 +51,15 @@ yo react-webpack:component my/namespaced/components/name
 ```
 
 The above command will create a new component, as well as its stylesheet and a basic testcase.
+
+## Generating new stateless functional components
+```
+yo react-webpack:component:stateless my/namespaced/components/name
+```
+
+Stateless functional components where introduced in React v0.14. They have a much shorter syntax than regular ones and no state or lifecycle methods at all. Please read the [React 0.14 release notes](https://facebook.github.io/react/blog/2015/10/07/react-v0.14.html) to get more information about those components.
+
+___Note___: You will still be able to set properties for stateless components!
 
 ## Usage
 The following commands are available in your project:

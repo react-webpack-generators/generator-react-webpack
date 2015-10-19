@@ -6,11 +6,17 @@ module.exports = generator.NamedBase.extend({
 
   constructor: function() {
     generator.NamedBase.apply(this, arguments);
+
+    this.option('stateless', {
+      desc: 'Create a stateless component instead of a full one',
+      defaults: false
+    });
   },
 
   writing: function() {
 
     let settings = utils.yeoman.getAllSettingsFromComponentName(this.name, this.config.get('style'));
+    let componentType = this.options.stateless ? 'Stateless' : 'Base';
 
     // Create the style template
     this.fs.copyTpl(
@@ -21,7 +27,7 @@ module.exports = generator.NamedBase.extend({
 
     // Create the component
     this.fs.copyTpl(
-      this.templatePath('components/Base.js'),
+      this.templatePath(`components/${componentType}.js`),
       this.destinationPath(settings.component.path + settings.component.fileName),
       settings
     );

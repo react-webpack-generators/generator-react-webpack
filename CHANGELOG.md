@@ -1,5 +1,12 @@
 # generator-react-webpack - Changelog
 
+## 2.2.5
+___Upgrades:___
+
+1. Added ability to create stateless components
+2. Updated README with new installation instructions (need to install globally)
+3. Added new tests for components (should be easier to handle in the future)
+
 ## 2.2.4
 ___Upgrades:___
 
