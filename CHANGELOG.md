@@ -1,5 +1,10 @@
 # generator-react-webpack - Changelog
 
+## 2.2.6
+___Upgrades___:
+
+1. Added new version of ```react-webpack-template``` (provides new features for continuous testing and better dist build support)
+
 ## 2.2.5
 ___Upgrades:___
 
