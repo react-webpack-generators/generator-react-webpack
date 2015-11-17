@@ -1,5 +1,16 @@
 # generator-react-webpack - Changelog
 
+## 3.0.0
+___Upgrades___:
+
+1. Updated react-webpack-template to 1.0.0 to include support for babel 6.
+
+## 2.2.7
+___Upgrades___:
+
+1. Updated yeoman to 0.21
+2. Added some badges for the readme
+
 ## 2.2.6
 ___Upgrades___:
 

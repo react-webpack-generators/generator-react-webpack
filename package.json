@@ -37,7 +37,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "react-webpack-template": "^0.3.0",
+    "react-webpack-template": "^1.0.0",
     "underscore.string": "^3.2.2",
     "yeoman-generator": "^0.21.0",
     "yeoman-welcome": "^1.0.1"
