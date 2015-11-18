@@ -25,6 +25,49 @@ module.exports = generator.Base.extend({
     this.sourceRoot(baseRootPath);
 
     this.config.save();
+
+    this.postcssConfig = function() {
+      let esprima = require('esprima');
+      let walk = require('esprima-walk');
+      let escodegen = require('escodegen');
+
+      let baseConfigPath = path.join(this.destinationRoot(), 'cfg/base.js');
+
+      let css = '/\\.css$/';
+      let cssDialects = ['/\\.sass/', '/\\.scss/', '/\\.less/', '/\\.styl/'];
+
+      let postcss = 'var postcss = { postcss: function() { return []; } }';
+      postcss = esprima.parse(postcss);
+      postcss = postcss.body[0].declarations[0].init.properties[0];
+
+      let data = fs.readFileSync(baseConfigPath, 'utf8');
+      let parsed = esprima.parse(data);
+
+      walk.walkAddParent(parsed, function(node) {
+        if(node.type === 'AssignmentExpression' && node.left.object.name === 'module') {
+          node.right.properties.push(postcss);
+        }
+
+        if(node.type === 'Property' && node.key.name === 'test') {
+          if(cssDialects.indexOf(node.value.raw) > -1) {
+            let current = node.parent.properties[1].value.value;
+            current += '!postcss-loader';
+
+            node.parent.properties[1].value.value = current;
+          }
+
+          if(node.value.raw === css) {
+            let current = 'style-loader!css-loader!postcss-loader';
+
+            node.parent.properties[1].value.value = current;
+          }
+        }
+      });
+
+      let options = { format: { indent: { style: '  ' } } };
+      let code = escodegen.generate(parsed, options);
+      fs.writeFileSync(baseConfigPath, code, 'utf8');
+    }
   },
 
   initializing: function() {
@@ -134,19 +177,8 @@ module.exports = generator.Base.extend({
   },
 
   install: function() {
-    // Update base cfg if postcss is enabled
     if(this.postcss) {
-      var baseConfigPath = path.join(this.destinationRoot(), 'cfg/base.js');
-      var data = fs.readFileSync(baseConfigPath, 'utf8');
-      var result = data.replace(/(style-loader.*)'/g,
-        function(match, $1) {
-          return $1 + '!postcss-loader\'';
-        }
-      );
-      result = result.replace(/style!css/, 'style-loader!css-loader!postcss-loader');
-      result = result.replace(/\s\s\}\n};/, '  },\n  postcss: function () {\n    return [\n\n    ];\n  }\n};');
-
-      fs.writeFileSync(baseConfigPath, result, 'utf8');
+      this.postcssConfig();
     }
 
     if(!this.options['skip-install']) {
