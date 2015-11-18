@@ -1,0 +1,7 @@
+//Support for Visual Studio Code https://code.visualstudio.com/docs/languages/javascript
+{
+	"compilerOptions": {
+		"target": "ES6",
+		"module": "commonjs"
+	}
+}
