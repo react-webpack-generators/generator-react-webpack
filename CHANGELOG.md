@@ -1,5 +1,10 @@
 # generator-react-webpack - Changelog
 
+## 3.0.1
+___Upgrades___:
+1. Unneeded files (License, .npmignore) are not copied anymore
+2. Existence of .babelrc is now checked in unit tests
+
 ## 3.0.0
 ___Upgrades___:
 
