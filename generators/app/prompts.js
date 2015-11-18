@@ -14,5 +14,11 @@ module.exports = [
     message: 'Which styles language you want to use?',
     choices: utils.config.getChoices('style'),
     default: utils.config.getDefaultChoice('style')
+  },
+  {
+    type: 'confirm',
+    name: 'postcss',
+    message: 'Enable postcss?',
+    default: false
   }
 ];

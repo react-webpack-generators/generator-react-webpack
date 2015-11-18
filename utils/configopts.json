@@ -39,6 +39,18 @@
       }
     ]
   },
+  "postcss": {
+    "options": [
+      {
+        "name": "postcss",
+        "value": "postcss",
+        "packages": [
+          { "name": "postcss", "version": "^5.0.11" },
+          { "name": "postcss-loader", "version": "^0.8.0" }
+        ]
+      }
+    ]
+  },
   "style": {
     "options": [
       {
