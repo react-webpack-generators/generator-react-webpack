@@ -134,6 +134,21 @@ module.exports = generator.Base.extend({
   },
 
   install: function() {
+    // Update base cfg if postcss is enabled
+    if(this.postcss) {
+      var baseConfigPath = path.join(this.destinationRoot(), 'cfg/base.js');
+      var data = fs.readFileSync(baseConfigPath, 'utf8');
+      var result = data.replace(/(style-loader.*)'/g,
+        function(match, $1) {
+          return $1 + '!postcss-loader\'';
+        }
+      );
+      result = result.replace(/style!css/, 'style-loader!css-loader!postcss-loader');
+      result = result.replace(/\s\s\}\n};/, '  },\n  postcss: function () {\n    return [\n\n    ];\n  }\n};');
+
+      fs.writeFileSync(baseConfigPath, result, 'utf8');
+    }
+
     if(!this.options['skip-install']) {
       this.installDependencies({ bower: false });
     }
