@@ -89,11 +89,12 @@ module.exports = generator.Base.extend({
   writing: function() {
 
     let excludeList = [
-      'LICENCE',
+      'LICENSE',
       'README.md',
       'CHANGELOG.md',
       'node_modules',
-      'package.json'
+      'package.json',
+      '.travis.yml'
     ];
 
     // Get all files in our repo and copy the ones we should
@@ -113,8 +114,9 @@ module.exports = generator.Base.extend({
         } else {
           if (item === '.npmignore') {
             this.copy(item, '.gitignore');
+          } else {
+            this.copy(item, item);
           }
-          this.copy(item, item);
         }
       }
     });

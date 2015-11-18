@@ -42,10 +42,10 @@ describe('react-webpack:app', () => {
     it('should generate dot files', () => {
 
       assert.file([
+        '.babelrc',
         '.editorconfig',
         '.eslintrc',
         '.gitignore',
-        '.npmignore',
         '.yo-rc.json'
       ]);
     });
@@ -53,7 +53,6 @@ describe('react-webpack:app', () => {
     it('should generate project configuration files', () => {
 
       assert.file([
-        'LICENSE',
         'package.json'
       ]);
     });
