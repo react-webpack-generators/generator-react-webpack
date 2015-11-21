@@ -7,9 +7,7 @@ let escodegen = require('escodegen');
 module.exports = {
   write: function(path) {
     let baseConfigPath = path;
-
-    let css = '/\\.css$/';
-    let cssDialects = ['/\\.sass/', '/\\.scss/', '/\\.less/', '/\\.styl/'];
+    let cssDialects = ['/\\.css$/', '/\\.sass/', '/\\.scss/', '/\\.less/', '/\\.styl/'];
 
     let postcss = 'var postcss = { postcss: function() { return []; } }';
     postcss = esprima.parse(postcss);
@@ -30,18 +28,11 @@ module.exports = {
 
           node.parent.properties[1].value.value = current;
         }
-
-        if(node.value.raw === css) {
-          let current = 'style-loader!css-loader!postcss-loader';
-
-          node.parent.properties[1].value.value = current;
-        }
       }
     });
 
     let options = { format: { indent: { style: '  ' } } };
     let code = escodegen.generate(parsed, options);
     fs.writeFileSync(baseConfigPath, code, 'utf8');
-
   }
 }
