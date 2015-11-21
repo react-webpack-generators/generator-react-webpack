@@ -35,6 +35,10 @@ describe('react-webpack:app', () => {
     it('should use "css" as default style language', () => {
       expect(generator.config.get('style')).to.equal('css');
     });
+
+    it('should not enable "PostCSS" by default', () => {
+      expect(generator.config.get('postcss')).to.equal(false);
+    });
   });
 
   describe('#createFiles', () => {
