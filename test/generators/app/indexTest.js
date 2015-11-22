@@ -169,7 +169,7 @@ describe('react-webpack:app non-default-prompts', () => {
       ]);
     });
 
-    it('should append the postcss loader to the style pipes', () => {
+    it('should insert the postcss loader into the style pipes', () => {
 
       assert.fileContent('cfg/base.js', 'loader: \'style!css!postcss-loader\'');
       //assert.fileContent('cfg/base.js', 'loader: \'style-loader!css-loader!postcss-loader\'');
