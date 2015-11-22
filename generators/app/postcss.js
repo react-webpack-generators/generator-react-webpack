@@ -24,7 +24,8 @@ module.exports = {
       if(node.type === 'Property' && node.key.name === 'test') {
         if(cssDialects.indexOf(node.value.raw) > -1) {
           let current = node.parent.properties[1].value.value;
-          current += '!postcss-loader';
+          let position = current.split('!', 2).join('!').length;
+          current = [current.slice(0, position), '!postcss-loader', current.slice(position)].join('');
 
           node.parent.properties[1].value.value = current;
         }
