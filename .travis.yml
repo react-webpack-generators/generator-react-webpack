@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - '4.1.0'
+  - '4.2.2'
 before_install:
   - currentfolder=${PWD##*/}
   - if [ "$currentfolder" != 'generator-react-webpack' ]; then cd .. && eval "mv $currentfolder generator-react-webpack" && cd generator-react-webpack; fi
