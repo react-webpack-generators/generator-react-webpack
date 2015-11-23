@@ -1,6 +1,6 @@
 {
   "name": "generator-react-webpack",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "Yeoman generator for using React with Webpack via Babel",
   "keywords": [
     "yeoman-generator",
@@ -44,8 +44,8 @@
     "underscore.string": "^3.2.2",
     "yeoman-generator": "^0.21.0",
     "yeoman-welcome": "^1.0.1",
-    "esprima": "^2.7.0" ,
-    "esprima-walk": "^0.1.0" ,
+    "esprima": "^2.7.0",
+    "esprima-walk": "^0.1.0",
     "escodegen": "^1.7.0"
   },
   "devDependencies": {
