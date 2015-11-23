@@ -46,11 +46,15 @@ module.exports = generator.Base.extend({
       // Set needed global vars for yo
       this.appName = props.appName;
       this.style = props.style;
+      this.postcss = props.postcss
 
       // Set needed keys into config
       this.config.set('appName', this.appName);
       this.config.set('appPath', this.appPath);
       this.config.set('style', this.style);
+      this.config.set('postcss', this.postcss);
+
+      this.config.save();
 
       done();
     }.bind(this));
@@ -79,6 +83,15 @@ module.exports = generator.Base.extend({
     if(styleConfig && styleConfig.packages) {
 
       for(let dependency of styleConfig.packages) {
+        packageSettings.dependencies[dependency.name] = dependency.version;
+      }
+    }
+
+    // Add postcss module if enabled
+    let postcssConfig = utils.config.getChoiceByKey('postcss', 'postcss');
+    if(this.postcss && postcssConfig && postcssConfig.packages) {
+
+      for(let dependency of postcssConfig.packages) {
         packageSettings.dependencies[dependency.name] = dependency.version;
       }
     }
@@ -123,6 +136,11 @@ module.exports = generator.Base.extend({
   },
 
   install: function() {
+    if(this.postcss) {
+      let postcss = require('./postcss');
+      postcss.write(path.join(this.destinationRoot(), 'cfg/base.js'));
+    }
+
     if(!this.options['skip-install']) {
       this.installDependencies({ bower: false });
     }

@@ -11,6 +11,7 @@ Out of the box it comes with support for:
 - Webpack
 - ES2015 via Babel-Loader
 - Different supported style languages (sass, scss, less, stylus)
+- Style transformations via PostCSS
 - Automatic code linting via esLint
 - Ability to unit test components via Karma and Mocha/Chai
 
@@ -63,6 +64,27 @@ yo react-webpack:component my/namespaced/components/name --stateless
 Stateless functional components where introduced in React v0.14. They have a much shorter syntax than regular ones and no state or lifecycle methods at all. Please read the [React 0.14 release notes](https://facebook.github.io/react/blog/2015/10/07/react-v0.14.html) to get more information about those components.
 
 ___Note___: You will still be able to set properties for stateless components!
+
+## Adding PostCSS plugins
+If you have enabled [PostCSS](https://github.com/postcss/postcss) at generation time, install your PostCSS plugins via npm and *require* it in **postcss** function in *cfg/base.js*.
+
+Example for autoprefixer:
+```bash
+cd my-new-project
+npm install autoprefixer
+```
+Require in *cfg/base.js*
+```JavaScript
+...
+postcss: function () {
+  return [
+    require('autoprefixer')({
+      browsers: ['last 2 versions', 'ie >= 8']
+    })
+  ];
+}
+...
+```
 
 ## Usage
 The following commands are available in your project:
