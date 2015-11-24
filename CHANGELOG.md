@@ -1,5 +1,9 @@
 # generator-react-webpack - Changelog
 
+## 3.1.1
+
+1. Added bugfix for https://github.com/newtriks/generator-react-webpack/issues/170
+
 ## 3.1.0
 
 1. Added support for postcss (Patch provided by [stylesuxx](https://github.com/stylesuxx))

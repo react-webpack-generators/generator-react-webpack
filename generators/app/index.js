@@ -83,7 +83,7 @@ module.exports = generator.Base.extend({
     if(styleConfig && styleConfig.packages) {
 
       for(let dependency of styleConfig.packages) {
-        packageSettings.dependencies[dependency.name] = dependency.version;
+        packageSettings.devDependencies[dependency.name] = dependency.version;
       }
     }
 
@@ -92,7 +92,7 @@ module.exports = generator.Base.extend({
     if(this.postcss && postcssConfig && postcssConfig.packages) {
 
       for(let dependency of postcssConfig.packages) {
-        packageSettings.dependencies[dependency.name] = dependency.version;
+        packageSettings.devDependencies[dependency.name] = dependency.version;
       }
     }
 
