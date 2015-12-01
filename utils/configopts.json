@@ -63,8 +63,8 @@
         "value": "sass",
         "suffix": ".sass",
         "packages": [
-          { "name": "sass-loader", "version": "^1.0.1" },
-          { "name": "node-sass", "version": "^3.3.3" }
+          { "name": "sass-loader", "version": "^3.1.2" },
+          { "name": "node-sass", "version": "^3.4.2" }
         ]
       },
       {
@@ -72,8 +72,8 @@
         "value": "scss",
         "suffix": ".scss",
         "packages": [
-          { "name": "sass-loader", "version": "^1.0.1" },
-          { "name": "node-sass", "version": "^3.3.3" }
+          { "name": "sass-loader", "version": "^3.1.2" },
+          { "name": "node-sass", "version": "^3.4.2" }
         ]
       },
       {
