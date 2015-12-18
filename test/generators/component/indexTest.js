@@ -1,7 +1,7 @@
 'use strict';
 let path = require('path');
-let assert = require('yeoman-generator').assert;
-let helpers = require('yeoman-generator').test
+let assert = require('yeoman-assert');
+let helpers = require('yeoman-test');
 
 describe('react-webpack:component', () => {
 
