@@ -26,6 +26,7 @@ If you have built a generator using generator-react-webpack, tell us and we will
 
 ## Generators that extend generator-react-webpack
 - [Generator-React-Webpack-Alt](https://github.com/weblogixx/generator-react-webpack-alt) (Adds ability to create actions, stores and sources for [alt.js](http://alt.js.org))
+- [Generator-React-Webpack-Redux](https://github.com/stylesuxx/generator-react-webpack-redux) (Adds ability to create actions and reducers for [Redux](https://github.com/rackt/redux))
 
 ---
 
