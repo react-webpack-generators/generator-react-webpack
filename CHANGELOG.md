@@ -1,6 +1,10 @@
 # generator-react-webpack - Changelog
 
-## 3.1.2
+## 3.2.1
+
+1. Updated tests for new version of react-webpack-template
+
+## 3.2.0
 
 1. Updated yeoman-generator package to new version 0.22.1 (some methods like generator.NamedBase are now deprecated!)
 

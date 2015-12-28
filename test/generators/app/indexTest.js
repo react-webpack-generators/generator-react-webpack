@@ -77,8 +77,8 @@ describe('react-webpack:app', () => {
 
       assert.file([
         'src/actions/README.md',
+        'src/index.js',
         'src/components/Main.js',
-        'src/components/run.js',
         'src/favicon.ico',
         'src/images/yeoman.png',
         'src/index.html',
@@ -185,8 +185,8 @@ describe('react-webpack:app non-default-prompts', () => {
 
       assert.file([
         'src/actions/README.md',
+        'src/index.js',
         'src/components/Main.js',
-        'src/components/run.js',
         'src/favicon.ico',
         'src/images/yeoman.png',
         'src/index.html',
