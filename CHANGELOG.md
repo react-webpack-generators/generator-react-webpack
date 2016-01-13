@@ -1,5 +1,9 @@
 # generator-react-webpack - Changelog
 
+## 3.2.2
+
+1. Cleaned up formatting of unit tests
+
 ## 3.2.1
 
 1. Updated tests for new version of react-webpack-template
