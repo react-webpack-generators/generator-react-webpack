@@ -11,7 +11,7 @@ module.exports = [
   {
     type: 'list',
     name: 'style',
-    message: 'Which styles language you want to use?',
+    message: 'Which style language do you want to use?',
     choices: utils.config.getChoices('style'),
     default: utils.config.getDefaultChoice('style')
   },
