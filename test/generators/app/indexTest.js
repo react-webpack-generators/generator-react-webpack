@@ -65,6 +65,7 @@ describe('react-webpack:app', () => {
 
       assert.file([
         'cfg/base.js',
+        'cfg/defaults.js',
         'cfg/dev.js',
         'cfg/dist.js',
         'cfg/test.js',
@@ -159,6 +160,7 @@ describe('react-webpack:app non-default-prompts', () => {
 
       assert.file([
         'cfg/base.js',
+        'cfg/defaults.js',
         'cfg/dev.js',
         'cfg/dist.js',
         'cfg/test.js',
@@ -169,16 +171,16 @@ describe('react-webpack:app non-default-prompts', () => {
 
     it('should insert the postcss loader into the style pipes', () => {
 
-      assert.fileContent('cfg/base.js', 'loader: \'style-loader!css-loader!postcss-loader\'');
-      assert.fileContent('cfg/base.js', 'loader: \'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded&indentedSyntax\'');
-      assert.fileContent('cfg/base.js', 'loader: \'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded\'');
-      assert.fileContent('cfg/base.js', 'loader: \'style-loader!css-loader!postcss-loader!less-loader\'');
-      assert.fileContent('cfg/base.js', 'loader: \'style-loader!css-loader!postcss-loader!stylus-loader\'');
+      assert.fileContent('cfg/defaults.js', 'loader: \'style-loader!css-loader!postcss-loader\'');
+      assert.fileContent('cfg/defaults.js', 'loader: \'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded&indentedSyntax\'');
+      assert.fileContent('cfg/defaults.js', 'loader: \'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded\'');
+      assert.fileContent('cfg/defaults.js', 'loader: \'style-loader!css-loader!postcss-loader!less-loader\'');
+      assert.fileContent('cfg/defaults.js', 'loader: \'style-loader!css-loader!postcss-loader!stylus-loader\'');
     });
 
     it('should append the postcss function to the base config', () => {
 
-      assert.fileContent('cfg/base.js', ',\n  postcss: function () {\n    return [];\n  }');
+      assert.fileContent('cfg/defaults.js', ',\n  postcss: function () {\n    return [];\n  }');
     });
 
     it('should generate required source files', () => {

@@ -138,7 +138,7 @@ module.exports = generator.Base.extend({
   install: function() {
     if(this.postcss) {
       let postcss = require('./postcss');
-      postcss.write(path.join(this.destinationRoot(), 'cfg/base.js'));
+      postcss.write(path.join(this.destinationRoot(), 'cfg/defaults.js'));
     }
 
     if(!this.options['skip-install']) {

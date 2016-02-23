@@ -1,5 +1,10 @@
 # generator-react-webpack - Changelog
 
+## 3.2.3
+
+1. Adjusted postcss to work with react-webpack-template 1.4 upwards
+2. Improved styling output (provided by [thewtex](https://github.com/thewtex))
+
 ## 3.2.2
 
 1. Cleaned up formatting of unit tests
