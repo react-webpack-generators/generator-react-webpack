@@ -1,5 +1,8 @@
 # generator-react-webpack - Changelog
 
+## 3.2.4
+1. Added whitespaces to generated unit tests (made problems when using it with various eslint rules)
+
 ## 3.2.3
 
 1. Adjusted postcss to work with react-webpack-template 1.4 upwards
