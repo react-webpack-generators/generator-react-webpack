@@ -64,13 +64,17 @@ describe('react-webpack:component', () => {
    * @param {String} styleType Styling language to use
    * @param {Object} options Options to use for the generator
    * @param {Function} callback Test callback to run
+   * @param {Object} configs Override export paths
    */
-  function createGeneratedComponent(name, styleType, options, callback) {
+  function createGeneratedComponent(name, styleType, options, callback, config) {
     helpers.run(generatorComponent)
       .withArguments([name])
       .withOptions(options)
       .on('ready', (instance) => {
         instance.config.set('style', styleType);
+        if (config)
+          instance.config.set('paths', config);
+
       })
       .on('end', callback);
   }
@@ -83,7 +87,7 @@ describe('react-webpack:component', () => {
   function testComponentWithStyle(style, options) {
 
     // Make sure we always have options
-    if(!options) {
+    if (!options) {
       options = {};
     }
 
@@ -134,6 +138,19 @@ describe('react-webpack:component', () => {
           });
         });
 
+        it('should export the created component', (done) => {
+          const config = {
+            "components": "src/shared/components//",
+            "tests": "test/components//",
+            "styles": "src/shared/styles//"
+          };
+
+          createGeneratedComponent('mycomponent', style.type, options, () => {
+            assert.fileContent('src/shared/components/MycomponentComponent.js', `export default MycomponentComponent`);
+            done();
+          }, config);
+        });
+
         it(`should be possible to create components in a subfolder`, (done) => {
           createGeneratedComponent('my/little !special/test', style.type, options, () => {
 
@@ -177,5 +194,5 @@ describe('react-webpack:component', () => {
   testComponentWithStyle(styleTypes.stylus);
 
   // Test stateless components (should be enough when testing with defaults)
-  testComponentWithStyle(styleTypes.css, { stateless: true });
+  testComponentWithStyle(styleTypes.css, {stateless: true});
 });
