@@ -57,12 +57,9 @@ let getDefaultChoice = (setting) => {
   return config && config.default !== undefined && config.default.length > 0 ? config.default : null;
 }
 
-// getChoices
-// getDefault
-
 module.exports = {
-  getSetting: getSetting,
-  getChoices: getChoices,
-  getChoiceByKey: getChoiceByKey,
-  getDefaultChoice: getDefaultChoice
+  getSetting,
+  getChoices,
+  getChoiceByKey,
+  getDefaultChoice
 };

@@ -1,8 +1,8 @@
 'use strict';
 
-let path = require('path');
-let configUtils = require('./config');
-let _ = require('underscore.string');
+const path = require('path');
+const configUtils = require('./config');
+const _ = require('underscore.string');
 
 // Needed directory paths
 const baseName = path.basename(process.cwd());
@@ -157,11 +157,11 @@ let getDestinationClassName = (name, type, suffix) => {
 };
 
 module.exports = {
-  getBaseDir: getBaseDir,
-  getAllSettingsFromComponentName: getAllSettingsFromComponentName,
-  getAppName: getAppName,
-  getCleanedPathName: getCleanedPathName,
-  getComponentStyleName: getComponentStyleName,
-  getDestinationPath: getDestinationPath,
-  getDestinationClassName: getDestinationClassName
+  getBaseDir,
+  getAllSettingsFromComponentName,
+  getAppName,
+  getCleanedPathName,
+  getComponentStyleName,
+  getDestinationPath,
+  getDestinationClassName
 };

@@ -1,9 +1,9 @@
 'use strict';
 
-let config = require('./config');
-let yeoman = require('./yeoman');
+const config = require('./config');
+const yeoman = require('./yeoman');
 
 module.exports = {
-  config: config,
-  yeoman: yeoman
+  config,
+  yeoman
 };

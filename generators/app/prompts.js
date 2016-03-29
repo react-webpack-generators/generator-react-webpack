@@ -1,5 +1,5 @@
 'use strict';
-let utils = require('../../utils/all');
+const utils = require('../../utils/all');
 
 module.exports = [
   {
