@@ -4,33 +4,47 @@ let expect = require('chai').expect;
 let assert = require('yeoman-assert');
 let helpers = require('yeoman-test');
 
+// Default globals, used in all tests
+const defaultPrompts = require('../../../generators/app/prompts.js');
+let generator;
+const generatorBase = path.join(__dirname, '../../../generators/app');
+
+/**
+ * Global before load function. Run in the before callbacks
+ * @param  {Object}   prompts List of prompts to use
+ * @param  {Function} done    Done callback
+ */
+const beforeLoad = (prompts, done) => {
+
+  helpers.run(generatorBase)
+    .inTmpDir()
+    .withOptions({
+      'skip-welcome-message': true,
+      'skip-install': true
+    })
+    .withPrompts(prompts)
+    .on('ready', (instance) => {
+      generator = instance;
+    })
+    .on('end', done);
+};
+
 describe('react-webpack:app', () => {
 
-  let defaultPrompts = require('../../../generators/app/prompts.js');
   let prompts = {};
   for(let p of defaultPrompts) {
     prompts[p.name] = p.default;
   }
 
-  let generator;
-  let generatorBase = path.join(__dirname, '../../../generators/app');
-
   before((done) => {
-
-    helpers.run(generatorBase)
-      .inTmpDir()
-      .withOptions({
-        'skip-welcome-message': true,
-        'skip-install': true
-      })
-      .withPrompts(prompts)
-      .on('ready', (instance) => {
-        generator = instance;
-      })
-      .on('end', done);
+    beforeLoad(prompts, done);
   });
 
   describe('#config', () => {
+
+    it('should set the generatedWith key to the current generator major version', () => {
+      expect(generator.config.get('generatedWithVersion')).to.equal(3);
+    });
 
     it('should use "css" as default style language', () => {
       expect(generator.config.get('style')).to.equal('css');
@@ -101,9 +115,8 @@ describe('react-webpack:app', () => {
   });
 });
 
-describe('react-webpack:app non-default-prompts', () => {
+describe('react-webpack:app with PostCSS support', () => {
 
-  let defaultPrompts = require('../../../generators/app/prompts.js');
   let prompts = {};
   for(let p of defaultPrompts) {
     prompts[p.name] = p.default;
@@ -111,28 +124,22 @@ describe('react-webpack:app non-default-prompts', () => {
 
   prompts.postcss = true;
 
-  let generator;
-  let generatorBase = path.join(__dirname, '../../../generators/app');
-
   before((done) => {
-
-    helpers.run(generatorBase)
-      .inTmpDir()
-      .withOptions({
-        'skip-welcome-message': true,
-        'skip-install': true
-      })
-      .withPrompts(prompts)
-      .on('ready', (instance) => {
-        generator = instance;
-      })
-      .on('end', done);
+    beforeLoad(prompts, done);
   });
 
   describe('#config', () => {
 
+    it('should set the generatedWith key to the current generator major version', () => {
+      expect(generator.config.get('generatedWithVersion')).to.equal(3);
+    });
+
     it('should use "css" as default style language', () => {
       expect(generator.config.get('style')).to.equal('css');
+    });
+
+    it('should enable "PostCSS"', () => {
+      expect(generator.config.get('postcss')).to.equal(true);
     });
   });
 

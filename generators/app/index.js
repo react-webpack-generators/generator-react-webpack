@@ -4,6 +4,7 @@ let utils = require('../../utils/all');
 let prompts = require('./prompts');
 let path = require('path');
 let fs = require('fs');
+const packageInfo = require('../../package.json');
 
 // Set the base root directory for our files
 let baseRootPath = path.dirname(require.resolve('react-webpack-template'));
@@ -47,12 +48,14 @@ module.exports = generator.Base.extend({
       this.appName = props.appName;
       this.style = props.style;
       this.postcss = props.postcss
+      this.generatedWithVersion = packageInfo.version.split('.').unshift();
 
       // Set needed keys into config
       this.config.set('appName', this.appName);
       this.config.set('appPath', this.appPath);
       this.config.set('style', this.style);
       this.config.set('postcss', this.postcss);
+      this.config.set('generatedWithVersion', this.generatedWithVersion);
 
       this.config.save();
 
