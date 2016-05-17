@@ -1,5 +1,9 @@
 # generator-react-webpack - Changelog
 
+## 3.3.2
+
+1. Emergency fix: Reverted 3.3.1
+
 ## 3.3.1
 
 1. Added new version of yeoman-generator, adjusted unit tests

@@ -42,7 +42,7 @@
   "dependencies": {
     "react-webpack-template": "^1.0.0",
     "underscore.string": "^3.2.2",
-    "yeoman-generator": "^0.23.0",
+    "yeoman-generator": "^0.22.0",
     "yeoman-welcome": "^1.0.1",
     "esprima": "^2.7.0",
     "esprima-walk": "^0.1.0",
