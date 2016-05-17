@@ -1,5 +1,9 @@
 # generator-react-webpack - Changelog
 
+## 3.3.1
+
+1. Added new version of yeoman-generator, adjusted unit tests
+
 ## 3.3.0
 
 1. Added new yeoman key "generatedWithVersion". Will be used for backwards compatibility of new major releases.
