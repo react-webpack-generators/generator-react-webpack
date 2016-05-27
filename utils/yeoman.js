@@ -114,7 +114,7 @@ let getAppName = (appName) => {
     appName = getBaseDir();
   }
 
-  return _.camelize(_.slugify(_.humanize(appName)));
+  return _.slugify(_.humanize(appName));
 };
 
 /**

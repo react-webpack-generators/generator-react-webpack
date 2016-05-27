@@ -36,7 +36,7 @@ describe('Utilities:Yeoman', () => {
 
     it('should return a js friendly application name', () => {
       let result = utils.getAppName('this is a test using % special / chars!');
-      expect(result).to.be.equal('thisIsATestUsingSpecialChars');
+      expect(result).to.be.equal('this-is-a-test-using-special-chars');
     });
 
     it('should use the current path for creating the appName if the argument is omitted', () => {

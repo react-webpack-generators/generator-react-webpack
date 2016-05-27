@@ -1,6 +1,6 @@
 {
   "name": "generator-react-webpack",
-  "version": "3.3.2",
+  "version": "4.0.0",
   "description": "Yeoman generator for using React with Webpack via Babel",
   "keywords": [
     "yeoman-generator",
@@ -29,6 +29,10 @@
     }
   ],
   "main": "generators/app/index.js",
+  "files": [
+    "generators/app",
+    "generators/component"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/newtriks/generator-react-webpack.git"
@@ -40,13 +44,13 @@
     "release:patch": "npm version patch && npm publish && git push --follow-tags"
   },
   "dependencies": {
-    "react-webpack-template": "^1.0.0",
-    "underscore.string": "^3.2.2",
-    "yeoman-generator": "^0.22.0",
-    "yeoman-welcome": "^1.0.1",
+    "escodegen": "^1.7.0",
     "esprima": "^2.7.0",
     "esprima-walk": "^0.1.0",
-    "escodegen": "^1.7.0"
+    "react-webpack-template": "^2.0.1-0",
+    "underscore.string": "^3.2.2",
+    "yeoman-generator": "^0.23.0",
+    "yeoman-welcome": "^1.0.1"
   },
   "devDependencies": {
     "chai": "^3.2.0",
