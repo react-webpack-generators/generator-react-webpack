@@ -76,7 +76,7 @@ Example for autoprefixer:
 cd my-new-project
 npm install autoprefixer
 ```
-Require in *cfg/base.js*
+Require in *cfg/defaults.js*
 ```JavaScript
 ...
 postcss: function () {
