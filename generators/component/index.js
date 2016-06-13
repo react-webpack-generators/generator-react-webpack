@@ -18,6 +18,14 @@ module.exports = generator.Base.extend({
     let settings = utils.yeoman.getAllSettingsFromComponentName(this.name, this.config.get('style'));
     let componentType = this.options.stateless ? 'Stateless' : 'Base';
 
+    const paths = this.config.get('paths');
+
+    if (paths !== undefined) {
+      settings.component.path = paths.components || settings.components.path;
+      settings.test.path = paths.tests || settings.tests.path;
+      settings.style.path = paths.styles || settings.style.path;
+    }
+
     // Create the style template
     this.fs.copyTpl(
       this.templatePath(`styles/Component${settings.style.suffix}`),
