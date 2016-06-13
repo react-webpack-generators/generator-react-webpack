@@ -105,6 +105,9 @@ npm run dist
 # Run unit tests
 npm test
 
+# Auto-run unit tests on file changes
+npm run test:watch
+
 # Lint all files in src (also automatically done AFTER tests are run)
 npm run lint
 
