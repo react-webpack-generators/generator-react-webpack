@@ -45,8 +45,8 @@
         "name": "postcss",
         "value": "postcss",
         "packages": [
-          { "name": "postcss", "version": "^5.0.11" },
-          { "name": "postcss-loader", "version": "^0.8.0" }
+          { "name": "postcss", "version": "^5.0.21" },
+          { "name": "postcss-loader", "version": "^0.9.1" }
         ]
       }
     ]
@@ -63,8 +63,8 @@
         "value": "sass",
         "suffix": ".sass",
         "packages": [
-          { "name": "sass-loader", "version": "^3.1.2" },
-          { "name": "node-sass", "version": "^3.4.2" }
+          { "name": "sass-loader", "version": "^3.2.0" },
+          { "name": "node-sass", "version": "^3.7.0" }
         ]
       },
       {
@@ -72,8 +72,8 @@
         "value": "scss",
         "suffix": ".scss",
         "packages": [
-          { "name": "sass-loader", "version": "^3.1.2" },
-          { "name": "node-sass", "version": "^3.4.2" }
+          { "name": "sass-loader", "version": "^3.2.0" },
+          { "name": "node-sass", "version": "^3.7.0" }
         ]
       },
       {
@@ -81,8 +81,8 @@
         "value": "less",
         "suffix": ".less",
         "packages": [
-          { "name": "less-loader", "version": "^2.0.0" },
-          { "name": "less", "version": "^2.5.3" }
+          { "name": "less-loader", "version": "^2.2.3" },
+          { "name": "less", "version": "^2.7.1" }
         ]
       },
       {
@@ -90,9 +90,9 @@
         "value": "stylus",
         "suffix": ".styl",
         "packages": [
-          { "name": "stylus-loader", "version": "^0.5.0" },
-          { "name": "stylus", "version": "~0.49.2" },
-          { "name": "nib", "version": "~1.0.4" }
+          { "name": "stylus-loader", "version": "^2.1.0" },
+          { "name": "stylus", "version": "^0.54.5" },
+          { "name": "nib", "version": "~1.1.0" }
         ]
       }
     ],

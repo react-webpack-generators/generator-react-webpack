@@ -122,8 +122,11 @@ describe.skip('react-webpack:app with PostCSS support', () => {
   for(let p of defaultPrompts) {
     prompts[p.name] = p.default;
   }
-
   prompts.postcss = true;
+
+  before(() => {
+    return beforeLoad(prompts);
+  });
 
   describe('#config', () => {
 
@@ -163,18 +166,15 @@ describe.skip('react-webpack:app with PostCSS support', () => {
     it('should generate the webpack configuration', () => {
 
       assert.file([
-        'cfg/base.js',
-        'cfg/defaults.js',
-        'cfg/dev.js',
-        'cfg/dist.js',
-        'cfg/test.js',
-        'server.js',
+        'conf/webpack/Base.js',
+        'conf/webpack/Dev.js',
+        'conf/webpack/Dist.js',
+        'conf/webpack/Test.js',
         'webpack.config.js'
       ]);
     });
 
     it('should insert the postcss loader into the style pipes', () => {
-
       assert.fileContent('cfg/defaults.js', 'loader: \'style-loader!css-loader!postcss-loader\'');
       assert.fileContent('cfg/defaults.js', 'loader: \'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded&indentedSyntax\'');
       assert.fileContent('cfg/defaults.js', 'loader: \'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded\'');
@@ -182,7 +182,7 @@ describe.skip('react-webpack:app with PostCSS support', () => {
       assert.fileContent('cfg/defaults.js', 'loader: \'style-loader!css-loader!postcss-loader!stylus-loader\'');
     });
 
-    it('should append the postcss function to the base config', () => {
+    it.skip('should append the postcss function to the base config', () => {
 
       assert.fileContent('cfg/defaults.js', ',\n  postcss: function () {\n    return [];\n  }');
     });
@@ -192,13 +192,13 @@ describe.skip('react-webpack:app with PostCSS support', () => {
       assert.file([
         'src/actions/README.md',
         'src/index.js',
-        'src/components/Main.js',
+        'src/components/App.js',
+        'src/components/app.css',
         'src/favicon.ico',
         'src/images/yeoman.png',
         'src/index.html',
         'src/sources/README.md',
-        'src/stores/README.md',
-        'src/styles/App.css'
+        'src/stores/README.md'
       ]);
     });
 
@@ -206,9 +206,10 @@ describe.skip('react-webpack:app with PostCSS support', () => {
 
       assert.file([
         'karma.conf.js',
-        'test/components/MainTest.js',
-        'test/helpers/shallowRenderHelper.js',
-        'test/loadtests.js'
+        'test/components/AppTest.js',
+        'test/config/ConfigTest.js',
+        'test/loadtests.js',
+        'test/.eslintrc'
       ]);
     });
   });

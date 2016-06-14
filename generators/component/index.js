@@ -1,19 +1,20 @@
 'use strict';
-let generator = require('yeoman-generator');
+const Generators = require('yeoman-generator');
 let utils = require('../../utils/all');
 
-module.exports = generator.Base.extend({
+class ComponentGenerator extends Generators.Base {
 
-  constructor: function() {
-    generator.Base.apply(this, arguments);
+  constructor(args, options) {
+
+    super(args, options);
     this.argument('name', { type: String, required: true });
     this.option('stateless', {
       desc: 'Create a stateless component instead of a full one',
       defaults: false
     });
-  },
+  }
 
-  writing: function() {
+  writing() {
 
     let settings = utils.yeoman.getAllSettingsFromComponentName(this.name, this.config.get('style'));
     let componentType = this.options.stateless ? 'Stateless' : 'Base';
@@ -39,4 +40,6 @@ module.exports = generator.Base.extend({
       settings
     );
   }
-});
+}
+
+module.exports = ComponentGenerator;

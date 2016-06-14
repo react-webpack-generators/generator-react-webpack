@@ -39,6 +39,7 @@
   },
   "scripts": {
     "test": "mocha",
+    "test:watch": "mocha -w",
     "release:major": "npm version major && npm publish && git push --follow-tags",
     "release:minor": "npm version minor && npm publish && git push --follow-tags",
     "release:patch": "npm version patch && npm publish && git push --follow-tags"

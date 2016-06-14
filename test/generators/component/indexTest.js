@@ -108,7 +108,7 @@ describe('react-webpack:component', () => {
 
         it('should always import REACT', (done) => {
           createGeneratedComponent('mycomponent', style.type, options, () => {
-            assert.fileContent('src/components/MycomponentComponent.js', `import React from 'react';`);
+            assert.fileContent('src/components/MycomponentComponent.js', 'import React from \'react\';');
             done();
           });
         });
@@ -122,19 +122,19 @@ describe('react-webpack:component', () => {
 
         it('should have its displayName set per default', (done) => {
           createGeneratedComponent('mycomponent', style.type, options, () => {
-            assert.fileContent('src/components/MycomponentComponent.js', `displayName = 'MycomponentComponent';`);
+            assert.fileContent('src/components/MycomponentComponent.js', 'displayName = \'MycomponentComponent\';');
             done();
           });
         });
 
         it('should export the created component', (done) => {
           createGeneratedComponent('mycomponent', style.type, options, () => {
-            assert.fileContent('src/components/MycomponentComponent.js', `export default MycomponentComponent`);
+            assert.fileContent('src/components/MycomponentComponent.js', 'export default MycomponentComponent');
             done();
           });
         });
 
-        it(`should be possible to create components in a subfolder`, (done) => {
+        it('should be possible to create components in a subfolder', (done) => {
           createGeneratedComponent('my/little !special/test', style.type, options, () => {
 
             assert.file([
