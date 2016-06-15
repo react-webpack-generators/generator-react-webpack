@@ -1,6 +1,6 @@
 {
   "name": "generator-react-webpack",
-  "version": "4.0.0",
+  "version": "4.0.1-0",
   "description": "Yeoman generator for using React with Webpack via Babel",
   "keywords": [
     "yeoman-generator",
