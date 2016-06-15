@@ -94,7 +94,7 @@ describe('react-webpack:app', () => {
         'src/actions/README.md',
         'src/index.js',
         'src/components/App.js',
-        'src/components/app.css',
+        'src/components/app.cssmodule.css',
         'src/favicon.ico',
         'src/images/yeoman.png',
         'src/index.html',
@@ -116,6 +116,7 @@ describe('react-webpack:app', () => {
   });
 });
 
+/*
 describe.skip('react-webpack:app with PostCSS support', () => {
 
   let prompts = {};
@@ -214,3 +215,4 @@ describe.skip('react-webpack:app with PostCSS support', () => {
     });
   });
 });
+*/
