@@ -4,6 +4,7 @@ import styles from '<%= style.webpackPath %>';
 
 @cssmodules(styles)
 class <%= component.className %> extends React.Component {
+  
   render() {
     return (
       <div className="<%= style.className %>" styleName="<%= style.className %>">

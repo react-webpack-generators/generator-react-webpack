@@ -17,6 +17,12 @@ module.exports = [
   },
   {
     type: 'confirm',
+    name: 'cssmodules',
+    message: 'Enable css module support? See https://github.com/gajus/react-css-modules for further info',
+    default: true
+  },
+  {
+    type: 'confirm',
     name: 'postcss',
     message: 'Enable postcss?',
     default: false

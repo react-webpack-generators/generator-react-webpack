@@ -5,7 +5,7 @@ import styles from '<%= style.webpackPath %>';
 function <%= component.className %>() {
 
   return (
-    <div className="<%= style.className %>">
+    <div className="<%= style.className %>" styleName="<%= style.className %>">
       Please edit <%= component.path %><%= component.fileName %> to update this component!
     </div>
   );

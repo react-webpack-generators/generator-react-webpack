@@ -54,6 +54,7 @@ class AppGenerator extends Generators.Base {
       // Set needed global vars for yo
       this.appName = answers.appName;
       this.style = answers.style;
+      this.cssmodules = answers.cssmodules;
       this.postcss = answers.postcss;
       this.generatedWithVersion = parseInt(packageInfo.version.split('.').shift(), 10);
 
@@ -61,6 +62,7 @@ class AppGenerator extends Generators.Base {
       this.config.set('appName', this.appName);
       this.config.set('appPath', this.appPath);
       this.config.set('style', this.style);
+      this.config.set('cssmodules', this.cssmodules);
       this.config.set('postcss', this.postcss);
       this.config.set('generatedWithVersion', this.generatedWithVersion);
     });

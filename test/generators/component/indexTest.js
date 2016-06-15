@@ -173,17 +173,20 @@ describe('react-webpack:component', () => {
     }
 
     // Run all tests for all available style types.
-    testComponentWithStyle(styleTypes.css);
-    testComponentWithStyle(styleTypes.sass);
-    testComponentWithStyle(styleTypes.scss);
-    testComponentWithStyle(styleTypes.less);
-    testComponentWithStyle(styleTypes.stylus);
-
-    // Test stateless components (should be enough when testing with defaults)
-    testComponentWithStyle(styleTypes.css, { stateless: true });
+    // Stateless components will also be tested!
+    for(const style in styleTypes) {
+      testComponentWithStyle(styleTypes[style]);
+      testComponentWithStyle(styleTypes[style], { stateless: true });
+    }
   });
 
   describe('when using version 4 of the generator', () => {
+
+    /**
+     * @var {yeoman.generator} generator
+     * Global generator instance, set by createGeneratedComponent
+     */
+    let generator;
 
     // List of available style types. Please add a line that says
     // testComponentWithStyle(styleTypes.KEY); to the bottom of the file
@@ -191,56 +194,50 @@ describe('react-webpack:component', () => {
     const styleTypes = {
       css: {
         type: 'css',
-        fileName: 'src/styles/Mycomponent.css',
-        expandedFileName: 'src/styles/my/littleSpecial/Test.css',
+        fileName: 'src/components/mycomponent.cssmodule.css',
+        expandedFileName: 'src/components/my/littleSpecial/test.cssmodule.css',
         assertions: {
-          componentImport: 'import styles from \'styles//Mycomponent.css\';',
+          componentImport: 'import styles from \'./mycomponent.cssmodule.css\';',
           styleContent: '.mycomponent-component'
         }
       },
       sass: {
         type: 'sass',
-        fileName: 'src/styles/Mycomponent.sass',
-        expandedFileName: 'src/styles/my/littleSpecial/Test.sass',
+        fileName: 'src/components/Mycomponent.cssmodule.sass',
+        expandedFileName: 'src/components/my/littleSpecial/test.cssmodule.sass',
         assertions: {
-          componentImport: 'import styles from \'styles//Mycomponent.sass\';',
+          componentImport: 'import styles from \'./mycomponent.cssmodule.sass\';',
           styleContent: '.mycomponent-component'
         }
       },
       scss: {
         type: 'scss',
-        fileName: 'src/styles/Mycomponent.scss',
-        expandedFileName: 'src/styles/my/littleSpecial/Test.scss',
+        fileName: 'src/components/mycomponent.cssmodule.scss',
+        expandedFileName: 'src/components/my/littleSpecial/test.cssmodule.scss',
         assertions: {
-          componentImport: 'import styles from \'styles//Mycomponent.scss\';',
+          componentImport: 'import styles from \'./mycomponent.cssmodule.scss\';',
           styleContent: '.mycomponent-component'
         }
       },
       less: {
         type: 'less',
-        fileName: 'src/styles/Mycomponent.less',
-        expandedFileName: 'src/styles/my/littleSpecial/Test.less',
+        fileName: 'src/components/mycomponent.cssmodule.less',
+        expandedFileName: 'src/components/my/littleSpecial/test.cssmodule.less',
         assertions: {
-          componentImport: 'import styles from \'styles//Mycomponent.less\';',
+          componentImport: 'import styles from \'./mycomponent.cssmodule.less\';',
           styleContent: '.mycomponent-component'
         }
       },
       stylus: {
         type: 'stylus',
-        fileName: 'src/styles/Mycomponent.styl',
-        expandedFileName: 'src/styles/my/littleSpecial/Test.styl',
+        fileName: 'src/components/mycomponent.cssmodule.styl',
+        expandedFileName: 'src/components/my/littleSpecial/test.cssmodule.styl',
         assertions: {
-          componentImport: 'import styles from \'styles//Mycomponent.styl\';',
+          componentImport: 'import styles from \'./mycomponent.cssmodule.styl\';',
           styleContent: '.mycomponent-component'
         }
       }
     };
-
-    /**
-     * @var {yeoman.generator} generator
-     * Global generator instance, set by createGeneratedComponent
-     */
-    let generator;
 
     /**
      * Return a newly generated component with given name and style
@@ -281,9 +278,9 @@ describe('react-webpack:component', () => {
             createGeneratedComponent('mycomponent', style.type, options, () => {
 
               assert.file([
-                'src/components/MycomponentComponent.js',
+                'src/components/Mycomponent.js',
                 style.fileName,
-                'test/components/MycomponentComponentTest.js'
+                'test/components/MycomponentTest.js'
               ]);
               done();
             });
@@ -294,21 +291,21 @@ describe('react-webpack:component', () => {
 
           it('should always import REACT', (done) => {
             createGeneratedComponent('mycomponent', style.type, options, () => {
-              assert.fileContent('src/components/MycomponentComponent.js', 'import React from \'react\';');
+              assert.fileContent('src/components/Mycomponent.js', 'import React from \'react\';');
               done();
             });
           });
 
           it(`should require the created ${style.type} file`, (done) => {
             createGeneratedComponent('mycomponent', style.type, options, () => {
-              assert.fileContent('src/components/MycomponentComponent.js', style.assertions.componentImport);
+              assert.fileContent('src/components/Mycomponent.js', style.assertions.componentImport);
               done();
             });
           });
 
           it('should have its displayName set per default', (done) => {
             createGeneratedComponent('mycomponent', style.type, options, () => {
-              assert.fileContent('src/components/MycomponentComponent.js', 'displayName = \'MycomponentComponent\';');
+              assert.fileContent('src/components/Mycomponent.js', 'Mycomponent.displayName = \'Mycomponent\';');
               done();
             });
           });
@@ -318,11 +315,11 @@ describe('react-webpack:component', () => {
 
               let exportAssertion;
               if(generator.options.stateless) {
-                exportAssertion = 'export default cssmodules(MycomponentComponent, styles);';
+                exportAssertion = 'export default cssmodules(Mycomponent, styles);';
               } else {
-                exportAssertion = 'export default MycomponentComponent';
+                exportAssertion = 'export default Mycomponent';
               }
-              assert.fileContent('src/components/MycomponentComponent.js', exportAssertion);
+              assert.fileContent('src/components/Mycomponent.js', exportAssertion);
               done();
             });
           });
@@ -331,9 +328,9 @@ describe('react-webpack:component', () => {
             createGeneratedComponent('my/little !special/test', style.type, options, () => {
 
               assert.file([
-                'src/components/my/littleSpecial/TestComponent.js',
+                'src/components/my/littleSpecial/Test.js',
                 style.expandedFileName,
-                'test/components/my/littleSpecial/TestComponentTest.js'
+                'test/components/my/littleSpecial/TestTest.js'
               ]);
               done();
             });
@@ -354,7 +351,7 @@ describe('react-webpack:component', () => {
 
           it('should import the react component', (done) => {
             createGeneratedComponent('mycomponent', style.type, options, () => {
-              assert.fileContent('test/components/MycomponentComponentTest.js', 'import MycomponentComponent from \'components//MycomponentComponent.js\';');
+              assert.fileContent('test/components/MycomponentTest.js', 'import Mycomponent from \'components//Mycomponent.js\';');
               done();
             });
           });
@@ -363,14 +360,11 @@ describe('react-webpack:component', () => {
     }
 
     // Run all tests for all available style types.
-    testComponentWithStyle(styleTypes.css);
-    testComponentWithStyle(styleTypes.sass);
-    testComponentWithStyle(styleTypes.scss);
-    testComponentWithStyle(styleTypes.less);
-    testComponentWithStyle(styleTypes.stylus);
-
-    // Test stateless components (should be enough when testing with defaults)
-    testComponentWithStyle(styleTypes.css, { stateless: true });
+    // Stateless components will also be tested!
+    for(const style in styleTypes) {
+      testComponentWithStyle(styleTypes[style]);
+      testComponentWithStyle(styleTypes[style], { stateless: true });
+    }
   });
 
 });

@@ -19,12 +19,19 @@ let getBaseDir = () => {
  * Get all settings (paths and the like) from components name
  * @param {String} componentName The components name
  * @param {String} style Style language to use [optional]
+ * @param {String|Number} generatorVersion The version of the generator [optional]
  * @return {Object} Component settings
  */
-let getAllSettingsFromComponentName = (componentName, style) => {
+let getAllSettingsFromComponentName = (componentName, style, generatorVersion) => {
 
+  // Use css per default
   if(!style) {
     style = 'css';
+  }
+
+  // Use version 3 fallback as default for projects
+  if(!generatorVersion) {
+    generatorVersion = 3;
   }
 
   // Clean up the path and pull it to parts
@@ -46,27 +53,61 @@ let getAllSettingsFromComponentName = (componentName, style) => {
   // Configure tests
   let testPath = configUtils.getChoiceByKey('path', 'test');
 
-  let settings = {
-    style: {
-      webpackPath: `styles/${componentPartPath}/${componentBaseName}${styleSettings.suffix}`,
-      path: `${stylePaths.path}/${componentPartPath}/`,
-      fileName: `${componentBaseName}${styleSettings.suffix}`,
-      className: getComponentStyleName(componentBaseName),
-      suffix: styleSettings.suffix
-    },
-    component: {
-      webpackPath: `components/${componentPartPath}/${componentBaseName}Component.js`,
-      path: `${componentPath.path}/${componentPartPath}/`,
-      fileName: `${componentBaseName}Component.js`,
-      className: `${componentBaseName}Component`,
-      displayName: `${componentFullName}Component`,
-      suffix: '.js'
-    },
-    test: {
-      path: `${testPath.path}/components/${componentPartPath}/`,
-      fileName: `${componentBaseName}ComponentTest.js`
-    }
-  };
+  let settings;
+
+  switch(generatorVersion) {
+
+    case 4:
+      settings = {
+        style: {
+          webpackPath: `./${componentBaseName.toLowerCase()}.cssmodule${styleSettings.suffix}`,
+          path: `${componentPath.path}/${componentPartPath}/`,
+          fileName: `${componentBaseName.toLowerCase()}.cssmodule${styleSettings.suffix}`,
+          className: getComponentStyleName(componentBaseName),
+          suffix: styleSettings.suffix
+        },
+        component: {
+          webpackPath: `components/${componentPartPath}/${componentBaseName}.js`,
+          path: `${componentPath.path}/${componentPartPath}/`,
+          fileName: `${componentBaseName}.js`,
+          className: `${componentBaseName}`,
+          displayName: `${componentFullName}`,
+          suffix: '.js'
+        },
+        test: {
+          path: `${testPath.path}/components/${componentPartPath}/`,
+          fileName: `${componentBaseName}Test.js`
+        }
+      };
+      break;
+
+    // Use version 3 style for the defaults and fallback
+    // @deprecated
+    case 3:
+    default:
+      settings = {
+        style: {
+          webpackPath: `styles/${componentPartPath}/${componentBaseName}${styleSettings.suffix}`,
+          path: `${stylePaths.path}/${componentPartPath}/`,
+          fileName: `${componentBaseName}${styleSettings.suffix}`,
+          className: getComponentStyleName(componentBaseName),
+          suffix: styleSettings.suffix
+        },
+        component: {
+          webpackPath: `components/${componentPartPath}/${componentBaseName}Component.js`,
+          path: `${componentPath.path}/${componentPartPath}/`,
+          fileName: `${componentBaseName}Component.js`,
+          className: `${componentBaseName}Component`,
+          displayName: `${componentFullName}Component`,
+          suffix: '.js'
+        },
+        test: {
+          path: `${testPath.path}/components/${componentPartPath}/`,
+          fileName: `${componentBaseName}ComponentTest.js`
+        }
+      };
+      break;
+  }
 
   return settings;
 };

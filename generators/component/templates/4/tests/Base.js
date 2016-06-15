@@ -6,12 +6,12 @@ describe('<<%= component.className %> />', () => {
 
   let component;
   beforeEach(() => {
-    component = shallow(<%= component.className %>);
+    component = shallow(<<%= component.className %> />);
   });
 
   describe('when rendering the component', () => {
 
-    it('should have a className of "index"', () => {
+    it('should have a className of "<%= style.className %>"', () => {
       expect(component.hasClass('<%= style.className %>')).to.equal(true);
     });
   });

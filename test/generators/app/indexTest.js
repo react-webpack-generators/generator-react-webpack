@@ -52,8 +52,12 @@ describe('react-webpack:app', () => {
       expect(generator.config.get('style')).to.equal('css');
     });
 
+    it('should use "css modules" per default', () => {
+      expect(generator.config.get('cssmodules')).to.be.true;
+    });
+
     it('should not enable "PostCSS" by default', () => {
-      expect(generator.config.get('postcss')).to.equal(false);
+      expect(generator.config.get('postcss')).to.be.false;
     });
   });
 

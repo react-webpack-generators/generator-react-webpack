@@ -67,9 +67,38 @@ describe('Utilities:Yeoman', () => {
 
   describe('#getAllSettingsFromComponentName', () => {
 
-    it('should get all required information for component creation from the components name', () => {
+    describe('when the generator version is set to 4', () => {
 
-      let expection = {
+      const expection = {
+        style: {
+          webpackPath: './test.cssmodule.css',
+          path: 'src/components/my/component/',
+          fileName: 'test.cssmodule.css',
+          className: 'test-component',
+          suffix: '.css'
+        },
+        component: {
+          webpackPath: 'components/my/component/Test.js',
+          path: 'src/components/my/component/',
+          fileName: 'Test.js',
+          className: 'Test',
+          displayName: 'MyComponentTest',
+          suffix: '.js'
+        },
+        test: {
+          path: 'test/components/my/component/',
+          fileName: 'TestTest.js'
+        }
+      };
+
+      it('should get all required information for component creation from the components name', () => {
+        expect(utils.getAllSettingsFromComponentName('my/component/test', 'css', 4)).to.deep.equal(expection);
+      });
+    });
+
+    describe('when the generator version is set to 3 (or not set at all)', () => {
+
+      const expection = {
         style: {
           webpackPath: 'styles/my/component/Test.css',
           path: 'src/styles/my/component/',
@@ -91,7 +120,10 @@ describe('Utilities:Yeoman', () => {
         }
       };
 
-      expect(utils.getAllSettingsFromComponentName('my/component/test')).to.deep.equal(expection);
+      it('should get all required information for component creation from the components name', () => {
+        expect(utils.getAllSettingsFromComponentName('my/component/test')).to.deep.equal(expection);
+        expect(utils.getAllSettingsFromComponentName('my/component/test', 'css', 3)).to.deep.equal(expection);
+      });
     });
   });
 
