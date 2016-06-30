@@ -31,7 +31,8 @@
   "main": "generators/app/index.js",
   "files": [
     "generators/app",
-    "generators/component"
+    "generators/component",
+    "utils"
   ],
   "repository": {
     "type": "git",
