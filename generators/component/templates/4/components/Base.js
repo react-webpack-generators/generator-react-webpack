@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react';<% if(componentHasStyles) { %>
 import cssmodules from 'react-css-modules';
-import styles from '<%= style.webpackPath %>';
+import styles from '<%= style.webpackPath %>';<% } %>
 
-@cssmodules(styles)
-class <%= component.className %> extends React.Component {
+<% if(componentHasStyles) { %>@cssmodules(styles)
+<% } %>class <%= component.className %> extends React.Component {
 
   render() {
     return (

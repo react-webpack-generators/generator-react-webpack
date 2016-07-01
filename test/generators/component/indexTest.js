@@ -148,21 +148,15 @@ describe('react-webpack:component', () => {
               done();
             });
           });
-        });
 
-        describe('Style', () => {
-
-          it(`should add the components ${style.type} class to the stylesheet`, (done) => {
+          it(`should add the components ${style.type} class to the created stylesheet`, (done) => {
             createGeneratedComponent('mycomponent', style.type, options, () => {
               assert.fileContent(style.fileName, style.assertions.styleContent);
               done();
             });
           });
-        });
 
-        describe('Test', () => {
-
-          it('should import the react component', (done) => {
+          it('should create a unit test that imports the generated component', (done) => {
             createGeneratedComponent('mycomponent', style.type, options, () => {
               assert.fileContent('test/components/MycomponentComponentTest.js', 'import MycomponentComponent from \'components//MycomponentComponent.js\';');
               done();
@@ -270,7 +264,7 @@ describe('react-webpack:component', () => {
         options = {};
       }
 
-      describe(`when using style type "${style.type}"`, () => {
+      describe(`when using style type "${style.type}" including with nostyle set to false`, () => {
 
         describe('when writing is called', () => {
 
@@ -335,21 +329,87 @@ describe('react-webpack:component', () => {
               done();
             });
           });
-        });
 
-        describe('Style', () => {
-
-          it(`should add the components ${style.type} class to the stylesheet`, (done) => {
+          it(`should add the components ${style.type} class to the created stylesheet`, (done) => {
             createGeneratedComponent('mycomponent', style.type, options, () => {
               assert.fileContent(style.fileName, style.assertions.styleContent);
               done();
             });
           });
+
+          it('should create a unit test that imports the generated component', (done) => {
+            createGeneratedComponent('mycomponent', style.type, options, () => {
+              assert.fileContent('test/components/MycomponentTest.js', 'import Mycomponent from \'components//Mycomponent.js\';');
+              done();
+            });
+          });
+        });
+      });
+    }
+
+    /**
+     * Test a component with styling applied
+     * @param {Object} style The style to apply (see styleTypes above)
+     * @param {Object} options Options to use [optional]
+     */
+    function testComponentWithoutStyle(style, options) {
+
+      // Make sure we always have options
+      if(!options) {
+        options = {};
+      }
+
+      describe(`when using style type "${style.type}" with nostyle set to true`, () => {
+
+        describe('when writing is called', () => {
+
+          it('should create the react component, and test file', (done) => {
+            createGeneratedComponent('mycomponent', style.type, options, () => {
+
+              assert.file([
+                'src/components/Mycomponent.js',
+                'test/components/MycomponentTest.js'
+              ]);
+              done();
+            });
+          });
         });
 
-        describe('Test', () => {
+        describe('when creating a component', () => {
 
-          it('should import the react component', (done) => {
+          it('should always import REACT', (done) => {
+            createGeneratedComponent('mycomponent', style.type, options, () => {
+              assert.fileContent('src/components/Mycomponent.js', 'import React from \'react\';');
+              done();
+            });
+          });
+
+          it('should have its displayName set per default', (done) => {
+            createGeneratedComponent('mycomponent', style.type, options, () => {
+              assert.fileContent('src/components/Mycomponent.js', 'Mycomponent.displayName = \'Mycomponent\';');
+              done();
+            });
+          });
+
+          it('should export the created component', (done) => {
+            createGeneratedComponent('mycomponent', style.type, options, () => {
+              assert.fileContent('src/components/Mycomponent.js', 'export default Mycomponent');
+              done();
+            });
+          });
+
+          it('should be possible to create components in a subfolder', (done) => {
+            createGeneratedComponent('my/little !special/test', style.type, options, () => {
+
+              assert.file([
+                'src/components/my/littleSpecial/Test.js',
+                'test/components/my/littleSpecial/TestTest.js'
+              ]);
+              done();
+            });
+          });
+
+          it('should create a unit test that imports the generated component', (done) => {
             createGeneratedComponent('mycomponent', style.type, options, () => {
               assert.fileContent('test/components/MycomponentTest.js', 'import Mycomponent from \'components//Mycomponent.js\';');
               done();
@@ -364,7 +424,7 @@ describe('react-webpack:component', () => {
     for(const style in styleTypes) {
       testComponentWithStyle(styleTypes[style]);
       testComponentWithStyle(styleTypes[style], { stateless: true });
+      testComponentWithoutStyle(styleTypes[style], { nostyle: true });
     }
   });
-
 });

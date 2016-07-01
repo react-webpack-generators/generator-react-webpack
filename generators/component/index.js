@@ -8,8 +8,14 @@ class ComponentGenerator extends Generators.Base {
 
     super(args, options);
     this.argument('name', { type: String, required: true });
+
     this.option('stateless', {
       desc: 'Create a stateless component instead of a full one',
+      defaults: false
+    });
+
+    this.option('nostyle', {
+      desc: 'Create a component without creating an associated style',
       defaults: false
     });
   }
@@ -24,15 +30,21 @@ class ComponentGenerator extends Generators.Base {
       generatorVersion = 3;
     }
 
-    const settings = utils.yeoman.getAllSettingsFromComponentName(this.name, this.config.get('style'), generatorVersion);
     const componentType = this.options.stateless ? 'Stateless' : 'Base';
+    const componentHasStyles = !this.options.nostyle;
 
-    // Create the style template
-    this.fs.copyTpl(
-      this.templatePath(`${generatorVersion}/styles/Component${settings.style.suffix}`),
-      this.destinationPath(settings.style.path + settings.style.fileName),
-      settings
-    );
+    // Get the
+    const settings = utils.yeoman.getAllSettingsFromComponentName(this.name, this.config.get('style'), generatorVersion);
+    settings.componentHasStyles = componentHasStyles;
+
+    // Create the style template. Skipped if nostyle is set as command line flag
+    if(componentHasStyles) {
+      this.fs.copyTpl(
+        this.templatePath(`${generatorVersion}/styles/Component${settings.style.suffix}`),
+        this.destinationPath(settings.style.path + settings.style.fileName),
+        settings
+      );
+    }
 
     // Create the component
     this.fs.copyTpl(
