@@ -18,7 +18,7 @@ describe('react-webpack:component', () => {
         fileName: 'src/styles/Mycomponent.css',
         expandedFileName: 'src/styles/my/littleSpecial/Test.css',
         assertions: {
-          componentImport: 'require(\'styles//Mycomponent.css\');',
+          componentImport: 'require(\'styles/Mycomponent.css\');',
           styleContent: '.mycomponent-component'
         }
       },
@@ -27,7 +27,7 @@ describe('react-webpack:component', () => {
         fileName: 'src/styles/Mycomponent.sass',
         expandedFileName: 'src/styles/my/littleSpecial/Test.sass',
         assertions: {
-          componentImport: 'require(\'styles//Mycomponent.sass\');',
+          componentImport: 'require(\'styles/Mycomponent.sass\');',
           styleContent: '.mycomponent-component'
         }
       },
@@ -36,7 +36,7 @@ describe('react-webpack:component', () => {
         fileName: 'src/styles/Mycomponent.scss',
         expandedFileName: 'src/styles/my/littleSpecial/Test.scss',
         assertions: {
-          componentImport: 'require(\'styles//Mycomponent.scss\');',
+          componentImport: 'require(\'styles/Mycomponent.scss\');',
           styleContent: '.mycomponent-component'
         }
       },
@@ -45,7 +45,7 @@ describe('react-webpack:component', () => {
         fileName: 'src/styles/Mycomponent.less',
         expandedFileName: 'src/styles/my/littleSpecial/Test.less',
         assertions: {
-          componentImport: 'require(\'styles//Mycomponent.less\');',
+          componentImport: 'require(\'styles/Mycomponent.less\');',
           styleContent: '.mycomponent-component'
         }
       },
@@ -54,7 +54,7 @@ describe('react-webpack:component', () => {
         fileName: 'src/styles/Mycomponent.styl',
         expandedFileName: 'src/styles/my/littleSpecial/Test.styl',
         assertions: {
-          componentImport: 'require(\'styles//Mycomponent.styl\');',
+          componentImport: 'require(\'styles/Mycomponent.styl\');',
           styleContent: '.mycomponent-component'
         }
       }
@@ -158,7 +158,7 @@ describe('react-webpack:component', () => {
 
           it('should create a unit test that imports the generated component', (done) => {
             createGeneratedComponent('mycomponent', style.type, options, () => {
-              assert.fileContent('test/components/MycomponentComponentTest.js', 'import MycomponentComponent from \'components//MycomponentComponent.js\';');
+              assert.fileContent('test/components/MycomponentComponentTest.js', 'import MycomponentComponent from \'components/MycomponentComponent.js\';');
               done();
             });
           });
@@ -197,7 +197,7 @@ describe('react-webpack:component', () => {
       },
       sass: {
         type: 'sass',
-        fileName: 'src/components/Mycomponent.cssmodule.sass',
+        fileName: 'src/components/mycomponent.cssmodule.sass',
         expandedFileName: 'src/components/my/littleSpecial/test.cssmodule.sass',
         assertions: {
           componentImport: 'import styles from \'./mycomponent.cssmodule.sass\';',
@@ -339,7 +339,7 @@ describe('react-webpack:component', () => {
 
           it('should create a unit test that imports the generated component', (done) => {
             createGeneratedComponent('mycomponent', style.type, options, () => {
-              assert.fileContent('test/components/MycomponentTest.js', 'import Mycomponent from \'components//Mycomponent.js\';');
+              assert.fileContent('test/components/MycomponentTest.js', 'import Mycomponent from \'components/Mycomponent.js\';');
               done();
             });
           });
@@ -411,7 +411,7 @@ describe('react-webpack:component', () => {
 
           it('should create a unit test that imports the generated component', (done) => {
             createGeneratedComponent('mycomponent', style.type, options, () => {
-              assert.fileContent('test/components/MycomponentTest.js', 'import Mycomponent from \'components//Mycomponent.js\';');
+              assert.fileContent('test/components/MycomponentTest.js', 'import Mycomponent from \'components/Mycomponent.js\';');
               done();
             });
           });
