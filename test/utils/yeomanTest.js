@@ -69,7 +69,7 @@ describe('Utilities:Yeoman', () => {
 
     describe('when the generator version is set to 4', () => {
 
-      const expection = {
+      const expectionNamespaced = {
         style: {
           webpackPath: './test.cssmodule.css',
           path: 'src/components/my/component/',
@@ -91,9 +91,37 @@ describe('Utilities:Yeoman', () => {
         }
       };
 
+      const expectionRoot = {
+        style: {
+          webpackPath: './test.cssmodule.css',
+          path: 'src/components/',
+          fileName: 'test.cssmodule.css',
+          className: 'test-component',
+          suffix: '.css'
+        },
+        component: {
+          webpackPath: 'components/Test.js',
+          path: 'src/components/',
+          fileName: 'Test.js',
+          className: 'Test',
+          displayName: 'Test',
+          suffix: '.js'
+        },
+        test: {
+          path: 'test/components/',
+          fileName: 'TestTest.js'
+        }
+      };
+
       it('should get all required information for component creation from the components name', () => {
-        expect(utils.getAllSettingsFromComponentName('my/component/test', 'css', 4)).to.deep.equal(expection);
+        expect(utils.getAllSettingsFromComponentName('my/component/test', 'css', 4)).to.deep.equal(expectionNamespaced);
       });
+
+      it('should build path information wo/ two slashes when dealing with a non-namespaced component', () => {
+        expect(utils.getAllSettingsFromComponentName('test', 'css', 4)).to.deep.equal(expectionRoot);
+      });
+
+
     });
 
     describe('when the generator version is set to 3 (or not set at all)', () => {

@@ -61,21 +61,21 @@ let getAllSettingsFromComponentName = (componentName, style, generatorVersion) =
       settings = {
         style: {
           webpackPath: `./${componentBaseName.toLowerCase()}.cssmodule${styleSettings.suffix}`,
-          path: `${componentPath.path}/${componentPartPath}/`,
+          path: path.normalize(`${componentPath.path}/${componentPartPath}/`),
           fileName: `${componentBaseName.toLowerCase()}.cssmodule${styleSettings.suffix}`,
           className: getComponentStyleName(componentBaseName),
           suffix: styleSettings.suffix
         },
         component: {
-          webpackPath: `components/${componentPartPath}/${componentBaseName}.js`,
-          path: `${componentPath.path}/${componentPartPath}/`,
+          webpackPath: path.normalize(`components/${componentPartPath}/${componentBaseName}.js`),
+          path: path.normalize(`${componentPath.path}/${componentPartPath}/`),
           fileName: `${componentBaseName}.js`,
           className: `${componentBaseName}`,
           displayName: `${componentFullName}`,
           suffix: '.js'
         },
         test: {
-          path: `${testPath.path}/components/${componentPartPath}/`,
+          path: path.normalize(`${testPath.path}/components/${componentPartPath}/`),
           fileName: `${componentBaseName}Test.js`
         }
       };
@@ -87,22 +87,22 @@ let getAllSettingsFromComponentName = (componentName, style, generatorVersion) =
     default:
       settings = {
         style: {
-          webpackPath: `styles/${componentPartPath}/${componentBaseName}${styleSettings.suffix}`,
-          path: `${stylePaths.path}/${componentPartPath}/`,
+          webpackPath: path.normalize(`styles/${componentPartPath}/${componentBaseName}${styleSettings.suffix}`),
+          path: path.normalize(`${stylePaths.path}/${componentPartPath}/`),
           fileName: `${componentBaseName}${styleSettings.suffix}`,
           className: getComponentStyleName(componentBaseName),
           suffix: styleSettings.suffix
         },
         component: {
-          webpackPath: `components/${componentPartPath}/${componentBaseName}Component.js`,
-          path: `${componentPath.path}/${componentPartPath}/`,
+          webpackPath: path.normalize(`components/${componentPartPath}/${componentBaseName}Component.js`),
+          path: path.normalize(`${componentPath.path}/${componentPartPath}/`),
           fileName: `${componentBaseName}Component.js`,
           className: `${componentBaseName}Component`,
           displayName: `${componentFullName}Component`,
           suffix: '.js'
         },
         test: {
-          path: `${testPath.path}/components/${componentPartPath}/`,
+          path: path.normalize(`${testPath.path}/components/${componentPartPath}/`),
           fileName: `${componentBaseName}ComponentTest.js`
         }
       };
