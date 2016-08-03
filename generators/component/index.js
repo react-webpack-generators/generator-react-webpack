@@ -1,12 +1,39 @@
 'use strict';
 const Generators = require('yeoman-generator');
-let utils = require('../../utils/all');
+const utils = require('../../utils/all');
+const C = utils.constants;
+const getAllSettingsFromComponentName = utils.yeoman.getAllSettingsFromComponentName;
+
 
 class ComponentGenerator extends Generators.Base {
 
   constructor(args, options) {
-
     super(args, options);
+
+    /**
+     * Flag indicating whether the component should be created with associated style files.
+     * @type {boolean}
+     */
+    this.useStyles = false;
+
+    /**
+     * Flag indicating whether the component should make use of css modules.
+     * @type {boolean}
+     */
+    this.useCssModules = false;
+
+    /**
+     * Filename of the template that will be used to create the component.
+     * @type {?string}
+     */
+    this.componentTemplateName = null;
+
+    /**
+     * Generator and template version to create the component from.
+     * @type {?number}
+     */
+    this.generatorVersion = null;
+
     this.argument('name', { type: String, required: true });
 
     this.option('stateless', {
@@ -20,27 +47,37 @@ class ComponentGenerator extends Generators.Base {
     });
   }
 
-  writing() {
 
-    // Set the template base. If it cannot be guessed,
-    // use files from the default directory. In this case,
-    // assume we have something REALLY REALLY old here...
-    let generatorVersion = this.config.get('generatedWithVersion');
-    if(!generatorVersion) {
-      generatorVersion = 3;
+  configuring() {
+    // Read the requested major version or default it to the latest stable
+    this.generatorVersion = this.config.get('generatedWithVersion') || 3;
+
+    if (!C.SUPPORTED_GEN_VERSIONS.some(x => x === this.generatorVersion)) {
+      this.env.error('Unsupported generator version');
     }
 
-    const componentType = this.options.stateless ? 'Stateless' : 'Base';
-    const componentHasStyles = !this.options.nostyle;
+    this.useStyles = !this.options.nostyle;
+    this.useCssModules = this.config.get('cssmodules') || false;
 
-    // Get the
-    const settings = utils.yeoman.getAllSettingsFromComponentName(this.name, this.config.get('style'), generatorVersion);
-    settings.componentHasStyles = componentHasStyles;
+    // Make sure we don't try to use template v3 with cssmodules
+    if (this.generatorVersion < 4 && this.useStyles && this.useCssModules) {
+      this.env.error('Creating components with cssmodules is only supported in generator versions 4+');
+    }
+
+    // Get the filename of the component template to be copied during this run
+    this.componentTemplateName =
+      utils.yeoman.getComponentTemplateName(this.options.stateless, this.useStyles, this.useCssModules);
+  }
+
+
+  writing() {
+    const settings =
+      getAllSettingsFromComponentName(this.name, this.config.get('style'), this.useCssModules, this.generatorVersion);
 
     // Create the style template. Skipped if nostyle is set as command line flag
-    if(componentHasStyles) {
+    if(this.useStyles) {
       this.fs.copyTpl(
-        this.templatePath(`${generatorVersion}/styles/Component${settings.style.suffix}`),
+        this.templatePath(`${this.generatorVersion}/styles/Component${settings.style.suffix}`),
         this.destinationPath(settings.style.path + settings.style.fileName),
         settings
       );
@@ -48,14 +85,14 @@ class ComponentGenerator extends Generators.Base {
 
     // Create the component
     this.fs.copyTpl(
-      this.templatePath(`${generatorVersion}/components/${componentType}.js`),
+      this.templatePath(`${this.generatorVersion}/components/${this.componentTemplateName}`),
       this.destinationPath(settings.component.path + settings.component.fileName),
       settings
     );
 
     // Create the unit test
     this.fs.copyTpl(
-      this.templatePath(`${generatorVersion}/tests/Base.js`),
+      this.templatePath(`${this.generatorVersion}/tests/Base.js`),
       this.destinationPath(settings.test.path + settings.test.fileName),
       settings
     );
