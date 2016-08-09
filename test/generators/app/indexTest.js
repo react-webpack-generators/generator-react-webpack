@@ -98,7 +98,7 @@ describe('react-webpack:app', () => {
         'src/actions/README.md',
         'src/index.js',
         'src/components/App.js',
-        'src/components/app.cssmodule.css',
+        'src/components/app.css',
         'src/favicon.ico',
         'src/images/yeoman.png',
         'src/index.html',

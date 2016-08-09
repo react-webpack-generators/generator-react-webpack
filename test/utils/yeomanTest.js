@@ -114,11 +114,11 @@ describe('Utilities:Yeoman', () => {
       };
 
       it('should get all required information for component creation from the components name', () => {
-        expect(utils.getAllSettingsFromComponentName('my/component/test', 'css', 4)).to.deep.equal(expectionNamespaced);
+        expect(utils.getAllSettingsFromComponentName('my/component/test', 'css', true, 4)).to.deep.equal(expectionNamespaced);
       });
 
       it('should build path information wo/ two slashes when dealing with a non-namespaced component', () => {
-        expect(utils.getAllSettingsFromComponentName('test', 'css', 4)).to.deep.equal(expectionRoot);
+        expect(utils.getAllSettingsFromComponentName('test', 'css', true, 4)).to.deep.equal(expectionRoot);
       });
 
 

@@ -3,6 +3,7 @@ let path = require('path');
 let assert = require('yeoman-assert');
 let helpers = require('yeoman-test');
 
+
 describe('react-webpack:component', () => {
 
   const generatorComponent = path.join(__dirname, '../../../generators/component');
@@ -182,70 +183,78 @@ describe('react-webpack:component', () => {
      */
     let generator;
 
+    const cssModSuffix = (useCssModules) => useCssModules ? '.cssmodule' : '';
+    const importAssertion = (useCssModules, ext)  => useCssModules
+      ? `import styles from './mycomponent.cssmodule.${ext}';`
+      : `import './mycomponent.${ext}';`
+      ;
+
     // List of available style types. Please add a line that says
     // testComponentWithStyle(styleTypes.KEY); to the bottom of the file
     // to run all unit tests for this filetype.
-    const styleTypes = {
+    const styleTypes = (useCssModules) => ({
       css: {
         type: 'css',
-        fileName: 'src/components/mycomponent.cssmodule.css',
-        expandedFileName: 'src/components/my/littleSpecial/test.cssmodule.css',
+        fileName: `src/components/mycomponent${cssModSuffix(useCssModules)}.css`,
+        expandedFileName: `src/components/my/littleSpecial/test${cssModSuffix(useCssModules)}.css`,
         assertions: {
-          componentImport: 'import styles from \'./mycomponent.cssmodule.css\';',
+          componentImport: importAssertion(useCssModules, 'css'),
           styleContent: '.mycomponent-component'
         }
       },
       sass: {
         type: 'sass',
-        fileName: 'src/components/mycomponent.cssmodule.sass',
-        expandedFileName: 'src/components/my/littleSpecial/test.cssmodule.sass',
+        fileName: `src/components/mycomponent${cssModSuffix(useCssModules)}.sass`,
+        expandedFileName: `src/components/my/littleSpecial/test${cssModSuffix(useCssModules)}.sass`,
         assertions: {
-          componentImport: 'import styles from \'./mycomponent.cssmodule.sass\';',
+          componentImport: importAssertion(useCssModules, 'sass'),
           styleContent: '.mycomponent-component'
         }
       },
       scss: {
         type: 'scss',
-        fileName: 'src/components/mycomponent.cssmodule.scss',
-        expandedFileName: 'src/components/my/littleSpecial/test.cssmodule.scss',
+        fileName: `src/components/mycomponent${cssModSuffix(useCssModules)}.scss`,
+        expandedFileName: `src/components/my/littleSpecial/test${cssModSuffix(useCssModules)}.scss`,
         assertions: {
-          componentImport: 'import styles from \'./mycomponent.cssmodule.scss\';',
+          componentImport: importAssertion(useCssModules, 'scss'),
           styleContent: '.mycomponent-component'
         }
       },
       less: {
         type: 'less',
-        fileName: 'src/components/mycomponent.cssmodule.less',
-        expandedFileName: 'src/components/my/littleSpecial/test.cssmodule.less',
+        fileName: `src/components/mycomponent${cssModSuffix(useCssModules)}.less`,
+        expandedFileName: `src/components/my/littleSpecial/test${cssModSuffix(useCssModules)}.less`,
         assertions: {
-          componentImport: 'import styles from \'./mycomponent.cssmodule.less\';',
+          componentImport: importAssertion(useCssModules, 'less'),
           styleContent: '.mycomponent-component'
         }
       },
       stylus: {
         type: 'stylus',
-        fileName: 'src/components/mycomponent.cssmodule.styl',
-        expandedFileName: 'src/components/my/littleSpecial/test.cssmodule.styl',
+        fileName: `src/components/mycomponent${cssModSuffix(useCssModules)}.styl`,
+        expandedFileName: `src/components/my/littleSpecial/test${cssModSuffix(useCssModules)}.styl`,
         assertions: {
-          componentImport: 'import styles from \'./mycomponent.cssmodule.styl\';',
+          componentImport: importAssertion(useCssModules, 'styl'),
           styleContent: '.mycomponent-component'
         }
       }
-    };
+    });
 
     /**
      * Return a newly generated component with given name and style
      * @param {String} name Name of the component
      * @param {String} styleType Styling language to use
      * @param {Object} options Options to use for the generator
+     * @param {boolean} useCssModules useCssModules indicate whether to test with cssmodules enabled
      * @param {Function} callback Test callback to run
      */
-    function createGeneratedComponent(name, styleType, options, callback) {
+    function createGeneratedComponent(name, styleType, options, useCssModules, callback) {
       helpers.run(generatorComponent)
         .withArguments([name])
         .withOptions(options)
         .on('ready', (instance) => {
           instance.config.set('style', styleType);
+          instance.config.set('cssmodules', useCssModules);
           instance.config.set('generatedWithVersion', 4);
           generator = instance;
         })
@@ -256,20 +265,21 @@ describe('react-webpack:component', () => {
      * Test a component with styling applied
      * @param {Object} style The style to apply (see styleTypes above)
      * @param {Object} options Options to use [optional]
+     * @param {boolean} useCssModules indicate whether to test with cssmodules enabled
      */
-    function testComponentWithStyle(style, options) {
+    function testComponentWithStyle(style, options, useCssModules) {
 
       // Make sure we always have options
       if(!options) {
         options = {};
       }
 
-      describe(`when using style type "${style.type}" including with nostyle set to false`, () => {
+      describe(`when using style type "${style.type}" with nostyle = false and cssmodules = ${useCssModules}`, () => {
 
         describe('when writing is called', () => {
 
           it(`should create the react component, its ${style.type}-stylesheet and test file`, (done) => {
-            createGeneratedComponent('mycomponent', style.type, options, () => {
+            createGeneratedComponent('mycomponent', style.type, options, useCssModules, () => {
 
               assert.file([
                 'src/components/Mycomponent.js',
@@ -284,34 +294,34 @@ describe('react-webpack:component', () => {
         describe('when creating a component', () => {
 
           it('should always import REACT', (done) => {
-            createGeneratedComponent('mycomponent', style.type, options, () => {
+            createGeneratedComponent('mycomponent', style.type, options, useCssModules, () => {
               assert.fileContent('src/components/Mycomponent.js', 'import React from \'react\';');
               done();
             });
           });
 
           it(`should require the created ${style.type} file`, (done) => {
-            createGeneratedComponent('mycomponent', style.type, options, () => {
+            createGeneratedComponent('mycomponent', style.type, options, useCssModules, () => {
               assert.fileContent('src/components/Mycomponent.js', style.assertions.componentImport);
               done();
             });
           });
 
           it('should have its displayName set per default', (done) => {
-            createGeneratedComponent('mycomponent', style.type, options, () => {
+            createGeneratedComponent('mycomponent', style.type, options, useCssModules, () => {
               assert.fileContent('src/components/Mycomponent.js', 'Mycomponent.displayName = \'Mycomponent\';');
               done();
             });
           });
 
           it('should export the created component', (done) => {
-            createGeneratedComponent('mycomponent', style.type, options, () => {
+            createGeneratedComponent('mycomponent', style.type, options, useCssModules, () => {
 
               let exportAssertion;
-              if(generator.options.stateless) {
+              if(useCssModules) {
                 exportAssertion = 'export default cssmodules(Mycomponent, styles);';
               } else {
-                exportAssertion = 'export default Mycomponent';
+                exportAssertion = 'export default Mycomponent;';
               }
               assert.fileContent('src/components/Mycomponent.js', exportAssertion);
               done();
@@ -319,7 +329,7 @@ describe('react-webpack:component', () => {
           });
 
           it('should be possible to create components in a subfolder', (done) => {
-            createGeneratedComponent('my/little !special/test', style.type, options, () => {
+            createGeneratedComponent('my/little !special/test', style.type, options, useCssModules, () => {
 
               assert.file([
                 'src/components/my/littleSpecial/Test.js',
@@ -331,14 +341,14 @@ describe('react-webpack:component', () => {
           });
 
           it(`should add the components ${style.type} class to the created stylesheet`, (done) => {
-            createGeneratedComponent('mycomponent', style.type, options, () => {
+            createGeneratedComponent('mycomponent', style.type, options, useCssModules, () => {
               assert.fileContent(style.fileName, style.assertions.styleContent);
               done();
             });
           });
 
           it('should create a unit test that imports the generated component', (done) => {
-            createGeneratedComponent('mycomponent', style.type, options, () => {
+            createGeneratedComponent('mycomponent', style.type, options, useCssModules, () => {
               assert.fileContent('test/components/MycomponentTest.js', 'import Mycomponent from \'components/Mycomponent.js\';');
               done();
             });
@@ -351,20 +361,21 @@ describe('react-webpack:component', () => {
      * Test a component with styling applied
      * @param {Object} style The style to apply (see styleTypes above)
      * @param {Object} options Options to use [optional]
+     * @param {boolean} useCssModules indicate whether to test with cssmodules enabled
      */
-    function testComponentWithoutStyle(style, options) {
+    function testComponentWithoutStyle(style, options, useCssModules) {
 
       // Make sure we always have options
       if(!options) {
         options = {};
       }
 
-      describe(`when using style type "${style.type}" with nostyle set to true`, () => {
+      describe(`when using style type "${style.type}" with nostyle = true and cssmodules = ${useCssModules}`, () => {
 
         describe('when writing is called', () => {
 
           it('should create the react component, and test file', (done) => {
-            createGeneratedComponent('mycomponent', style.type, options, () => {
+            createGeneratedComponent('mycomponent', style.type, options, useCssModules, () => {
 
               assert.file([
                 'src/components/Mycomponent.js',
@@ -378,28 +389,28 @@ describe('react-webpack:component', () => {
         describe('when creating a component', () => {
 
           it('should always import REACT', (done) => {
-            createGeneratedComponent('mycomponent', style.type, options, () => {
+            createGeneratedComponent('mycomponent', style.type, options, useCssModules, () => {
               assert.fileContent('src/components/Mycomponent.js', 'import React from \'react\';');
               done();
             });
           });
 
           it('should have its displayName set per default', (done) => {
-            createGeneratedComponent('mycomponent', style.type, options, () => {
+            createGeneratedComponent('mycomponent', style.type, options, useCssModules, () => {
               assert.fileContent('src/components/Mycomponent.js', 'Mycomponent.displayName = \'Mycomponent\';');
               done();
             });
           });
 
           it('should export the created component', (done) => {
-            createGeneratedComponent('mycomponent', style.type, options, () => {
+            createGeneratedComponent('mycomponent', style.type, options, useCssModules, () => {
               assert.fileContent('src/components/Mycomponent.js', 'export default Mycomponent');
               done();
             });
           });
 
           it('should be possible to create components in a subfolder', (done) => {
-            createGeneratedComponent('my/little !special/test', style.type, options, () => {
+            createGeneratedComponent('my/little !special/test', style.type, options, useCssModules, () => {
 
               assert.file([
                 'src/components/my/littleSpecial/Test.js',
@@ -410,7 +421,7 @@ describe('react-webpack:component', () => {
           });
 
           it('should create a unit test that imports the generated component', (done) => {
-            createGeneratedComponent('mycomponent', style.type, options, () => {
+            createGeneratedComponent('mycomponent', style.type, options, useCssModules, () => {
               assert.fileContent('test/components/MycomponentTest.js', 'import Mycomponent from \'components/Mycomponent.js\';');
               done();
             });
@@ -421,10 +432,15 @@ describe('react-webpack:component', () => {
 
     // Run all tests for all available style types.
     // Stateless components will also be tested!
-    for(const style in styleTypes) {
-      testComponentWithStyle(styleTypes[style]);
-      testComponentWithStyle(styleTypes[style], { stateless: true });
-      testComponentWithoutStyle(styleTypes[style], { nostyle: true });
+    for(const style in styleTypes(true)) {
+      testComponentWithStyle(styleTypes(true)[style], {}, true);
+      testComponentWithStyle(styleTypes(true)[style], { stateless: true }, true);
+      testComponentWithoutStyle(styleTypes(true)[style], { nostyle: true }, true);
+    }
+    for(const style in styleTypes(false)) {
+      testComponentWithStyle(styleTypes(false)[style], {}, false);
+      testComponentWithStyle(styleTypes(false)[style], { stateless: true }, false);
+      testComponentWithoutStyle(styleTypes(false)[style], { nostyle: true }, false);
     }
   });
 });

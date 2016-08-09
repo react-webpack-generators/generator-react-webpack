@@ -1,13 +1,10 @@
-import React from 'react';<% if(componentHasStyles) { %>
-import cssmodules from 'react-css-modules';
-import styles from '<%= style.webpackPath %>';<% } %>
+import React from 'react';
 
-<% if(componentHasStyles) { %>@cssmodules(styles)
-<% } %>class <%= component.className %> extends React.Component {
+class <%= component.className %> extends React.Component {
 
   render() {
     return (
-      <div className="<%= style.className %>" styleName="<%= style.className %>">
+      <div className="<%= style.className %>">
         Please edit <%= component.path %><%= component.fileName %> to update this component!
       </div>
     );
