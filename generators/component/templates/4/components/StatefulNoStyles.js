@@ -1,6 +1,6 @@
 import React from 'react';
 
-class <%= component.className %> extends React.Component {
+class <%= component.className %> extends <%= component.classBase %> {
 
   render() {
     return (

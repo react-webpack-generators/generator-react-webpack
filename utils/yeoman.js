@@ -20,10 +20,11 @@ let getBaseDir = () => {
  * Get all settings (paths and the like) from components name
  * @param {String} componentName The components name
  * @param {String} style Style language to use [optional]
+ * @param {Boolean} isPure Use a pure component? [optional]
  * @param {String|Number} generatorVersion The version of the generator [optional]
  * @return {Object} Component settings
  */
-let getAllSettingsFromComponentName = (componentName, style, useCssModules, generatorVersion) => {
+let getAllSettingsFromComponentName = (componentName, style, useCssModules, isPure, generatorVersion) => {
 
   // Use css per default
   if(!style) {
@@ -72,6 +73,7 @@ let getAllSettingsFromComponentName = (componentName, style, useCssModules, gene
           path: path.normalize(`${componentPath.path}/${componentPartPath}/`),
           fileName: `${componentBaseName}.js`,
           className: `${componentBaseName}`,
+          classBase: isPure ? 'React.PureComponent' : 'React.Component',
           displayName: `${componentFullName}`,
           suffix: '.js'
         },

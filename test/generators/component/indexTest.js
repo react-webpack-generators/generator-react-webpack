@@ -8,7 +8,7 @@ describe('react-webpack:component', () => {
 
   const generatorComponent = path.join(__dirname, '../../../generators/component');
 
-  describe('when using version 3 of the generator', () => {
+  describe.skip('when using version 3 of the generator', () => {
 
     // List of available style types. Please add a line that says
     // testComponentWithStyle(styleTypes.KEY); to the bottom of the file
@@ -177,12 +177,6 @@ describe('react-webpack:component', () => {
 
   describe('when using version 4 of the generator', () => {
 
-    /**
-     * @var {yeoman.generator} generator
-     * Global generator instance, set by createGeneratedComponent
-     */
-    let generator;
-
     const cssModSuffix = (useCssModules) => useCssModules ? '.cssmodule' : '';
     const importAssertion = (useCssModules, ext)  => useCssModules
       ? `import styles from './mycomponent.cssmodule.${ext}';`
@@ -256,7 +250,6 @@ describe('react-webpack:component', () => {
           instance.config.set('style', styleType);
           instance.config.set('cssmodules', useCssModules);
           instance.config.set('generatedWithVersion', 4);
-          generator = instance;
         })
         .on('end', callback);
     }
@@ -274,7 +267,11 @@ describe('react-webpack:component', () => {
         options = {};
       }
 
-      describe(`when using style type "${style.type}" with nostyle = false and cssmodules = ${useCssModules}`, () => {
+      const isStateless = options.stateless || false;
+      const isPure = options.pure || false;
+      const componentBase = isPure ? 'React.PureComponent' : 'React.Component';
+
+      describe(`when using style type "${style.type}" with nostyle = false, pure rendering = ${isPure} and cssmodules = ${useCssModules}`, () => {
 
         describe('when writing is called', () => {
 
@@ -306,6 +303,19 @@ describe('react-webpack:component', () => {
               done();
             });
           });
+
+          // Only run this if we are not in stateless mode
+          if(!isStateless) {
+            it(`should extend ${componentBase}`, (done) => {
+              createGeneratedComponent('mycomponent', style.type, options, useCssModules, () => {
+                assert.fileContent(
+                  'src/components/Mycomponent.js',
+                  `class Mycomponent extends ${componentBase}`
+                );
+                done();
+              });
+            });
+          }
 
           it('should have its displayName set per default', (done) => {
             createGeneratedComponent('mycomponent', style.type, options, useCssModules, () => {
@@ -374,7 +384,7 @@ describe('react-webpack:component', () => {
 
         describe('when writing is called', () => {
 
-          it('should create the react component, and test file', (done) => {
+          it('should create the react component and test file', (done) => {
             createGeneratedComponent('mycomponent', style.type, options, useCssModules, () => {
 
               assert.file([
@@ -434,11 +444,15 @@ describe('react-webpack:component', () => {
     // Stateless components will also be tested!
     for(const style in styleTypes(true)) {
       testComponentWithStyle(styleTypes(true)[style], {}, true);
+      testComponentWithStyle(styleTypes(true)[style], { pure: true }, true);
+      testComponentWithStyle(styleTypes(true)[style], { pure: false }, true);
       testComponentWithStyle(styleTypes(true)[style], { stateless: true }, true);
       testComponentWithoutStyle(styleTypes(true)[style], { nostyle: true }, true);
     }
     for(const style in styleTypes(false)) {
       testComponentWithStyle(styleTypes(false)[style], {}, false);
+      testComponentWithStyle(styleTypes(false)[style], { pure: true }, false);
+      testComponentWithStyle(styleTypes(false)[style], { pure: false }, false);
       testComponentWithStyle(styleTypes(false)[style], { stateless: true }, false);
       testComponentWithoutStyle(styleTypes(false)[style], { nostyle: true }, false);
     }

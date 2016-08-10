@@ -2,7 +2,7 @@ import React from 'react';
 import cssmodules from 'react-css-modules';
 import styles from '<%= style.webpackPath %>';
 
-class <%= component.className %> extends React.Component {
+class <%= component.className %> extends <%= component.classBase %> {
 
   render() {
     return (

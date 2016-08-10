@@ -23,6 +23,12 @@ class ComponentGenerator extends Generators.Base {
     this.useCssModules = false;
 
     /**
+     * Flag indicating if stateful components should extends from React.PureComponent
+     * @type {boolean}
+     */
+    this.usePureComponent = false;
+
+    /**
      * Filename of the template that will be used to create the component.
      * @type {?string}
      */
@@ -43,6 +49,11 @@ class ComponentGenerator extends Generators.Base {
 
     this.option('nostyle', {
       desc: 'Create a component without creating an associated style',
+      defaults: false
+    });
+
+    this.option('pure', {
+      desc: 'Create a pure component instead of a "regular" one. Will use React.PureComponent as a base instead of React.Component',
       defaults: false
     });
   }
@@ -69,10 +80,9 @@ class ComponentGenerator extends Generators.Base {
       utils.yeoman.getComponentTemplateName(this.options.stateless, this.useStyles, this.useCssModules);
   }
 
-
   writing() {
     const settings =
-      getAllSettingsFromComponentName(this.name, this.config.get('style'), this.useCssModules, this.generatorVersion);
+      getAllSettingsFromComponentName(this.name, this.config.get('style'), this.useCssModules, this.options.pure, this.generatorVersion);
 
     // Create the style template. Skipped if nostyle is set as command line flag
     if(this.useStyles) {

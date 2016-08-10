@@ -82,6 +82,7 @@ describe('Utilities:Yeoman', () => {
           path: 'src/components/my/component/',
           fileName: 'Test.js',
           className: 'Test',
+          classBase: 'React.Component',
           displayName: 'MyComponentTest',
           suffix: '.js'
         },
@@ -104,6 +105,7 @@ describe('Utilities:Yeoman', () => {
           path: 'src/components/',
           fileName: 'Test.js',
           className: 'Test',
+          classBase: 'React.Component',
           displayName: 'Test',
           suffix: '.js'
         },
@@ -114,14 +116,12 @@ describe('Utilities:Yeoman', () => {
       };
 
       it('should get all required information for component creation from the components name', () => {
-        expect(utils.getAllSettingsFromComponentName('my/component/test', 'css', true, 4)).to.deep.equal(expectionNamespaced);
+        expect(utils.getAllSettingsFromComponentName('my/component/test', 'css', true, false, 4)).to.deep.equal(expectionNamespaced);
       });
 
       it('should build path information wo/ two slashes when dealing with a non-namespaced component', () => {
-        expect(utils.getAllSettingsFromComponentName('test', 'css', true, 4)).to.deep.equal(expectionRoot);
+        expect(utils.getAllSettingsFromComponentName('test', 'css', true, false, 4)).to.deep.equal(expectionRoot);
       });
-
-
     });
 
     describe('when the generator version is set to 3 (or not set at all)', () => {
@@ -150,7 +150,7 @@ describe('Utilities:Yeoman', () => {
 
       it('should get all required information for component creation from the components name', () => {
         expect(utils.getAllSettingsFromComponentName('my/component/test')).to.deep.equal(expection);
-        expect(utils.getAllSettingsFromComponentName('my/component/test', 'css', 3)).to.deep.equal(expection);
+        expect(utils.getAllSettingsFromComponentName('my/component/test', 'css', false, 3)).to.deep.equal(expection);
       });
     });
   });
@@ -176,6 +176,29 @@ describe('Utilities:Yeoman', () => {
       expect(utils.getDestinationClassName('test', 'action', 'Actions')).to.equal('TestActions');
       expect(utils.getDestinationClassName('test', 'source', 'Source')).to.equal('TestSource');
       expect(utils.getDestinationClassName('test', 'store', 'Store')).to.equal('TestStore');
+    });
+  });
+
+  describe('#getComponentTemplateName', () => {
+
+    it('should return a stateless component with styles if stateless is set to true and useStyles set to true', () => {
+      expect(utils.getComponentTemplateName(true, true)).to.equal('StatelessWithStyles.js');
+    });
+
+    it('should return a stateless component without styles if stateless is set to true and useStyles set to false', () => {
+      expect(utils.getComponentTemplateName(true, false)).to.equal('StatelessNoStyles.js');
+    });
+
+    it('should return a statefull component with styles if stateless is set to false and useStyles set to true', () => {
+      expect(utils.getComponentTemplateName(false, true)).to.equal('StatefulWithStyles.js');
+    });
+
+    it('should return a statefull component without styles if stateless is set to false and useStyles set to false', () => {
+      expect(utils.getComponentTemplateName(false, false)).to.equal('StatefulNoStyles.js');
+    });
+
+    it('should return a statefull component with styles and cssmodules if stateless is set to false and useCssModules set to true', () => {
+      expect(utils.getComponentTemplateName(false, true, true)).to.equal('StatefulCssModules.js');
     });
   });
 });
