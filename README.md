@@ -1,7 +1,7 @@
 # generator-react-webpack V3.0 (legacy)
 > ! This is the branch for the current stable 3.x release. It will only receive bugfixes, but no new features. Make sure to use master for the lastest version.
 
-[![Join the chat at https://gitter.im/newtriks/generator-react-webpack](https://badges.gitter.im/newtriks/generator-react-webpack.svg)](https://gitter.im/newtriks/generator-react-webpack?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://secure.travis-ci.org/newtriks/generator-react-webpack.png?branch=master)](https://travis-ci.org/newtriks/generator-react-webpack)   [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/newtriks/generator-react-webpack/trend.png)](https://bitdeli.com/free "Bitdeli Badge") ![Amount of Downloads per month](https://img.shields.io/npm/dm/generator-react-webpack.svg "Amount of Downloads") ![Dependency Tracker](https://img.shields.io/david/newtriks/generator-react-webpack.svg "Dependency Tracker") ![Dependency Tracker](https://img.shields.io/david/dev/newtriks/generator-react-webpack.svg "Dependency Tracker") ![Node Version](https://img.shields.io/node/v/generator-react-webpack.svg "Node Version")
+[![Join the chat at https://gitter.im/newtriks/generator-react-webpack](https://badges.gitter.im/newtriks/generator-react-webpack.svg)](https://gitter.im/newtriks/generator-react-webpack?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://secure.travis-ci.org/react-webpack-generators/generator-react-webpack.png?branch=3.x)](https://travis-ci.org/react-webpack-generators/generator-react-webpack) ![Amount of Downloads per month](https://img.shields.io/npm/dm/generator-react-webpack.svg "Amount of Downloads") ![Dependency Tracker](https://img.shields.io/david/react-webpack-generators/generator-react-webpack.svg "Dependency Tracker") ![Dependency Tracker](https://img.shields.io/david/dev/react-webpack-generators/generator-react-webpack.svg "Dependency Tracker") ![Node Version](https://img.shields.io/node/v/generator-react-webpack.svg "Node Version")
 
 > Yeoman generator for [ReactJS](http://facebook.github.io/react/) - lets you quickly set up a project including karma test runner and [Webpack](http://webpack.github.io/) module system.
 
@@ -130,5 +130,4 @@ Contributions are welcomed. When submitting a bugfix, write a test that exposes 
 `npm test` or `node node_modules/.bin/mocha`
 
 ## License
-
-[BSD license](http://opensource.org/licenses/bsd-license.php)
+[MIT license](http://opensource.org/licenses/mit-license.php)

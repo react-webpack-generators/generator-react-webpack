@@ -1,5 +1,9 @@
 # generator-react-webpack - Changelog
 
+## 3.3.3
+
+1. Updated packages to latest stable versions
+
 ## 3.3.2
 
 1. Emergency fix: Reverted 3.3.1

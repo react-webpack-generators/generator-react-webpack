@@ -14,8 +14,8 @@
     "front-end",
     "app"
   ],
-  "homepage": "https://github.com/newtriks/generator-react-webpack",
-  "bugs": "https://github.com/newtriks/generator-react-webpack/issues",
+  "homepage": "https://github.com/react-webpack-generators/generator-react-webpack#readme",
+  "bugs": "https://github.com/react-webpack-generators/generator-react-webpack/issues",
   "author": {
     "name": "Simon Bailey",
     "email": "simon@newtriks.com",
@@ -31,7 +31,7 @@
   "main": "generators/app/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/newtriks/generator-react-webpack.git"
+    "url": "https://github.com/react-webpack-generators/generator-react-webpack.git"
   },
   "scripts": {
     "test": "mocha",
