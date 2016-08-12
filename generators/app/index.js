@@ -36,8 +36,7 @@ module.exports = generator.Base.extend({
   },
 
   prompting: function() {
-    let done = this.async();
-    this.prompt(prompts, function(props) {
+    return this.prompt(prompts, function(props) {
 
       // Make sure to get the correct app name if it is not the default
       if(props.appName !== utils.yeoman.getAppName()) {
@@ -47,7 +46,7 @@ module.exports = generator.Base.extend({
       // Set needed global vars for yo
       this.appName = props.appName;
       this.style = props.style;
-      this.postcss = props.postcss
+      this.postcss = props.postcss;
       this.generatedWithVersion = packageInfo.version.split('.').unshift();
 
       // Set needed keys into config
@@ -59,7 +58,6 @@ module.exports = generator.Base.extend({
 
       this.config.save();
 
-      done();
     }.bind(this));
   },
 
