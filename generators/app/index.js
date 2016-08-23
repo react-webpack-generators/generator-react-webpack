@@ -104,6 +104,14 @@ class AppGenerator extends Generators.Base {
       }
     }
 
+    // Add cssmodules if enabled
+    const cssmoduleConfig = utils.config.getChoiceByKey('cssmodules', 'cssmodules');
+    if(this.cssmodules && cssmoduleConfig && cssmoduleConfig.packages) {
+      for(let dependency of cssmoduleConfig.packages) {
+        packageSettings.dependencies[dependency.name] = dependency.version;
+      }
+    }
+
     this.fs.writeJSON(this.destinationPath('package.json'), packageSettings);
   }
 

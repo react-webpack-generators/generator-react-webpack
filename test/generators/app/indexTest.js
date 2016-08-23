@@ -23,8 +23,7 @@ const beforeLoad = (prompts) => {
       'skip-welcome-message': true,
       'skip-install': true
     })
-    .withPrompts
-    (prompts)
+    .withPrompts(prompts)
     .on('ready', function(instance) {
       generator = instance;
     })
@@ -58,6 +57,12 @@ describe('react-webpack:app', () => {
 
     it('should not enable "PostCSS" by default', () => {
       expect(generator.config.get('postcss')).to.be.false;
+    });
+  });
+
+  describe('configuring', () => {
+    it('should add css module support', () => {
+      assert.fileContent('package.json', 'react-css-modules');
     });
   });
 
@@ -116,6 +121,44 @@ describe('react-webpack:app', () => {
         'test/loadtests.js',
         'test/.eslintrc'
       ]);
+    });
+  });
+});
+
+describe('react-webpack:app without cssmodules support', () => {
+
+  let prompts = {};
+  for(let p of defaultPrompts) {
+    prompts[p.name] = p.default;
+  }
+  prompts.cssmodules = false;
+
+  before(() => {
+    return beforeLoad(prompts);
+  });
+
+  describe('#config', () => {
+
+    it('should set the generatedWith key to the current generator major version', () => {
+      expect(generator.config.get('generatedWithVersion')).to.equal(4);
+    });
+
+    it('should use "css" as default style language', () => {
+      expect(generator.config.get('style')).to.equal('css');
+    });
+
+    it('should not use "css modules"', () => {
+      expect(generator.config.get('cssmodules')).to.be.false;
+    });
+
+    it('should not enable "PostCSS" by default', () => {
+      expect(generator.config.get('postcss')).to.be.false;
+    });
+  });
+
+  describe('configuring', () => {
+    it('should add no cssmodule support', () => {
+      assert.noFileContent('package.json', 'react-css-modules');
     });
   });
 });

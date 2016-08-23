@@ -51,6 +51,17 @@
       }
     ]
   },
+  "cssmodules": {
+    "options": [
+      {
+        "name": "cssmodules",
+        "value": "cssmodules",
+        "packages": [
+          { "name": "react-css-modules", "version": "^3.7.10" }
+        ]
+      }
+    ]
+  },
   "style": {
     "options": [
       {
