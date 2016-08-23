@@ -39,8 +39,9 @@
     "url": "https://github.com/react-webpack-generators/generator-react-webpack.git"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "istanbul cover --report html _mocha",
     "test:watch": "mocha -w",
+    "coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "release:major": "npm version prerelease && git push --follow-tags && npm publish --tag beta",
     "release:minor": "npm version prerelease && git push --follow-tags && npm publish --tag beta",
     "release:patch": "npm version prerelease && git push --follow-tags && npm publish --tag beta"
@@ -56,6 +57,8 @@
   },
   "devDependencies": {
     "chai": "^3.2.0",
+    "coveralls": "^2.11.12",
+    "istanbul": "^0.4.5",
     "mocha": "^3.0.0",
     "yeoman-assert": "^2.1.1",
     "yeoman-test": "^1.0.0"

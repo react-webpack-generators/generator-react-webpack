@@ -6,3 +6,4 @@ node_js:
 before_install:
   - currentfolder=${PWD##*/}
   - if [ "$currentfolder" != 'generator-react-webpack' ]; then cd .. && eval "mv $currentfolder generator-react-webpack" && cd generator-react-webpack; fi
+after_success: 'npm run coverage'
