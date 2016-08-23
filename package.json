@@ -39,7 +39,7 @@
     "url": "https://github.com/react-webpack-generators/generator-react-webpack.git"
   },
   "scripts": {
-    "test": "istanbul cover --report html _mocha",
+    "test": "istanbul cover _mocha",
     "test:watch": "mocha -w",
     "coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "release:major": "npm version prerelease && git push --follow-tags && npm publish --tag beta",
