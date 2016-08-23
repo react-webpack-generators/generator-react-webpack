@@ -16,18 +16,30 @@ module.exports = {
     const ast = esprima.parse(data);
 
     // List of css dialects we want to add postCSS for
+    // On regular css, we can add the loader to the end
+    // of the chain. If we have a preprocessor, we will add
+    // it before the initial loader
     const cssDialects = [
-      '/\\.css$/',
-      '/\\.sass$/',
-      '/\\.scss$/',
-      '/\\.less$/',
-      '/\\.styl$/'
+      '\\.cssmodule\\.css$',
+      '^.((?!cssmodule).)*\\.css$'
+    ];
+
+    const preprocessorDialects = [
+      '\\.cssmodule\\.(sass|scss)$',
+      '^.((?!cssmodule).)*\\.(sass|scss)$',
+      '\\.cssmodule\\.less$',
+      '^.((?!cssmodule).)*\\.less$',
+      '\\.cssmodule\\.styl$',
+      '^.((?!cssmodule).)*\\.styl$'
     ];
 
     // Prepare postCSS statement for inclusion
     const postcssFunction = 'var postcss = { postcss: function() { return []; } }';
     const postcssAst = esprima.parse(postcssFunction);
     const postcss = postcssAst.body[0].declarations[0].init.properties[0];
+
+    // The postcss loader item to add
+    const postcssLoader = { type: 'Literal', value: 'postcss', raw: '\'postcss\'' };
 
     // Add postcss to the loaders array
     walk.walkAddParent(ast, (node) => {
@@ -50,11 +62,19 @@ module.exports = {
         typeof node.value.regex !== 'undefined'
       ) {
 
-        // Make sure we only parse style based items!
-        if(cssDialects.indexOf(node.value.raw) !== -1) {
+        // Regular css usage
+        if(cssDialects.indexOf(node.value.regex.pattern) !== -1) {
 
           const loaderData = node.parent.properties[1];
-          loaderData.value.elements[1].value += '!postcss';
+          loaderData.value.elements.push(postcssLoader);
+        }
+
+        if(preprocessorDialects.indexOf(node.value.regex.pattern) !== -1) {
+
+          const loaderData = node.parent.properties[1];
+          const lastElm = loaderData.value.elements.pop();
+          loaderData.value.elements.push(postcssLoader);
+          loaderData.value.elements.push(lastElm);
         }
       }
     });

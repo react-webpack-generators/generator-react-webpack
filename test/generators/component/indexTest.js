@@ -8,7 +8,7 @@ describe('react-webpack:component', () => {
 
   const generatorComponent = path.join(__dirname, '../../../generators/component');
 
-  describe.skip('when using version 3 of the generator', () => {
+  describe('when using version 3 of the generator', () => {
 
     // List of available style types. Please add a line that says
     // testComponentWithStyle(styleTypes.KEY); to the bottom of the file

@@ -120,8 +120,7 @@ describe('react-webpack:app', () => {
   });
 });
 
-/*
-describe.skip('react-webpack:app with PostCSS support', () => {
+describe('react-webpack:app with PostCSS support', () => {
 
   let prompts = {};
   for(let p of defaultPrompts) {
@@ -141,6 +140,10 @@ describe.skip('react-webpack:app with PostCSS support', () => {
 
     it('should use "css" as default style language', () => {
       expect(generator.config.get('style')).to.equal('css');
+    });
+
+    it('should use "css modules" per default', () => {
+      expect(generator.config.get('cssmodules')).to.be.true;
     });
 
     it('should enable "PostCSS"', () => {
@@ -180,16 +183,33 @@ describe.skip('react-webpack:app with PostCSS support', () => {
     });
 
     it('should insert the postcss loader into the style pipes', () => {
-      assert.fileContent('cfg/defaults.js', 'loader: \'style-loader!css-loader!postcss-loader\'');
-      assert.fileContent('cfg/defaults.js', 'loader: \'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded&indentedSyntax\'');
-      assert.fileContent('cfg/defaults.js', 'loader: \'style-loader!css-loader!postcss-loader!sass-loader?outputStyle=expanded\'');
-      assert.fileContent('cfg/defaults.js', 'loader: \'style-loader!css-loader!postcss-loader!less-loader\'');
-      assert.fileContent('cfg/defaults.js', 'loader: \'style-loader!css-loader!postcss-loader!stylus-loader\'');
+      assert.fileContent('conf/webpack/Base.js', `'css?modules&importLoaders=1&localIdentName=[name]-[local]-[hash:base64:5]',
+              'postcss'`);
+      assert.fileContent('conf/webpack/Base.js', `'css',
+              'postcss'`);
+      assert.fileContent('conf/webpack/Base.js', `'css?modules&importLoaders=1&localIdentName=[name]-[local]-[hash:base64:5]',
+              'postcss',
+              'sass'`);
+      assert.fileContent('conf/webpack/Base.js', `'css',
+              'postcss',
+              'sass'`);
+      assert.fileContent('conf/webpack/Base.js', `'css?modules&importLoaders=1&localIdentName=[name]-[local]-[hash:base64:5]',
+              'postcss',
+              'less'`);
+      assert.fileContent('conf/webpack/Base.js', `'css',
+              'postcss',
+              'less'`);
+      assert.fileContent('conf/webpack/Base.js', `'css?modules&importLoaders=1&localIdentName=[name]-[local]-[hash:base64:5]',
+              'postcss',
+              'stylus'`);
+      assert.fileContent('conf/webpack/Base.js', `'css',
+              'postcss',
+              'stylus'`);
     });
 
-    it.skip('should append the postcss function to the base config', () => {
+    it('should append the postcss function to the base config', () => {
 
-      assert.fileContent('cfg/defaults.js', ',\n  postcss: function () {\n    return [];\n  }');
+      assert.fileContent('conf/webpack/Base.js', 'postcss: function () {');
     });
 
     it('should generate required source files', () => {
@@ -219,4 +239,3 @@ describe.skip('react-webpack:app with PostCSS support', () => {
     });
   });
 });
-*/
