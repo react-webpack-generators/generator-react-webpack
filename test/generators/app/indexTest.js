@@ -101,10 +101,10 @@ describe('react-webpack:app', () => {
 
       assert.file([
         'src/actions/README.md',
-        'src/index.js',
+        'src/client.js',
         'src/components/App.js',
         'src/components/app.css',
-        'src/favicon.ico',
+        'src/static/favicon.ico',
         'src/images/yeoman.png',
         'src/index.html',
         'src/sources/README.md',
@@ -259,10 +259,10 @@ describe('react-webpack:app with PostCSS support', () => {
 
       assert.file([
         'src/actions/README.md',
-        'src/index.js',
+        'src/client.js',
         'src/components/App.js',
         'src/components/app.css',
-        'src/favicon.ico',
+        'src/static/favicon.ico',
         'src/images/yeoman.png',
         'src/index.html',
         'src/sources/README.md',
