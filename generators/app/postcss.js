@@ -39,17 +39,22 @@ module.exports = {
     const postcss = postcssAst.body[0].declarations[0].init.properties[0];
 
     // The postcss loader item to add
-    const postcssLoader = { type: 'Literal', value: 'postcss', raw: '\'postcss\'' };
+    const postcssLoaderObject = 'var postcss = [{ loader: \'postcss-loader\'}]';
+    const postcssLoaderAst = esprima.parse(postcssLoaderObject);
+    const postcssLoader = postcssLoaderAst.body[0].declarations[0].init.elements[0];
+
 
     // Add postcss to the loaders array
     walk.walkAddParent(ast, (node) => {
 
+
       // Add the postcss key to the global configuration
+
       if(
         node.type === 'MethodDefinition' &&
         node.key.name === 'defaultSettings'
       ) {
-        const returnStatement = node.value.body.body[0];
+        const returnStatement = node.value.body.body[1];
         returnStatement.argument.properties.push(postcss);
       }
 
@@ -64,13 +69,12 @@ module.exports = {
 
         // Regular css usage
         if(cssDialects.indexOf(node.value.regex.pattern) !== -1) {
-
           const loaderData = node.parent.properties[1];
           loaderData.value.elements.push(postcssLoader);
         }
 
-        if(preprocessorDialects.indexOf(node.value.regex.pattern) !== -1) {
 
+        if(preprocessorDialects.indexOf(node.value.regex.pattern) !== -1) {
           const loaderData = node.parent.properties[1];
           const lastElm = loaderData.value.elements.pop();
           loaderData.value.elements.push(postcssLoader);

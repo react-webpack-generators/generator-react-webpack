@@ -101,10 +101,10 @@ describe('react-webpack:app', () => {
 
       assert.file([
         'src/actions/README.md',
-        'src/index.js',
+        'src/client.js',
         'src/components/App.js',
         'src/components/app.css',
-        'src/favicon.ico',
+        'src/static/favicon.ico',
         'src/images/yeoman.png',
         'src/index.html',
         'src/sources/README.md',
@@ -226,28 +226,40 @@ describe('react-webpack:app with PostCSS support', () => {
     });
 
     it('should insert the postcss loader into the style pipes', () => {
-      assert.fileContent('conf/webpack/Base.js', `'css?modules&importLoaders=1&localIdentName=[name]-[local]-[hash:base64:5]',
-              'postcss'`);
-      assert.fileContent('conf/webpack/Base.js', `'css',
-              'postcss'`);
-      assert.fileContent('conf/webpack/Base.js', `'css?modules&importLoaders=1&localIdentName=[name]-[local]-[hash:base64:5]',
-              'postcss',
-              'sass'`);
-      assert.fileContent('conf/webpack/Base.js', `'css',
-              'postcss',
-              'sass'`);
-      assert.fileContent('conf/webpack/Base.js', `'css?modules&importLoaders=1&localIdentName=[name]-[local]-[hash:base64:5]',
-              'postcss',
-              'less'`);
-      assert.fileContent('conf/webpack/Base.js', `'css',
-              'postcss',
-              'less'`);
-      assert.fileContent('conf/webpack/Base.js', `'css?modules&importLoaders=1&localIdentName=[name]-[local]-[hash:base64:5]',
-              'postcss',
-              'stylus'`);
-      assert.fileContent('conf/webpack/Base.js', `'css',
-              'postcss',
-              'stylus'`);
+      assert.fileContent('conf/webpack/Base.js', `{
+                loader: 'css-loader',
+                query: cssModulesQuery
+              },
+              { loader: 'postcss-loader' }`);
+      assert.fileContent('conf/webpack/Base.js', `{ loader: 'css-loader' },
+              { loader: 'postcss-loader' }`);
+      assert.fileContent('conf/webpack/Base.js', `{
+                loader: 'css-loader',
+                query: cssModulesQuery
+              },
+              { loader: 'postcss-loader' },
+              { loader: 'sass-loader' }`);
+      assert.fileContent('conf/webpack/Base.js', `{ loader: 'css-loader' },
+              { loader: 'postcss-loader' },
+              { loader: 'sass-loader' }`);
+      assert.fileContent('conf/webpack/Base.js', `{
+                loader: 'css-loader',
+                query: cssModulesQuery
+              },
+              { loader: 'postcss-loader' },
+              { loader: 'less-loader' }`);
+      assert.fileContent('conf/webpack/Base.js', `{ loader: 'css-loader' },
+              { loader: 'postcss-loader' },
+              { loader: 'less-loader' }`);
+      assert.fileContent('conf/webpack/Base.js', `{
+                loader: 'css-loader',
+                query: cssModulesQuery
+              },
+              { loader: 'postcss-loader' },
+              { loader: 'stylus-loader' }`);
+      assert.fileContent('conf/webpack/Base.js', `{ loader: 'css-loader' },
+              { loader: 'postcss-loader' },
+              { loader: 'stylus-loader' }`);
     });
 
     it('should append the postcss function to the base config', () => {
@@ -259,10 +271,10 @@ describe('react-webpack:app with PostCSS support', () => {
 
       assert.file([
         'src/actions/README.md',
-        'src/index.js',
+        'src/client.js',
         'src/components/App.js',
         'src/components/app.css',
-        'src/favicon.ico',
+        'src/static/favicon.ico',
         'src/images/yeoman.png',
         'src/index.html',
         'src/sources/README.md',
