@@ -48,9 +48,9 @@
   },
   "dependencies": {
     "escodegen": "^1.7.0",
-    "esprima": "^2.7.0",
+    "esprima": "^3.1.1",
     "esprima-walk": "^0.1.0",
-    "react-webpack-template": "^2.0.1-0",
+    "react-webpack-template": "^2.0.1-5",
     "underscore.string": "^3.2.2",
     "yeoman-generator": "^0.24.0",
     "yeoman-welcome": "^1.0.1"
