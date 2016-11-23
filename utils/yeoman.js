@@ -20,11 +20,13 @@ let getBaseDir = () => {
  * Get all settings (paths and the like) from components name
  * @param {String} componentName The components name
  * @param {String} style Style language to use [optional]
+ * @param {boolean} useCssModules Flag indicating whether to use css modules
  * @param {Boolean} isPure Use a pure component? [optional]
  * @param {String|Number} generatorVersion The version of the generator [optional]
+ * @param {String} cssClsPrefix Prefix to prepended to the component class name
  * @return {Object} Component settings
  */
-let getAllSettingsFromComponentName = (componentName, style, useCssModules, isPure, generatorVersion) => {
+let getAllSettingsFromComponentName = (componentName, style, useCssModules, isPure, generatorVersion, cssClsPrefix) => {
 
   // Use css per default
   if(!style) {
@@ -65,7 +67,7 @@ let getAllSettingsFromComponentName = (componentName, style, useCssModules, isPu
           webpackPath: `./${componentBaseName.toLowerCase()}${useCssModules ? '.cssmodule' : ''}${styleSettings.suffix}`,
           path: path.normalize(`${componentPath.path}/${componentPartPath}/`),
           fileName: `${componentBaseName.toLowerCase()}${useCssModules ? '.cssmodule' : ''}${styleSettings.suffix}`,
-          className: getComponentStyleName(componentBaseName),
+          className: getComponentStyleName(cssClsPrefix + componentBaseName),
           suffix: styleSettings.suffix
         },
         component: {

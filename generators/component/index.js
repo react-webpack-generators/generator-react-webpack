@@ -23,6 +23,12 @@ class ComponentGenerator extends Generators.Base {
     this.useCssModules = false;
 
     /**
+     * A string to prepended to the `className` attribute of generated components.
+     * @type {string}
+     */
+    this._cssClsPrefix = '';
+
+    /**
      * Flag indicating if stateful components should extends from React.PureComponent
      * @type {boolean}
      */
@@ -58,6 +64,13 @@ class ComponentGenerator extends Generators.Base {
     });
   }
 
+  get cssClsPrefix() {
+    return this._cssClsPrefix;
+  }
+
+  set cssClsPrefix(val) {
+    this._cssClsPrefix = (val === '') ? '' : `${val}-`;
+  }
 
   configuring() {
     // Read the requested major version or default it to the latest stable
@@ -69,6 +82,7 @@ class ComponentGenerator extends Generators.Base {
 
     this.useStyles = !this.options.nostyle;
     this.useCssModules = this.config.get('cssmodules') || false;
+    this.cssClsPrefix = this.config.get('cssClsPrefix') || '';
 
     // Make sure we don't try to use template v3 with cssmodules
     if (this.generatorVersion < 4 && this.useStyles && this.useCssModules) {
@@ -82,7 +96,14 @@ class ComponentGenerator extends Generators.Base {
 
   writing() {
     const settings =
-      getAllSettingsFromComponentName(this.name, this.config.get('style'), this.useCssModules, this.options.pure, this.generatorVersion);
+      getAllSettingsFromComponentName(
+        this.name,
+        this.config.get('style'),
+        this.useCssModules,
+        this.options.pure,
+        this.generatorVersion,
+        this.cssClsPrefix
+      );
 
     // Create the style template. Skipped if nostyle is set as command line flag
     if(this.useStyles) {
