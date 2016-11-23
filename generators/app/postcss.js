@@ -34,12 +34,12 @@ module.exports = {
     ];
 
     // Prepare postCSS statement for inclusion
-    const postcssFunction = 'var postcss = { postcss: function() { return []; } }';
-    const postcssAst = esprima.parse(postcssFunction);
-    const postcss = postcssAst.body[0].declarations[0].init.properties[0];
+    const postcssConfig = 'const postcssQuery = { plugins: [] };';
+    const postcssAst = esprima.parse(postcssConfig);
+    const postcss = postcssAst.body[0];
 
     // The postcss loader item to add
-    const postcssLoaderObject = 'var postcss = [{ loader: \'postcss-loader\'}]';
+    const postcssLoaderObject = 'var postcss = [{ loader: \'postcss-loader\', query: postcssQuery }];';
     const postcssLoaderAst = esprima.parse(postcssLoaderObject);
     const postcssLoader = postcssLoaderAst.body[0].declarations[0].init.elements[0];
 
@@ -55,7 +55,7 @@ module.exports = {
         node.key.name === 'defaultSettings'
       ) {
         const returnStatement = node.value.body.body[1];
-        returnStatement.argument.properties.push(postcss);
+        node.value.body.body = [postcss].concat(node.value.body.body);
       }
 
       // Parse all property nodes that use a regex.
