@@ -53,7 +53,7 @@
     "esprima": "^3.1.1",
     "esprima-walk": "^0.1.0",
     "jsonpath": "^0.2.7",
-    "react-webpack-template": "^2.0.1-5",
+    "react-webpack-template": "^2.0.1-6",
     "underscore.string": "^3.2.2",
     "yeoman-generator": "^0.24.0",
     "yeoman-welcome": "^1.0.1"
