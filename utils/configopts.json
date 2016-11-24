@@ -45,8 +45,8 @@
         "name": "postcss",
         "value": "postcss",
         "packages": [
-          { "name": "postcss", "version": "^5.0.21" },
-          { "name": "postcss-loader", "version": "^0.9.1" }
+          { "name": "postcss", "version": "^5.2.6" },
+          { "name": "postcss-loader", "version": "^1.1.1" }
         ]
       }
     ]
@@ -57,7 +57,7 @@
         "name": "cssmodules",
         "value": "cssmodules",
         "packages": [
-          { "name": "react-css-modules", "version": "^3.7.10" }
+          { "name": "react-css-modules", "version": "^4.0.3" }
         ]
       }
     ]
@@ -74,7 +74,7 @@
         "value": "sass",
         "suffix": ".sass",
         "packages": [
-          { "name": "sass-loader", "version": "^3.2.0" },
+          { "name": "sass-loader", "version": "^4.0.2" },
           { "name": "node-sass", "version": "^3.7.0" }
         ]
       },
@@ -83,7 +83,7 @@
         "value": "scss",
         "suffix": ".scss",
         "packages": [
-          { "name": "sass-loader", "version": "^3.2.0" },
+          { "name": "sass-loader", "version": "^4.0.2" },
           { "name": "node-sass", "version": "^3.7.0" }
         ]
       },
