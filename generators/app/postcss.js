@@ -20,43 +20,36 @@ module.exports = {
     // of the chain. If we have a preprocessor, we will add
     // it before the initial loader
     const cssDialects = [
-      '\\.cssmodule\\.css$',
       '^.((?!cssmodule).)*\\.css$'
     ];
 
+    const cssModuleDialects = [
+      '\\.cssmodule\\.css$'
+    ];
+
     const preprocessorDialects = [
-      '\\.cssmodule\\.(sass|scss)$',
       '^.((?!cssmodule).)*\\.(sass|scss)$',
-      '\\.cssmodule\\.less$',
       '^.((?!cssmodule).)*\\.less$',
-      '\\.cssmodule\\.styl$',
       '^.((?!cssmodule).)*\\.styl$'
     ];
 
-    // Prepare postCSS statement for inclusion
-    const postcssConfig = 'const postcssQuery = { plugins: [] };';
+    const preprocessorModuleDialects = [
+      '\\.cssmodule\\.(sass|scss)$',
+      '\\.cssmodule\\.less$',
+      '\\.cssmodule\\.styl$'
+    ];
+
+    const postcssConfig = 'const postcssQuery = { query: { importLoaders: 1 } };';
     const postcssAst = esprima.parse(postcssConfig);
-    const postcss = postcssAst.body[0];
+    const postcss = postcssAst.body[0].declarations[0].init.properties[0];
 
     // The postcss loader item to add
-    const postcssLoaderObject = 'var postcss = [{ loader: \'postcss-loader\', query: postcssQuery }];';
+    const postcssLoaderObject = 'var postcss = [{ loader: \'postcss-loader\' }];';
     const postcssLoaderAst = esprima.parse(postcssLoaderObject);
     const postcssLoader = postcssLoaderAst.body[0].declarations[0].init.elements[0];
 
-
     // Add postcss to the loaders array
     walk.walkAddParent(ast, (node) => {
-
-
-      // Add the postcss key to the global configuration
-
-      if(
-        node.type === 'MethodDefinition' &&
-        node.key.name === 'defaultSettings'
-      ) {
-        const returnStatement = node.value.body.body[1];
-        node.value.body.body = [postcss].concat(node.value.body.body);
-      }
 
       // Parse all property nodes that use a regex.
       // This should only be available under module.(pre)loaders
@@ -67,14 +60,28 @@ module.exports = {
         typeof node.value.regex !== 'undefined'
       ) {
 
+        // Enable importLoaders on non cssmodule dialacts
+        if(
+          cssDialects.indexOf(node.value.regex.pattern) !== -1 ||
+          preprocessorDialects.indexOf(node.value.regex.pattern) !== -1
+        ) {
+          node.parent.properties[1].value.elements[1].properties.push(postcss);
+        }
+
         // Regular css usage
-        if(cssDialects.indexOf(node.value.regex.pattern) !== -1) {
+        if(
+          cssDialects.indexOf(node.value.regex.pattern) !== -1 ||
+          cssModuleDialects.indexOf(node.value.regex.pattern) !== -1
+        ) {
           const loaderData = node.parent.properties[1];
           loaderData.value.elements.push(postcssLoader);
         }
 
-
-        if(preprocessorDialects.indexOf(node.value.regex.pattern) !== -1) {
+        // CSS preprocessors
+        if(
+          preprocessorDialects.indexOf(node.value.regex.pattern) !== -1 ||
+          preprocessorModuleDialects.indexOf(node.value.regex.pattern) !== -1
+        ) {
           const loaderData = node.parent.properties[1];
           const lastElm = loaderData.value.elements.pop();
           loaderData.value.elements.push(postcssLoader);
