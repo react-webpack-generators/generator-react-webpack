@@ -67,23 +67,23 @@ Stateless functional components where introduced in React v0.14. They have a muc
 ___Note___: You will still be able to set properties for stateless components!
 
 ## Adding PostCSS plugins
-If you have enabled [PostCSS](https://github.com/postcss/postcss) at generation time, install your PostCSS plugins via npm and *require* it in **postcss** function in *cfg/base.js*.
+If you have enabled [PostCSS](https://github.com/postcss/postcss) at generation time, install your PostCSS plugins via npm and *require* it in the **plugins** array in *postcss.config.js*.
 
 Example for autoprefixer:
 ```bash
 cd my-new-project
 npm install autoprefixer
 ```
-Require in *cfg/base.js*
+Require in *postcss.config.js*
 ```JavaScript
 ...
-postcss: function () {
-  return [
+module.exports = () => ({
+  plugins: [
     require('autoprefixer')({
       browsers: ['last 2 versions', 'ie >= 8']
     })
-  ];
-}
+  ]
+});
 ...
 ```
 

@@ -150,11 +150,14 @@ class AppGenerator extends Generators.Base {
         }
       }
     });
+
+    if(this.postcss) {
+      this.copy('../../generators/app/templates/postcss.config.js', 'postcss.config.js');
+    }
   }
 
   install() {
 
-    // Currently buggy!
     if(this.postcss) {
       const postcss = require('./postcss');
       postcss.write(path.join(this.destinationRoot(), 'conf/webpack/Base.js'));
