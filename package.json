@@ -47,10 +47,13 @@
     "release:patch": "npm version prerelease && git push --follow-tags && npm publish --tag beta"
   },
   "dependencies": {
-    "escodegen": "^1.7.0",
+    "acorn": "^4.0.3",
+    "escodegen": "^1.8.1",
+    "esformatter": "^0.9.6",
     "esprima": "^3.1.1",
     "esprima-walk": "^0.1.0",
-    "react-webpack-template": "^2.0.1-5",
+    "jsonpath": "^0.2.7",
+    "react-webpack-template": "^2.0.1-6",
     "underscore.string": "^3.2.2",
     "yeoman-generator": "^0.24.0",
     "yeoman-welcome": "^1.0.1"
@@ -58,6 +61,7 @@
   "devDependencies": {
     "chai": "^3.2.0",
     "coveralls": "^2.11.12",
+    "fs-extra": "^0.30.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.0.0",
     "yeoman-assert": "^2.1.1",
