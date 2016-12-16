@@ -45,8 +45,8 @@
         "name": "postcss",
         "value": "postcss",
         "packages": [
-          { "name": "postcss", "version": "^5.0.21" },
-          { "name": "postcss-loader", "version": "^0.9.1" }
+          { "name": "postcss", "version": "^5.2.6" },
+          { "name": "postcss-loader", "version": "^1.2.1" }
         ]
       }
     ]

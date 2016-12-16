@@ -163,6 +163,27 @@ describe('react-webpack:app without cssmodules support', () => {
   });
 });
 
+describe('react-webpack:app without PostCSS support', () => {
+
+  let prompts = {};
+  for(let p of defaultPrompts) {
+    prompts[p.name] = p.default;
+  }
+  prompts.postcss = false;
+
+  before(() => {
+    return beforeLoad(prompts);
+  });
+
+  describe('#createFiles', () => {
+
+    it('should not add postcss and postcss-loader deps', () => {
+      assert.noFileContent('package.json', 'postcss');
+      assert.noFileContent('package.json', 'postcss-loader');
+    });
+  });
+});
+
 describe('react-webpack:app with PostCSS support', () => {
 
   let prompts = {};
@@ -203,7 +224,14 @@ describe('react-webpack:app with PostCSS support', () => {
         '.editorconfig',
         '.eslintrc',
         '.gitignore',
-        '.yo-rc.json'
+        '.yo-rc.json',
+      ]);
+    });
+
+    it('should generate postcss.config.js', () => {
+
+      assert.file([
+        'postcss.config.js'
       ]);
     });
 
@@ -225,48 +253,6 @@ describe('react-webpack:app with PostCSS support', () => {
       ]);
     });
 
-    it('should insert the postcss loader into the style pipes', () => {
-      assert.fileContent('conf/webpack/Base.js', `{
-                loader: 'css-loader',
-                query: cssModulesQuery
-              },
-              { loader: 'postcss-loader' }`);
-      assert.fileContent('conf/webpack/Base.js', `{ loader: 'css-loader' },
-              { loader: 'postcss-loader' }`);
-      assert.fileContent('conf/webpack/Base.js', `{
-                loader: 'css-loader',
-                query: cssModulesQuery
-              },
-              { loader: 'postcss-loader' },
-              { loader: 'sass-loader' }`);
-      assert.fileContent('conf/webpack/Base.js', `{ loader: 'css-loader' },
-              { loader: 'postcss-loader' },
-              { loader: 'sass-loader' }`);
-      assert.fileContent('conf/webpack/Base.js', `{
-                loader: 'css-loader',
-                query: cssModulesQuery
-              },
-              { loader: 'postcss-loader' },
-              { loader: 'less-loader' }`);
-      assert.fileContent('conf/webpack/Base.js', `{ loader: 'css-loader' },
-              { loader: 'postcss-loader' },
-              { loader: 'less-loader' }`);
-      assert.fileContent('conf/webpack/Base.js', `{
-                loader: 'css-loader',
-                query: cssModulesQuery
-              },
-              { loader: 'postcss-loader' },
-              { loader: 'stylus-loader' }`);
-      assert.fileContent('conf/webpack/Base.js', `{ loader: 'css-loader' },
-              { loader: 'postcss-loader' },
-              { loader: 'stylus-loader' }`);
-    });
-
-    it('should append the postcss function to the base config', () => {
-
-      assert.fileContent('conf/webpack/Base.js', 'postcss: function () {');
-    });
-
     it('should generate required source files', () => {
 
       assert.file([
@@ -280,6 +266,11 @@ describe('react-webpack:app with PostCSS support', () => {
         'src/sources/README.md',
         'src/stores/README.md'
       ]);
+    });
+
+    it('should add postcss and postcss-loader deps', () => {
+      assert.fileContent('package.json', 'postcss');
+      assert.fileContent('package.json', 'postcss-loader');
     });
 
     it('should generate test configuration and basic tests', () => {
