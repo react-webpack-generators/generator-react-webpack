@@ -154,12 +154,6 @@ class AppGenerator extends Generators.Base {
 
   install() {
 
-    // Currently buggy!
-    if(this.postcss) {
-      const postcss = require('./postcss');
-      postcss.write(path.join(this.destinationRoot(), 'conf/webpack/Base.js'));
-    }
-
     if(!this.options['skip-install']) {
       this.installDependencies({ bower: false });
     }
